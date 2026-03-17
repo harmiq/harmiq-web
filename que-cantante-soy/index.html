@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>¿A qué cantante me parezco? Test de voz con IA gratis</title>
+<meta name="description" content="Descubre a qué cantante famoso se parece tu voz. Test gratuito con IA en 10 segundos. Compara tu voz con más de 60 artistas.">
+<meta name='keywords' content='que cantante soy, a que cantante me parezco, which singer are you, voz similar cantante famoso'>
+<meta property="og:title" content="¿A qué cantante me parezco? Test de voz con IA gratis">
+<meta property="og:description" content="Descubre a qué cantante famoso se parece tu voz. Test gratuito con IA en 10 segundos. Compara tu voz con más de 60 artistas.">
+<meta property="og:url" content="https://harmiq.app/que-cantante-soy">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://harmiq.app/que-cantante-soy">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800&family=Nunito:wght@400;600;700&display=swap');
+:root{--p:#6C63FF;--a:#FF6B9D;--dark:#0D0D1A;--card:#13131F;--t:#E5E7EB;--m:#6B7280}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--dark);color:var(--t);font-family:'Nunito','Segoe UI',system-ui,sans-serif;line-height:1.6}
+a{text-decoration:none}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid rgba(255,255,255,.07);flex-wrap:wrap;gap:.5rem}
+.logo{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#FF6B9D,#6C63FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:1.2rem;list-style:none;flex-wrap:wrap}
+.nav-links a{color:var(--m);font-size:.88rem;transition:color .2s}
+.nav-links a:hover{color:var(--t)}
+.btn{background:linear-gradient(135deg,var(--p),var(--a));color:#fff;padding:.75rem 1.8rem;border-radius:50px;font-weight:700;font-size:.92rem;display:inline-block;transition:transform .2s,opacity .2s}
+.btn:hover{transform:translateY(-2px);opacity:.9}
+.btn-out{background:rgba(255,255,255,.06);color:var(--t);padding:.75rem 1.8rem;border-radius:50px;font-weight:600;font-size:.92rem;border:1px solid rgba(255,255,255,.12);display:inline-block}
+.hero{text-align:center;padding:5rem 1.5rem 3rem;max-width:720px;margin:0 auto}
+.badge{display:inline-block;background:rgba(108,99,255,.15);color:var(--p);border:1px solid rgba(108,99,255,.3);border-radius:50px;padding:.3rem 1rem;font-size:.78rem;font-weight:700;margin-bottom:1.4rem}
+h1{font-family:'Baloo 2',cursive;font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.1;margin-bottom:1.1rem}
+.grad{background:linear-gradient(135deg,#FF6B9D,#FFD166,#06D6A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1rem;color:var(--m);margin-bottom:1.8rem}
+.btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.stats{display:flex;justify-content:center;gap:2.5rem;padding:2rem 1rem;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);flex-wrap:wrap}
+.stat{text-align:center}
+.sn{font-family:'Baloo 2',cursive;font-size:1.8rem;font-weight:800;color:var(--p)}
+.sl{font-size:.75rem;color:var(--m)}
+section{max-width:1040px;margin:0 auto;padding:3.5rem 1.5rem}
+h2{font-family:'Baloo 2',cursive;font-size:1.8rem;font-weight:800;text-align:center;margin-bottom:.5rem}
+.sub{text-align:center;color:var(--m);margin-bottom:2.5rem;font-size:.95rem}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem}
+.grid6{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1rem}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.card{background:var(--card);border-radius:16px;padding:1.5rem;border:1px solid rgba(255,255,255,.06)}
+.vcard{background:var(--card);border-radius:14px;padding:1.2rem;border:1px solid rgba(255,255,255,.06);text-align:center;color:var(--t);transition:transform .2s,border-color .2s;display:block}
+.vcard:hover{transform:translateY(-3px);border-color:rgba(108,99,255,.4)}
+.vcard .ic{font-size:2rem;margin-bottom:.5rem}
+.vcard h3{font-size:.9rem;font-weight:700;margin-bottom:.25rem}
+.vcard p{font-size:.72rem;color:var(--m)}
+.ic2{font-size:1.8rem;margin-bottom:.6rem}
+.card h3{font-size:.98rem;font-weight:700;margin-bottom:.4rem}
+.card p{font-size:.85rem;color:var(--m)}
+.cta-box{text-align:center;background:linear-gradient(135deg,rgba(108,99,255,.12),rgba(255,107,157,.08));border-radius:24px;padding:3rem 2rem;border:1px solid rgba(108,99,255,.2);margin:0 1.5rem 3rem}
+.cta-box h2{margin-bottom:.8rem}
+.cta-box p{color:var(--m);margin-bottom:1.5rem}
+.kofi{display:inline-flex;align-items:center;gap:.4rem;background:#FF5E5B;color:#fff;padding:.5rem 1.2rem;border-radius:50px;font-weight:700;font-size:.85rem}
+.ad{background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.07);border-radius:12px;padding:1rem;text-align:center;color:var(--m);font-size:.7rem;margin:1.5rem auto;max-width:728px;min-height:80px;display:flex;align-items:center;justify-content:center}
+.bc{padding:.7rem 2rem;font-size:.78rem;color:var(--m)}
+.bc a{color:var(--m)}
+.ah{max-width:760px;margin:0 auto;padding:3rem 1.5rem 1.5rem}
+.ah h1{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem;text-align:left}
+.am{font-size:.8rem;color:var(--m);margin-bottom:1.5rem}
+.ac{max-width:760px;margin:0 auto;padding:0 1.5rem 4rem}
+.ac h2{text-align:left;font-size:1.5rem;margin:2rem 0 .8rem}
+.ac h3{font-size:1.1rem;font-weight:700;margin:1.5rem 0 .5rem;color:#A5B4FC}
+.ac p{margin-bottom:1rem;color:#D1D5DB;font-size:.93rem}
+.ac ul{margin:0 0 1rem 1.5rem;color:#D1D5DB;font-size:.93rem}
+.ac li{margin-bottom:.4rem}
+.ibox{background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.3);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0}
+.ibox strong{color:#A5B4FC}
+.stbl{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.86rem}
+.stbl th{background:rgba(108,99,255,.2);padding:.65rem .9rem;text-align:left;font-weight:700}
+.stbl td{padding:.55rem .9rem;border-bottom:1px solid rgba(255,255,255,.05);color:#D1D5DB}
+footer{border-top:1px solid rgba(255,255,255,.06);padding:2rem 1.5rem;text-align:center;color:var(--m);font-size:.8rem}
+.fl{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.8rem;flex-wrap:wrap}
+footer a{color:var(--m)}
+footer a:hover{color:var(--t)}
+.faq{background:var(--card);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:.8rem;border:1px solid rgba(255,255,255,.06)}
+.faq h3{font-size:.93rem;font-weight:700;margin-bottom:.4rem}
+.faq p{font-size:.83rem;color:var(--m)}
+.song-row{background:var(--card);border-radius:10px;padding:.75rem 1rem;margin:.35rem 0;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.06)}
+.song-row .info strong{font-size:.9rem}
+.song-row .info span{font-size:.75rem;color:var(--m);display:block}
+.diff{border-radius:20px;padding:.18rem .65rem;font-size:.7rem;font-weight:700;border-width:1px;border-style:solid}
+@media(max-width:640px){nav{padding:.8rem 1rem}.nav-links{display:none}.stats{gap:1.2rem}.cta-box{margin:0 .5rem 2rem;padding:2rem 1.2rem}}
+</style>
+</head>
+<body><nav>
+  <a class="logo" href="/">🎙️ Harmiq</a>
+  <ul class="nav-links">
+    <li><a href="/voz/baritono">Barítono</a></li>
+    <li><a href="/voz/tenor">Tenor</a></li>
+    <li><a href="/voz/soprano">Soprano</a></li>
+    <li><a href="/que-tipo-de-voz-tengo">Test vocal</a></li>
+    <li><a href="/que-cantante-soy">¿Qué cantante soy?</a></li>
+  </ul>
+  <a class="btn" href="https://hamiq-harmiq.hf.space" target="_blank">🎤 Analizar mi voz</a>
+</nav><div class="bc"><a href="/">Inicio</a> › ¿A qué cantante me parezco?</div><div class="ah"><h1>¿A qué cantante famoso se parece tu voz?</h1><div class="am">Harmiq · Test gratuito · 60+ artistas</div></div><div class="ad"><!-- Google AdSense --></div><div class="ac">
+  <p>¿Alguna vez te has preguntado si tienes la voz de Freddie Mercury, Adele o Michael Jackson? Con Harmiq puedes saberlo en 10 segundos. Nuestra IA compara las características únicas de tu voz con más de 60 artistas famosos.</p>
+  <h2>¿Cómo comparamos tu voz con cantantes famosos?</h2>
+  <p>El sistema analiza cuatro parámetros y los compara con los perfiles vocales de cada artista:</p>
+  <ul>
+    <li><strong>Frecuencia fundamental:</strong> Tu nota base, que define si eres grave o agudo</li>
+    <li><strong>Centroide espectral:</strong> El brillo o la oscuridad de tu timbre vocal</li>
+    <li><strong>Coeficientes MFCC:</strong> La "huella dactilar" tímbrica única de tu voz</li>
+    <li><strong>Rango vocal:</strong> La amplitud de tu extensión vocal</li>
+  </ul>
+  <h2>Los artistas más buscados en Harmiq</h2>
+  <div class="grid2" style="margin:1rem 0">
+    <div style="background:var(--card);border-radius:12px;padding:1rem;border:1px solid rgba(255,255,255,.06)">
+      <strong style="color:#6C63FF">Voces masculinas</strong>
+      <ul style="margin-top:.5rem;color:#D1D5DB;font-size:.9rem">
+        <li>🎭 Freddie Mercury — Barítono</li>
+        <li>🎤 Michael Jackson — Tenor</li>
+        <li>🚀 Bruno Mars — Tenor</li>
+        <li>🦇 Batman — Bajo extremo</li>
+        <li>⚡ Goku — Tenor enérgico</li>
+      </ul>
+    </div>
+    <div style="background:var(--card);border-radius:12px;padding:1rem;border:1px solid rgba(255,255,255,.06)">
+      <strong style="color:#FF6B9D">Voces femeninas</strong>
+      <ul style="margin-top:.5rem;color:#D1D5DB;font-size:.9rem">
+        <li>✨ Mariah Carey — Soprano</li>
+        <li>💙 Adele — Mezzosoprano</li>
+        <li>⚡ Beyoncé — Mezzosoprano</li>
+        <li>❄️ Elsa (Frozen) — Soprano</li>
+        <li>🌊 Moana — Mezzo</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ibox"><strong>¿Sabías que?</strong> Harmiq también incluye personajes animados en su base de datos. ¿Tu voz se parece más a Goku o a Elsa? ¡Descúbrelo con el módulo Harmiq Toons!</div>
+</div><div class="ad"><!-- Google AdSense --></div><div class="cta-box">
+  <h2>¿A qué cantante suenas tú?</h2>
+  <p>Sube 10 segundos de tu voz y descúbrelo gratis ahora.</p>
+  <a class="btn" href="https://hamiq-harmiq.hf.space" target="_blank">🎤 Analizar mi voz gratis</a>
+  &nbsp;&nbsp;
+  <a class="kofi" href="https://ko-fi.com/harmiq" target="_blank">☕ Apoya Harmiq</a>
+</div><section><h2>Preguntas frecuentes</h2><div class="faq"><h3>¿El resultado es exacto?</h3><p>El resultado indica similitud vocal técnica (timbre, rango, frecuencia), no que vayas a sonar idéntico. La identidad vocal de un artista incluye también su estilo y técnica.</p></div>
+<div class="faq"><h3>¿Puedo comparar mi voz con un artista específico?</h3><p>Sí. En la app de Harmiq, en la pestaña 'Por artista' puedes buscar cualquier artista y ver exactamente qué % de similitud tienes con él o ella.</p></div>
+<div class="faq"><h3>¿Qué pasa si el resultado no me convence?</h3><p>Después del resultado puedes pulsar el botón de feedback, escribir el nombre del artista con el que crees que te pareces más, y Harmiq calculará tu similitud real con ese artista.</p></div></section>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿El resultado es exacto?", "acceptedAnswer": {"@type": "Answer", "text": "El resultado indica similitud vocal técnica (timbre, rango, frecuencia), no que vayas a sonar idéntico. La identidad vocal de un artista incluye también su estilo y técnica."}}, {"@type": "Question", "name": "¿Puedo comparar mi voz con un artista específico?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. En la app de Harmiq, en la pestaña 'Por artista' puedes buscar cualquier artista y ver exactamente qué % de similitud tienes con él o ella."}}, {"@type": "Question", "name": "¿Qué pasa si el resultado no me convence?", "acceptedAnswer": {"@type": "Answer", "text": "Después del resultado puedes pulsar el botón de feedback, escribir el nombre del artista con el que crees que te pareces más, y Harmiq calculará tu similitud real con ese artista."}}]}</script><footer>
+  <div class="fl">
+    <a href="/">Inicio</a>
+    <a href="/que-tipo-de-voz-tengo">Test vocal</a>
+    <a href="/que-cantante-soy">¿Qué cantante soy?</a>
+    <a href="/politica-privacidad">Privacidad</a>
+    <a href="https://ko-fi.com/harmiq" target="_blank">☕ Apoya Harmiq</a>
+  </div>
+  <p>© 2025 Harmiq · Análisis vocal con IA · <a href="mailto:hola@harmiq.app">hola@harmiq.app</a></p>
+</footer></body></html>
