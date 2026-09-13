@@ -1,0 +1,178 @@
+name: Repair Catalan music module
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply Catalan module repair
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          html_path = Path('modul-catala.html')
+          text = html_path.read_text(encoding='utf-8')
+
+          replacements = {
+              '<title>Música Catalana — Artistes i Karaoke | Harmiq</title>': '<title>Música en català — Artistes, cançons i cultura | Harmiq</title>',
+              '<div class="nav-right">🏴 Mòdul Català</div>': '<div class="nav-right">🎵 Música en català</div>',
+              '<div class="v5-kicker">Harmiq · Secció catalana</div>': '<div class="v5-kicker">Harmiq · Música en català</div>',
+              '<meta name="description" content="Descobreix l\'ADN de la música catalana amb Harmiq. Canta Oques Grasses, The Tyets, Rosalía, artistes catalans contemporanis i descobreix els millors grups emergents i grups de versions per a Festes Majors.">': '<meta name="description" content="Descobreix la música en català amb Harmiq: artistes, cançons, història, cultura i noves veus de Catalunya, el País Valencià i les Illes Balears.">',
+          }
+          for old, new in replacements.items():
+              text = text.replace(old, new)
+
+          # Remove the two previous image loaders: both depended on fragile endpoints/og:image.
+          text = re.sub(r'\s*<script id="harmiq-catala-v5-real-images">.*?</script>\s*', '\n', text, flags=re.S)
+          text = re.sub(r'\s*<script id="harmiq-catala-v5-enhancer">.*?</script>\s*', '\n', text, flags=re.S)
+
+          # Use real, recognizable Catalan territory photography in the hero.
+          hero_css = r'''
+  /* Real territory photography — stable Wikimedia Commons files */
+  .v5-bcn{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1200")}
+  .v5-gir{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1200")}
+  .v5-tar{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1200")}
+  .v5-lle{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1200")}
+  .v5-province{background-image:linear-gradient(180deg,rgba(3,10,18,.10),rgba(0,0,0,.80)),var(--prov-bg)!important;background-size:cover!important;background-position:center!important}
+  .v5-region.b{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1000")}
+  .v5-region.g{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1000")}
+  .v5-region.t{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1000")}
+  .v5-region.l{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1000")}
+  .v5-region{background-image:linear-gradient(180deg,rgba(4,10,16,.05),rgba(0,0,0,.86)),var(--region)!important;background-size:cover!important;background-position:center!important}
+  .catala-photo-credit{width:min(1200px,92%);margin:.7rem auto 0;color:#718096;font-size:.68rem;line-height:1.4;text-align:right}
+  .catala-photo-credit a{color:#94a3b8;text-decoration:underline}
+'''
+          marker = '</style>\n\n</head>'
+          if 'Real territory photography' not in text:
+              text = text.replace(marker, hero_css + '</style>\n\n</head>', 1)
+
+          # Add compact image credits below the territory tiles.
+          region_close = '''    </div>\n\n    <div class="search-box">'''
+          credit = '''    </div>\n    <div class="catala-photo-credit">Fotografies de territori via <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>: Barcelona · Girona · Tarragona · Lleida.</div>\n\n    <div class="search-box">'''
+          if 'catala-photo-credit' not in text:
+              text = text.replace(region_close, credit, 1)
+
+          # Add a single reliable image loader for the dynamically-rendered artist cards.
+          loader = r'''
+<script id="harmiq-catala-image-loader">
+(() => {
+  const langs = ['ca','es','en'];
+  const cache = new Map();
+  const clean = v => (v || '').replace(/\s+/g,' ').trim();
+
+  const wikiImage = async (name) => {
+    const key = name.toLowerCase();
+    if (cache.has(key)) return cache.get(key);
+    const promise = (async () => {
+      for (const lang of langs) {
+        try {
+          const r = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`, {cache:'force-cache'});
+          if (!r.ok) continue;
+          const d = await r.json();
+          const url = d?.originalimage?.source || d?.thumbnail?.source;
+          if (url) return url;
+        } catch (_) {}
+      }
+      return null;
+    })();
+    cache.set(key, promise);
+    return promise;
+  };
+
+  const loadCard = async (card) => {
+    if (card.dataset.photoLoaded) return;
+    const name = clean(card.querySelector('h3,h4,strong')?.textContent);
+    const wrap = card.querySelector('.art-av-wrap');
+    const fallback = card.querySelector('.art-av');
+    if (!name || !wrap) return;
+    card.dataset.photoLoaded = '1';
+    const url = await wikiImage(name);
+    if (!url) return;
+    const img = document.createElement('img');
+    img.className = 'art-photo';
+    img.src = url;
+    img.alt = `${name} — artista de música en català`;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.addEventListener('load', () => { img.classList.add('loaded'); fallback?.classList.add('hidden'); }, {once:true});
+    img.addEventListener('error', () => img.remove(), {once:true});
+    wrap.prepend(img);
+  };
+
+  const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      loadCard(e.target);
+      observer.unobserve(e.target);
+    });
+  }, {rootMargin:'900px 0px'}) : null;
+
+  const scan = () => {
+    document.querySelectorAll('#ag .art-card, #eg .art-card').forEach(card => {
+      if (observer) observer.observe(card); else loadCard(card);
+    });
+  };
+
+  const start = () => {
+    scan();
+    new MutationObserver(scan).observe(document.body, {childList:true, subtree:true});
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true}); else start();
+})();
+</script>
+'''
+          if 'id="harmiq-catala-image-loader"' not in text:
+              text = text.replace('\n</body>', '\n' + loader + '\n</body>', 1)
+
+          html_path.write_text(text, encoding='utf-8')
+
+          # Remove the page-specific visual IIFE from global config.js; the Catalan page now owns its own presentation.
+          config_path = Path('config.js')
+          config = config_path.read_text(encoding='utf-8')
+          marker = '/*\n * Harmiq — Música en català visual layer'
+          pos = config.find(marker)
+          if pos != -1:
+              config = config[:pos].rstrip() + '\n'
+              config_path.write_text(config, encoding='utf-8')
+
+          # Allow all Wikipedia language subdomains used by the loader.
+          headers_path = Path('_headers')
+          headers = headers_path.read_text(encoding='utf-8')
+          headers = headers.replace('https://en.wikipedia.org https://itunes.apple.com', 'https://*.wikipedia.org https://itunes.apple.com')
+          headers_path.write_text(headers, encoding='utf-8')
+
+      - name: Validate
+        run: |
+          test -f modul-catala.html
+          grep -q 'Música en català' modul-catala.html
+          grep -q 'Real territory photography' modul-catala.html
+          grep -q 'harmiq-catala-image-loader' modul-catala.html
+          grep -q 'wikipedia.org' _headers
+          ! grep -q 'harmiq-catala-v5-real-images' modul-catala.html
+          ! grep -q 'harmiq-catala-v5-enhancer' modul-catala.html
+
+      - name: Commit repaired module
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add modul-catala.html config.js _headers
+          git diff --cached --quiet || git commit -m "fix: restore Catalan module imagery and naming"
+          git push
+
+      - name: Remove temporary workflow
+        if: success()
+        run: |
+          git rm .github/workflows/catala-audit-fix.yml
+          git commit -m "chore: remove temporary Catalan audit workflow"
+          git push
