@@ -1,0 +1,149 @@
+name: Final Catalan visual polish
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  polish:
+    if: ${{ !startsWith(github.event.head_commit.message, 'feat: finalize Catalan visual') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Catalan page
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('modul-catala.html')
+          s=p.read_text()
+
+          # Naming / SEO: make Catalan music a first-class Harmiq section.
+          s=s.replace('<title>Música Catalana — Artistes i Karaoke | Harmiq</title>', '<title>Música en català — Artistes, cançons i cultura | Harmiq</title>')
+          s=s.replace('<meta name="description" content="Descobreix l\'ADN de la música catalana amb Harmiq. Canta Oques Grasses, The Tyets, Rosalía, artistes catalans contemporanis i descobreix els millors grups emergents i grups de versions per a Festes Majors.">', '<meta name="description" content="Descobreix la música en català amb Harmiq: artistes, cançons, història, cultura i noves veus de Catalunya, el País Valencià i les Illes Balears.">')
+          s=s.replace('<meta name="keywords" content="musica catalana, artistes catalans, grups emergents, karaokes, festes majors, grups de versions, analisis de voz ia, the tyets, oques grasses">', '<meta name="keywords" content="música en català, música catalana, artistes catalans, cançons en català, grups catalans, escena musical catalana, Oques Grasses, The Tyets, Julieta">')
+          s=s.replace('<div class="nav-right">🏴 Mòdul Català</div>', '<div class="nav-right">🎵 Música en català</div>')
+          s=s.replace('<div class="v5-kicker">Harmiq · Secció catalana</div>', '<div class="v5-kicker">Harmiq · Música en català</div>')
+
+          # Replace the previous fragile image scripts with one robust lazy loader.
+          start=s.find('<script id="harmiq-catala-v5-image-polish">')
+          end=s.find('</script>', start)
+          if start!=-1 and end!=-1:
+              s=s[:start]+s[end+9:]
+          start=s.find('<script id="harmiq-catala-v5-real-images">')
+          if start!=-1:
+              end=s.find('</script>', start)
+              if end!=-1: s=s[:start]+s[end+9:]
+          start=s.find('<script id="harmiq-catala-v5-enhancer">')
+          if start!=-1:
+              end=s.find('</script>', start)
+              if end!=-1: s=s[:start]+s[end+9:]
+
+          marker='</body>'
+          inject=r'''<style id="harmiq-catala-image-polish">
+  .art-card .art-av-wrap{position:relative!important;overflow:hidden!important}
+  .art-card .art-photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center!important;z-index:1!important;opacity:0;transition:opacity .35s ease,transform .5s ease,filter .35s ease!important}
+  .art-card .art-photo.loaded{opacity:1}
+  .art-card:hover .art-photo.loaded{transform:scale(1.045);filter:saturate(1.08)}
+  .art-card .art-av{z-index:0!important;transition:opacity .25s ease!important}
+  .art-card .art-av.hidden{opacity:0}
+  .v5-province.has-photo{background-size:cover!important;background-position:center!important}
+  .v5-province.has-photo:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,14,.10),rgba(2,8,14,.78));z-index:1}
+  .v5-province{transition:transform .35s ease,filter .35s ease}
+  .v5-province:hover{filter:saturate(1.08);transform:translateY(-3px) skewX(-4deg)}
+  @media(max-width:900px){.v5-province:hover{transform:translateY(-3px)}}
+</style>
+<script id="harmiq-catala-image-loader">
+(() => {
+  const wikiLangs = ['ca','es','en'];
+  const cache = new Map();
+  const clean = n => (n || '').replace(/\s+/g,' ').trim();
+
+  async function wikiImage(name) {
+    name = clean(name);
+    if (!name) return null;
+    const key = name.toLowerCase();
+    if (cache.has(key)) return cache.get(key);
+    const promise = (async () => {
+      for (const lang of wikiLangs) {
+        try {
+          const r = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`, {cache:'force-cache'});
+          if (!r.ok) continue;
+          const d = await r.json();
+          const url = d?.thumbnail?.source || d?.originalimage?.source;
+          if (url) return url;
+        } catch (_) {}
+      }
+      return null;
+    })();
+    cache.set(key, promise);
+    return promise;
+  }
+
+  function loadCard(card) {
+    if (card.dataset.imageStarted) return;
+    const name = clean(card.querySelector('h3,h4,strong')?.textContent);
+    const wrap = card.querySelector('.art-av-wrap');
+    const fallback = card.querySelector('.art-av');
+    if (!name || !wrap || !fallback) return;
+    card.dataset.imageStarted = '1';
+    wikiImage(name).then(url => {
+      if (!url) return;
+      const img = document.createElement('img');
+      img.className = 'art-photo';
+      img.alt = name;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.src = url;
+      img.addEventListener('load', () => {
+        img.classList.add('loaded');
+        fallback.classList.add('hidden');
+      }, {once:true});
+      img.addEventListener('error', () => img.remove(), {once:true});
+      wrap.insertBefore(img, wrap.firstChild);
+    });
+  }
+
+  function loadProvince(el) {
+    if (el.dataset.imageStarted) return;
+    const name = clean(el.dataset.artist);
+    if (!name) return;
+    el.dataset.imageStarted = '1';
+    wikiImage(name).then(url => {
+      if (url) {
+        el.style.backgroundImage = `linear-gradient(180deg,rgba(2,8,14,.10),rgba(2,8,14,.78)),url("${url.replace(/"/g,'\\"')}")`;
+        el.classList.add('has-photo');
+      }
+    });
+  }
+
+  function scan(root=document) {
+    root.querySelectorAll('#ag .art-card, #eg .art-card').forEach(loadCard);
+    root.querySelectorAll('.v5-province[data-artist]').forEach(loadProvince);
+  }
+
+  const observer = new MutationObserver(() => scan());
+  const start = () => {
+    scan();
+    observer.observe(document.body, {childList:true, subtree:true});
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
+  else start();
+})();
+</script>
+'''
+          if 'harmiq-catala-image-loader' not in s:
+              s=s.replace(marker, inject+marker)
+          p.write_text(s)
+          PY
+      - name: Commit and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add modul-catala.html
+          git commit -m 'feat: finalize Catalan visual and naming'
+          git push
+          rm -f .github/workflows/catala-final-polish.yml
+          git add -u .github/workflows/catala-final-polish.yml
+          git commit -m 'chore: remove temporary Catalan polish workflow'
+          git push
