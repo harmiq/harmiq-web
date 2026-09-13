@@ -3954,7 +3954,7 @@ function injectNewsBanner() {
   if (document.getElementById("_news_banner")) return;
   const b = document.createElement("a");
   b.id = "_news_banner";
-  b.href = "/karaoke.html";
+  b.href = "/karaoke-eventos.html";
   b.style.cssText = `
     display: block;
     background: linear-gradient(90deg, #06D6A0, #7C4DFF, #06D6A0);
