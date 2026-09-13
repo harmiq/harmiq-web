@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Il·lustració de la Sagrada Família de Barcelona">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#102a5c"/><stop offset=".55" stop-color="#3f82c7"/><stop offset="1" stop-color="#f3b65c"/></linearGradient><linearGradient id="stone" x2="0" y2="1"><stop stop-color="#f7d98a"/><stop offset="1" stop-color="#b56a32"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#sky)"/><circle cx="930" cy="150" r="110" fill="#ffd978" opacity=".45"/><path d="M0 690 Q300 610 600 680 T1200 650 V900 H0Z" fill="#102338" opacity=".8"/>
+<g fill="url(#stone)" stroke="#6e3e28" stroke-width="7" stroke-linejoin="round">
+<path d="M230 735V470l105-175 105 175v265Z"/><path d="M420 735V390l105-205 105 205v345Z"/><path d="M610 735V360l105-230 105 230v375Z"/><path d="M800 735V430l105-165 105 165v305Z"/>
+<path d="M285 470V230l50-105 50 105v240Z"/><path d="M470 390V150l55-115 55 115v240Z"/><path d="M660 360V95l55-120 55 120v265Z"/><path d="M850 430V205l55-110 55 110v225Z"/>
+</g>
+<g fill="#183b5a"><path d="M325 535h25v110h-25zM515 470h25v145h-25zM700 435h28v180h-28zM895 510h25v120h-25z"/><circle cx="715" cy="72" r="20"/></g>
+<text x="70" y="110" fill="white" font-family="sans-serif" font-size="54" font-weight="800">BARCELONA</text><text x="74" y="160" fill="#ffe08a" font-family="sans-serif" font-size="25" letter-spacing="5">CREACIÓ · ART · MÚSICA</text>
+</svg>
