@@ -3834,7 +3834,6 @@ function showCookieBanner() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   inicializarSEO();
-  injectNewsBanner(); // Inyectar banner de novedades
   showCookieBanner();
   wakeUpBackend(); // Despierta el Hugging Face Space si está en sleep mode
 
