@@ -1,5 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Il·lustració cinematogràfica de la Seu Vella de Lleida">
-<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#203b67"/><stop offset=".58" stop-color="#86a9c3"/><stop offset="1" stop-color="#e9b66c"/></linearGradient><linearGradient id="hill" x2="0" y2="1"><stop stop-color="#637447"/><stop offset="1" stop-color="#263b35"/></linearGradient><linearGradient id="stone" x2="0" y2="1"><stop stop-color="#ead08b"/><stop offset="1" stop-color="#91613e"/></linearGradient></defs>
-<rect width="1200" height="700" fill="url(#sky)"/><circle cx="940" cy="160" r="90" fill="#ffe3a1" opacity=".55"/><path d="M0 470 Q180 370 360 455 Q560 330 760 430 Q980 350 1200 440 V700H0Z" fill="#385243"/><path d="M100 625 Q250 390 500 395 Q800 375 1080 620Z" fill="url(#hill)"/>
-<g transform="translate(275 95)"><path d="M70 450V285H610V450Z" fill="url(#stone)" stroke="#624630" stroke-width="9"/><path d="M145 285V135h105v150Z" fill="url(#stone)" stroke="#624630" stroke-width="9"/><path d="M260 285V55h105v230Z" fill="url(#stone)" stroke="#624630" stroke-width="9"/><path d="M375 285V150h110v135Z" fill="url(#stone)" stroke="#624630" stroke-width="9"/><path d="M485 285V190h120v95Z" fill="url(#stone)" stroke="#624630" stroke-width="9"/><path d="M260 55h105v-28l-52-82-53 82Z" fill="#d8bb77" stroke="#624630" stroke-width="8"/><path d="M285 70h55v115h-55zM292 145h40v105h-40zM170 170h45v85h-45zM410 180h48v78h-48z" fill="#43556a"/><path d="M302 -55v-28" stroke="#e7c56f" stroke-width="9"/><circle cx="302" cy="-95" r="12" fill="#ffe08a"/></g>
-<g fill="#b2c06f" opacity=".8"><path d="M110 610l28-115 28 115z"/><path d="M1040 620l32-135 32 135z"/><path d="M930 625l25-105 25 105z"/></g><path d="M0 640 Q240 585 470 630 T950 620 T1200 605 V700H0Z" fill="#0d1c27" opacity=".8"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Lleida, Seu Vella sobre el turó, il·lustració cinematogràfica">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#1b315b"/><stop offset=".42" stop-color="#7299bd"/><stop offset=".76" stop-color="#e8a967"/><stop offset="1" stop-color="#f1d08d"/></linearGradient>
+ <linearGradient id="hill" x2="0" y2="1"><stop stop-color="#71814e"/><stop offset="1" stop-color="#263b35"/></linearGradient>
+ <linearGradient id="stone" x2="0" y2  ="1"><stop stop-color="#f0d48c"/><stop offset=".55" stop-color="#bd8150"/><stop offset="1" stop-color="#674735"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="20"/></filter>
+</defs>
+<rect width="1200" height="700" fill="url(#sky)"/>
+<circle cx="945" cy="160" r="165" fill="#ffe0a0" opacity=".32" filter="url(#glow)"/><circle cx="945" cy="160" r="50" fill="#ffe6a9" opacity=".8"/>
+<path d="M0 470 Q180 370 360 445 Q550 335 750 430 Q970 350 1200 435 V700H0Z" fill="#3c5546"/>
+<path d="M90 635 Q235 395 500 390 Q805 375 1090 630Z" fill="url(#hill)"/>
+<g transform="translate(250 105)">
+ <path d="M70 455V290H625V455Z" fill="url(#stone)" stroke="#61452f" stroke-width="10"/>
+ <path d="M140 290V145h110v145Z" fill="url(#stone)" stroke="#61452f" stroke-width="10"/>
+ <path d="M255 290V55h110v235Z" fill="url(#stone)" stroke="#61452f" stroke-width="10"/>
+ <path d="M370 290V150h115v140Z" fill="url(#stone)" stroke="#61452f" stroke-width="10"/>
+ <path d="M490 290V195h125v95Z" fill="url(#stone)" stroke="#61452f" stroke-width="10"/>
+ <path d="M255 55h110v-30l-55-85-55 85Z" fill="#d7bb78" stroke="#61452f" stroke-width="9"/>
+ <g fill="#45576a"><path d="M285 75h50v115h-50z"/><path d="M165 175h55v80h-55z"/><path d="M400 175h50v80h-50z"/><path d="M525 215h48v65h-48z"/></g>
+ <g fill="#f5dc9a" opacity=".55"><circle cx="310" cy="120" r="4"/><circle cx="415" cy="205" r="4"/><circle cx="550" cy="235" r="3"/></g>
+ <path d="M310 25v-34" stroke="#e8c872" stroke-width="10"/><circle cx="310" cy="-20" r="13" fill="#ffe08a"/>
+</g>
+<path d="M0 635 Q250 580 500 625 T950 615 T1200 600 V700H0Z" fill="#0b1a26" opacity=".82"/>
+<g fill="#b9c56e" opacity=".8"><path d="M110 620l28-120 28 120z"/><path d="M1040 625l30-135 30 135z"/><path d="M920 630l25-105 25 105z"/></g>
+</svg>
