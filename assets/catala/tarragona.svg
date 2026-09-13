@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Il·lustració de l'amfiteatre romà de Tarragona">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#16416d"/><stop offset=".6" stop-color="#68a6c7"/><stop offset="1" stop-color="#efb35f"/></linearGradient><linearGradient id="stone" x2="0" y2="1"><stop stop-color="#d7a15d"/><stop offset="1" stop-color="#7d482d"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#sky)"/><circle cx="980" cy="150" r="120" fill="#ffe49b" opacity=".5"/><path d="M0 625 Q350 555 700 620 T1200 580 V900 H0Z" fill="#244735"/>
+<ellipse cx="610" cy="635" rx="455" ry="235" fill="url(#stone)" stroke="#59372a" stroke-width="12"/><ellipse cx="610" cy="650" rx="340" ry="155" fill="#6d4030" stroke="#4d3028" stroke-width="10"/><ellipse cx="610" cy="665" rx="245" ry="95" fill="#261f20"/>
+<g fill="none" stroke="#f0c87a" stroke-width="22"><path d="M210 610 Q610 345 1010 610"/><path d="M260 670 Q610 430 960 670"/><path d="M330 730 Q610 530 890 730"/></g>
+<g fill="#8a5134"><path d="M170 605h45v180h-45zM270 535h42v245h-42zM375 485h40v290h-40zM805 485h40v290h-40zM890 535h42v245h-42zM985 605h45v180h-45z"/></g>
+<text x="70" y="105" fill="white" font-family="sans-serif" font-size="54" font-weight="800">TARRAGONA</text><text x="74" y="155" fill="#ffe09a" font-family="sans-serif" font-size="25" letter-spacing="5">ARRELS · MAR · HISTÒRIA</text>
+</svg>
