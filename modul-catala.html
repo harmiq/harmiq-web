@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Música Catalana — Artistes i Karaoke | Harmiq</title>
+    <title>Música en català — Artistes, cançons i cultura | Harmiq</title>
     <meta name="description" content="Descobreix l'ADN de la música catalana amb Harmiq. Canta Oques Grasses, The Tyets, Rosalía, artistes catalans contemporanis i descobreix els millors grups emergents i grups de versions per a Festes Majors.">
     <meta name="keywords" content="musica catalana, artistes catalans, grups emergents, karaokes, festes majors, grups de versions, analisis de voz ia, the tyets, oques grasses">
     <link rel="canonical" href="https://harmiq.app/modul-catala">
@@ -113,6 +113,20 @@
   @media(max-width:900px){.v5-provinces{position:relative;width:100%;height:220px;right:auto;order:2;transform:none}.mc-hero{display:block;min-height:0}.mc-hero .v5-inner{padding:3.5rem 0 0}.v5-province span{transform:none}.v5-strip{grid-template-columns:repeat(3,1fr);margin-top:1rem}.v5-strip a:nth-child(3){border-right:0}.v5-strip a{border-bottom:1px solid rgba(255,255,255,.08)}}
   @media(max-width:650px){.v5-provinces{height:170px}.v5-strip{grid-template-columns:repeat(2,1fr)}.v5-region-grid{grid-template-columns:1fr 1fr}.v5-section-head{display:block}.mc-container{padding-top:2rem}}
   @media(max-width:480px){.v5-provinces{grid-template-columns:repeat(2,1fr);height:300px}.v5-province{padding:.9rem}.v5-region-grid{grid-template-columns:1fr}.v5-actions{flex-direction:column;align-items:flex-start}.v5-btn{width:100%;justify-content:center}}
+
+  /* Real territory photography — stable Wikimedia Commons files */
+  .v5-bcn{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1200")}
+  .v5-gir{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1200")}
+  .v5-tar{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1200")}
+  .v5-lle{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1200")}
+  .v5-province{background-image:linear-gradient(180deg,rgba(3,10,18,.08),rgba(0,0,0,.82)),var(--prov-bg)!important;background-size:cover!important;background-position:center!important}
+  .v5-region.b{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1000")}
+  .v5-region.g{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1000")}
+  .v5-region.t{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1000")}
+  .v5-region.l{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1000")}
+  .v5-region{background-image:linear-gradient(180deg,rgba(4,10,16,.03),rgba(0,0,0,.88)),var(--region)!important;background-size:cover!important;background-position:center!important}
+  .catala-photo-credit{width:min(1200px,92%);margin:.7rem auto 0;color:#718096;font-size:.68rem;line-height:1.4;text-align:right}
+  .catala-photo-credit a{color:#94a3b8;text-decoration:underline}
 </style>
 
 </head>
@@ -123,7 +137,7 @@
         <a href="/" class="btn-back">← Tornar</a>
         <a href="/" class="logo"><img src="/harmiq-logo.png" id="nav-logo-img" alt="Harmiq IA Logo"><span class="grad" id="nav-logo-text">Harmiq</span></a>
     </div>
-    <div class="nav-right">🏴 Mòdul Català</div>
+    <div class="nav-right">🎵 Música en català</div>
 </nav>
 
 
@@ -135,7 +149,7 @@
     <div class="v5-province v5-lle" data-artist="The Tyets"><span>Lleida<small>Terra i talent</small></span></div>
   </div>
   <div class="v5-inner">
-    <div class="v5-kicker">Harmiq · Secció catalana</div>
+    <div class="v5-kicker">Harmiq · Música en català</div>
     <h1>La nostra veu<br><span class="v5-highlight">també sona al món</span></h1>
     <p class="v5-sub">Artistes, història, cultura i tècnica vocal d’un territori únic. <strong>Quatre províncies, una mateixa passió: la música.</strong></p>
     <div class="v5-actions"><a class="v5-btn primary" href="#artistes">🎤 Descobreix artistes catalans →</a><a class="v5-btn" href="#cancons">▶ Escolta la nostra essència</a></div>
@@ -371,43 +385,5 @@
 .v5-province{transition:transform .45s ease,filter .45s ease}.v5-province:hover{filter:saturate(1.08);transform:translateY(-3px) skewX(-4deg)}
 @media(max-width:900px){.v5-province:hover{transform:translateY(-3px)}}
 </style>
-
-<script id="harmiq-catala-v5-real-images">
-(() => {
-  const base = 'https://hamiq-harmiq-backend1.hf.space';
-  document.querySelectorAll('.v5-province[data-artist]').forEach(el => {
-    const name = el.getAttribute('data-artist');
-    fetch(base + '/artist-image?name=' + encodeURIComponent(name), {signal: AbortSignal.timeout(6000)})
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d && d.url) { el.style.backgroundImage = `linear-gradient(180deg,rgba(2,8,14,.08),rgba(2,8,14,.78)),url("${d.url}")`; el.classList.add('has-photo'); } })
-      .catch(() => {});
-  });
-})();
-</script>
-
-<script id="harmiq-catala-v5-enhancer">
-(() => {
-  const featured = ['Oques Grasses','The Tyets','Julieta','Mushkaa','Txarango','Manel','Els Pets','Rosalía','Lluís Llach','Montserrat Caballé'];
-  const slug = n => n.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-  const loadExistingArtistImage = async (card) => {
-    const name = (card.querySelector('h3,h4,strong')?.textContent || '').trim();
-    if (!name || !featured.some(x => x.toLowerCase() === name.toLowerCase())) return;
-    const s = slug(name);
-    try {
-      const r = await fetch(`/artistas/${s}/`, {cache:'force-cache'});
-      if (!r.ok) return;
-      const text = await r.text();
-      const m = text.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i);
-      if (!m) return;
-      const img = document.createElement('img'); img.src = m[1]; img.alt = name; img.loading='lazy'; img.decoding='async';
-      img.style='width:100%;height:150px;object-fit:cover;border-radius:16px;margin-bottom:1rem;display:block;';
-      card.prepend(img);
-    } catch (_) {}
-  };
-  const run = () => document.querySelectorAll('#ag .art-card').forEach(loadExistingArtistImage);
-  if ('requestIdleCallback' in window) requestIdleCallback(run,{timeout:1800}); else setTimeout(run,1200);
-})();
-</script>
-
-</body>
+\n<script id="harmiq-catala-image-loader">\n(()=>{\n const langs=['ca','es','en'],cache=new Map(),clean=v=>(v||'').replace(/\\s+/g,' ').trim();\n const get=async n=>{const k=n.toLowerCase();if(cache.has(k))return cache.get(k);const q=(async()=>{for(const l of langs){try{const r=await fetch(`https://${l}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(n)}`,{cache:'force-cache'});if(!r.ok)continue;const d=await r.json(),u=d?.originalimage?.source||d?.thumbnail?.source;if(u)return u}catch(_){}}return null})();cache.set(k,q);return q};\n const load=async c=>{if(c.dataset.photoLoaded)return;const n=clean(c.querySelector('h3,h4,strong')?.textContent),w=c.querySelector('.art-av-wrap'),f=c.querySelector('.art-av');if(!n||!w)return;c.dataset.photoLoaded='1';const u=await get(n);if(!u)return;const i=document.createElement('img');i.className='art-photo';i.src=u;i.alt=`${n} — artista de música en català`;i.loading='lazy';i.decoding='async';i.addEventListener('load',()=>{i.classList.add('loaded');f?.classList.add('hidden')},{once:true});i.addEventListener('error',()=>i.remove(),{once:true});w.prepend(i)};\n const ob='IntersectionObserver'in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){load(e.target);ob.unobserve(e.target)}}),{rootMargin:'900px 0px'}):null;\n const scan=()=>document.querySelectorAll('#ag .art-card,#eg .art-card').forEach(c=>ob?ob.observe(c):load(c));\n const start=()=>{scan();new MutationObserver(scan).observe(document.body,{childList:true,subtree:true})};\n document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start,{once:true}):start();\n})();\n</script>\n</body>
 </html>
