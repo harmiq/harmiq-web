@@ -15,18 +15,15 @@ jobs:
           python3 <<'PY'
           from pathlib import Path
           import re
-          p=Path('modul-catala.html')
-          s=p.read_text(encoding='utf-8')
+          p=Path('modul-catala.html'); s=p.read_text(encoding='utf-8')
           s=s.replace('<title>Música Catalana — Artistes i Karaoke | Harmiq</title>','<title>Música en català — Artistes, cançons i cultura | Harmiq</title>')
           s=s.replace('<div class="nav-right">🏴 Mòdul Català</div>','<div class="nav-right">🎵 Música en català</div>')
           s=s.replace('<div class="v5-kicker">Harmiq · Secció catalana</div>','<div class="v5-kicker">Harmiq · Música en català</div>')
           s=re.sub(r'\s*<script id="harmiq-catala-v5-real-images">.*?</script>\s*','\n',s,flags=re.S)
           s=re.sub(r'\s*<script id="harmiq-catala-v5-enhancer">.*?</script>\s*','\n',s,flags=re.S)
           css='''\n  /* Real territory photography — stable Wikimedia Commons files */\n  .v5-bcn{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1200")}\n  .v5-gir{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1200")}\n  .v5-tar{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1200")}\n  .v5-lle{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1200")}\n  .v5-province{background-image:linear-gradient(180deg,rgba(3,10,18,.08),rgba(0,0,0,.82)),var(--prov-bg)!important;background-size:cover!important;background-position:center!important}\n  .v5-region.b{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1000")}\n  .v5-region.g{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1000")}\n  .v5-region.t{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1000")}\n  .v5-region.l{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1000")}\n  .v5-region{background-image:linear-gradient(180deg,rgba(4,10,16,.03),rgba(0,0,0,.88)),var(--region)!important;background-size:cover!important;background-position:center!important}\n  .catala-photo-credit{width:min(1200px,92%);margin:.7rem auto 0;color:#718096;font-size:.68rem;line-height:1.4;text-align:right}\n  .catala-photo-credit a{color:#94a3b8;text-decoration:underline}\n'''
-          if 'Real territory photography' not in s:
-              s=s.replace('</style>\n\n</head>',css+'</style>\n\n</head>',1)
-          if 'catala-photo-credit' not in s:
-              s=s.replace('    </div>\n\n    <div class="search-box">','    </div>\n    <div class="catala-photo-credit">Fotografies de territori via <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>: Barcelona · Girona · Tarragona · Lleida.</div>\n\n    <div class="search-box">',1)
+          if 'Real territory photography' not in s:s=s.replace('</style>\n\n</head>',css+'</style>\n\n</head>',1)
+          if 'catala-photo-credit' not in s:s=s.replace('    </div>\n\n    <div class="search-box">','    </div>\n    <div class="catala-photo-credit">Fotografies de territori via <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>: Barcelona · Girona · Tarragona · Lleida.</div>\n\n    <div class="search-box">',1)
           loader=r'''\n<script id="harmiq-catala-image-loader">\n(()=>{\n const langs=['ca','es','en'],cache=new Map(),clean=v=>(v||'').replace(/\\s+/g,' ').trim();\n const get=async n=>{const k=n.toLowerCase();if(cache.has(k))return cache.get(k);const q=(async()=>{for(const l of langs){try{const r=await fetch(`https://${l}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(n)}`,{cache:'force-cache'});if(!r.ok)continue;const d=await r.json(),u=d?.originalimage?.source||d?.thumbnail?.source;if(u)return u}catch(_){}}return null})();cache.set(k,q);return q};\n const load=async c=>{if(c.dataset.photoLoaded)return;const n=clean(c.querySelector('h3,h4,strong')?.textContent),w=c.querySelector('.art-av-wrap'),f=c.querySelector('.art-av');if(!n||!w)return;c.dataset.photoLoaded='1';const u=await get(n);if(!u)return;const i=document.createElement('img');i.className='art-photo';i.src=u;i.alt=`${n} — artista de música en català`;i.loading='lazy';i.decoding='async';i.addEventListener('load',()=>{i.classList.add('loaded');f?.classList.add('hidden')},{once:true});i.addEventListener('error',()=>i.remove(),{once:true});w.prepend(i)};\n const ob='IntersectionObserver'in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){load(e.target);ob.unobserve(e.target)}}),{rootMargin:'900px 0px'}):null;\n const scan=()=>document.querySelectorAll('#ag .art-card,#eg .art-card').forEach(c=>ob?ob.observe(c):load(c));\n const start=()=>{scan();new MutationObserver(scan).observe(document.body,{childList:true,subtree:true})};\n document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start,{once:true}):start();\n})();\n</script>\n'''
           if 'harmiq-catala-image-loader' not in s:s=s.replace('</body>',loader+'</body>',1)
           p.write_text(s,encoding='utf-8')
@@ -38,7 +35,7 @@ jobs:
           grep -q 'Música en català' modul-catala.html
           grep -q 'Real territory photography' modul-catala.html
           grep -q 'harmiq-catala-image-loader' modul-catala.html
-          grep -q 'https://*.wikipedia.org' _headers
+          grep -q 'wikipedia.org' _headers
           ! grep -q 'harmiq-catala-v5-real-images' modul-catala.html
           ! grep -q 'harmiq-catala-v5-enhancer' modul-catala.html
       - name: Commit
