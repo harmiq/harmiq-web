@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   seo:
-    if: github.event.head_commit.message != 'chore: improve homepage SEO metadata and structured data'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
