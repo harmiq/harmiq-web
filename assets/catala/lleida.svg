@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Il·lustració de la Seu Vella de Lleida sobre el turó">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#172e55"/><stop offset=".55" stop-color="#779dbd"/><stop offset="1" stop-color="#efc26e"/></linearGradient><linearGradient id="stone" x2="0" y2="1"><stop stop-color="#ead48d"/><stop offset="1" stop-color="#8d6139"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#sky)"/><circle cx="920" cy="140" r="115" fill="#ffe29a" opacity=".5"/><path d="M0 650 Q250 520 480 610 Q700 470 940 590 Q1080 520 1200 580 V900 H0Z" fill="#314c3c"/><path d="M120 770 Q260 500 520 510 Q790 505 1050 760Z" fill="#4e6948"/>
+<g fill="url(#stone)" stroke="#60432f" stroke-width="9" stroke-linejoin="round"><path d="M350 585V350h330v235Z"/><path d="M470 350V165h95v185Z"/><path d="M565 350V120h100v230Z"/><path d="M330 350l70-135 70 135Z"/><path d="M650 350l55-115 55 115Z"/><path d="M690 585V270h135v315Z"/></g>
+<g fill="#3c4650"><path d="M505 190h25v95h-25zM600 145h28v125h-28zM720 315h22v105h-22z"/><circle cx="614" cy="105" r="17"/></g>
+<path d="M300 585 Q560 500 850 585" fill="none" stroke="#f5db9a" stroke-width="15" opacity=".65"/>
+<text x="70" y="105" fill="white" font-family="sans-serif" font-size="54" font-weight="800">LLEIDA</text><text x="74" y="155" fill="#ffe09a" font-family="sans-serif" font-size="25" letter-spacing="5">SEU VELLA · TERRA · TALENT</text>
+</svg>
