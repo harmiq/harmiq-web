@@ -1,0 +1,257 @@
+{
+  "version": "harmiq_pro_v1",
+  "config": {
+    "affiliate_id": "harmiqapp-20",
+    "base_search_url": "https://www.amazon.es/s?k=",
+    "default_region": "ES",
+    "currency": "EUR"
+  },
+  "affiliate": {
+    "amazon_tag": "harmiqapp-20",
+    "domain_map": {
+      "ES": "es",
+      "US": "com",
+      "MX": "com.mx",
+      "UK": "co.uk",
+      "DE": "de",
+      "FR": "fr",
+      "IT": "it"
+    }
+  },
+  "global_keywords": {
+    "essentials": ["filtro anti-pop", "brazo articulado microfono", "interfaz de audio", "auriculares estudio"],
+    "top_brands": ["Rode", "Audio-Technica", "Shure", "AKG", "Focusrite", "Neumann", "Sennheiser"]
+  },
+  "logic": {
+    "voice_profiles": {
+      "Tenor": {
+        "characteristics": "Voces agudas y brillantes. Necesitan calidez en el registro superior.",
+        "search_filters": "microfono+condensador+voces+agudas",
+        "mic_preference": ["bright", "detailed"],
+        "recommended_models": ["AT2035", "Rode NT1-A"]
+      },
+      "Barítono": {
+        "characteristics": "Voces cálidas y profundas. Requieren definición en medios-bajos.",
+        "search_filters": "microfono+dinamico+voces+graves+calidas",
+        "mic_preference": ["warm", "body"],
+        "recommended_models": ["AKG P220", "SM7B"]
+      },
+      "Bajo": {
+        "characteristics": "Timbre muy denso. Necesita control de graves.",
+        "mic_preference": ["controlled", "low"],
+        "recommended_models": ["SM7B", "RE20"]
+      },
+      "Soprano": {
+        "characteristics": "Rango agudo extenso. Requieren micros con respuesta suave.",
+        "search_filters": "microfono+condensador+soprano+cristalino",
+        "mic_preference": ["bright", "airy"],
+        "recommended_models": ["NT1-A", "AT2035"]
+      },
+      "Mezzosoprano": {
+        "characteristics": "Equilibrio entre graves y agudos.",
+        "search_filters": "microfono+condensador+mezzo+equilibrado",
+        "mic_preference": ["balanced"],
+        "recommended_models": ["AT2035", "AKG P220"]
+      },
+      "Contralto": {
+        "characteristics": "Femenina grave y profunda.",
+        "mic_preference": ["warm", "soft"],
+        "recommended_models": ["AKG P220"]
+      }
+    },
+    "usage_modes": {
+      "singing": {
+        "mic_type": "condenser",
+        "description": "Captura detalle y armónicos de la voz"
+      },
+      "podcast": {
+        "mic_type": "dynamic",
+        "description": "Reduce ruido ambiente y mejora claridad de voz hablada"
+      },
+      "hobby": {
+        "mic_type": "usb",
+        "description": "Plug & play sin configuración"
+      }
+    },
+    "budget_tiers": {
+      "basic": { "range": "50-120" },
+      "economic": { "range": "120-250" },
+      "mid": { "range": "250-600" },
+      "pro": { "range": "600-1500" }
+    }
+  },
+  "packs": {
+    "basic": {
+      "title": "🎧 Home Studio Básico",
+      "description": "Para empezar sin complicaciones, plug & play",
+      "microphones": [
+        {
+          "name": "Fifine K669B",
+          "search": "Fifine K669B USB microphone",
+          "why": "Muy barato y sorprendentemente usable",
+          "best_for": "principiantes",
+          "avoid_if": "quieres sonido profesional"
+        },
+        {
+          "name": "TONOR TC30",
+          "search": "TONOR TC30 kit mic",
+          "why": "Incluye brazo y filtro, listo para usar",
+          "best_for": "comodidad total"
+        },
+        {
+          "name": "Maono AU-A04",
+          "search": "Maono AU-A04",
+          "why": "Sonido más cálido que otros USB",
+          "best_for": "voz hablada"
+        }
+      ],
+      "extras": [
+        {
+          "name": "Pop filter básico",
+          "why": "Evita sonidos explosivos (P y B)"
+        }
+      ]
+    },
+    "economic": {
+      "title": "💰 Home Studio Económico",
+      "microphones": [
+        {
+          "name": "Audio-Technica AT2020",
+          "search": "Audio Technica AT2020",
+          "why": "Estándar mundial para empezar",
+          "best_for": "voces claras",
+          "avoid_if": "voz muy grave"
+        },
+        {
+          "name": "Behringer B-1",
+          "search": "Behringer B1 microphone",
+          "why": "Muy barato para ser XLR"
+        },
+        {
+          "name": "Maono PM500",
+          "search": "Maono PM500",
+          "why": "Equilibrio calidad/precio"
+        }
+      ],
+      "interfaces": [
+        {
+          "name": "Behringer UMC22",
+          "search": "Behringer UMC22",
+          "why": "La más barata funcional"
+        },
+        {
+          "name": "M-Audio M-Track Solo",
+          "search": "M-Audio M Track Solo",
+          "why": "Más estable"
+        },
+        {
+          "name": "Focusrite Solo",
+          "search": "Focusrite Scarlett Solo",
+          "why": "Calidad superior"
+        }
+      ]
+    },
+    "mid": {
+      "title": "🎙 Home Studio Medio",
+      "microphones": [
+        {
+          "name": "AT2035",
+          "search": "Audio Technica AT2035",
+          "why": "Equilibrio perfecto",
+          "best_for": "todo tipo de voces"
+        },
+        {
+          "name": "Rode NT1-A",
+          "search": "Rode NT1A",
+          "why": "Ultra limpio",
+          "best_for": "voces agudas"
+        },
+        {
+          "name": "AKG P220",
+          "search": "AKG P220",
+          "why": "Más cálido",
+          "best_for": "voces graves"
+        }
+      ],
+      "interfaces": [
+        { "name": "Focusrite 2i2", "search": "Focusrite Scarlett 2i2" },
+        { "name": "Audient iD4", "search": "Audient iD4" },
+        { "name": "Motu M2", "search": "Motu M2 interface" }
+      ],
+      "monitors": [
+        { "name": "Presonus Eris 3.5", "search": "Presonus Eris 3.5" },
+        { "name": "Mackie CR3-X", "search": "Mackie CR3X" },
+        { "name": "JBL 305P", "search": "JBL 305P MkII" }
+      ]
+    },
+    "pro": {
+      "title": "🔥 Home Studio Pro",
+      "microphones": [
+        {
+          "name": "Rode NT1",
+          "search": "Rode NT1 microphone",
+          "why": "Ultra limpio y moderno"
+        },
+        {
+          "name": "AKG C214",
+          "search": "AKG C214",
+          "why": "Sonido profesional"
+        },
+        {
+          "name": "Warm Audio WA47jr",
+          "search": "Warm Audio WA47jr",
+          "why": "Sonido vintage tipo Neumann"
+        }
+      ],
+      "interfaces": [
+        { "name": "Audient iD14", "search": "Audient iD14" },
+        { "name": "SSL2", "search": "SSL2 interface" },
+        { "name": "Motu M4", "search": "Motu M4" }
+      ]
+    }
+  },
+  "extra": {
+    "podcast_mode": {
+      "microphones": [
+        {
+          "name": "Samson Q2U",
+          "search": "Samson Q2U",
+          "why": "Mejor barato para podcast"
+        },
+        {
+          "name": "ATR2100",
+          "search": "ATR2100 microphone"
+        },
+        {
+          "name": "Shure MV7",
+          "search": "Shure MV7"
+        }
+      ]
+    },
+    "songs_by_voice": {
+      "Barítono": [
+        "Perfect - Ed Sheeran",
+        "Hallelujah - Leonard Cohen"
+      ],
+      "Tenor": [
+        "Blinding Lights - The Weeknd"
+      ]
+    },
+    "content": {
+      "Tenor": [
+        {
+          "artist": "Freddie Mercury",
+          "title": "Bohemian Rhapsody",
+          "search": "Bohemian Rhapsody movie"
+        }
+      ],
+      "Barítono": [
+        {
+          "artist": "Johnny Cash",
+          "title": "Walk the Line",
+          "search": "Johnny Cash movie"
+        }
+      ]
+    }
+  }
+}

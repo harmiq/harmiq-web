@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Éxitos por Década — Hits Reales de Spotify | Harmiq</title>
+<meta name="description" content="Explora los mayores éxitos musicales desde los 60 hasta hoy con listas actualizadas de Spotify, Apple Music y Amazon Music.">
+<link rel="canonical" href="https://harmiq.app/exitos-decada">
+<link rel="icon" type="image/png" href="/harmiq-logo.png">
+<link rel="apple-touch-icon" href="/harmiq-logo.png">
+<meta property="og:image" content="https://harmiq.app/harmiq-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--p:#7C4DFF;--a:#FF4FA3;--dark:#0A0818;--card:#130F2A;--t:#E5E7EB;--m:#6B7280;--green:#1DB954}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--dark);color:var(--t);font-family:'Outfit',sans-serif;line-height:1.6;min-height:100vh;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(13,13,26,.97);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;z-index:100}
+.logo{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#FF4FA3,#7C4DFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nav-back{background:rgba(124,77,255,.15);color:#A5B4FC;border:1px solid rgba(124,77,255,.3);padding:.45rem 1.1rem;border-radius:20px;font-size:.85rem;font-weight:700;cursor:pointer}
+
+.hero{text-align:center;padding:3rem 1.5rem 2rem;background:radial-gradient(circle at top right, rgba(124,77,255,0.1), transparent)}
+.grad{background:linear-gradient(135deg, var(--p), #FFFFFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1{font-family:'Outfit';font-size:clamp(2rem,6vw,3rem);font-weight:900}
+
+.tabs{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;padding:1.5rem;margin-bottom:1rem}
+.tab{padding:.5rem 1.2rem;border-radius:25px;font-size:.85rem;font-weight:700;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,0.05);color:var(--m);cursor:pointer;transition:.3s}
+.tab.active{background:linear-gradient(135deg,#7C4DFF,#FF4FA3);color:#fff;border-color:transparent;box-shadow:0 5px 15px rgba(124,77,255,0.4)}
+
+.content{max-width:900px;margin:0 auto;padding:1rem 1.5rem 4rem}
+
+.spotify-section{display:flex;flex-direction:column;gap:1.5rem;align-items:center}
+.spotify-section iframe{border-radius:16px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.platform-links{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:1rem}
+.platform-links a{padding:.5rem 1.2rem;border-radius:20px;font-weight:800;font-size:.8rem;transition:.3s;display:flex;align-items:center;gap:.4rem}
+.btn-spotify{background:#1DB954;color:#000}
+.btn-apple{background:#FC3C44;color:#fff}
+.btn-amazon{background:#FF9900;color:#000}
+.platform-links a:hover{transform:scale(1.05)}
+
+.loading-box{text-align:center;padding:4rem}
+.spinner{width:40px;height:40px;border:4px solid rgba(124,77,255,0.2);border-top-color:var(--p);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{text-align:center;padding:3rem;color:var(--m);font-size:0.8rem;border-top:1px solid rgba(255,255,255,0.05)}
+
+@media (max-width:600px) {
+    .spotify-section iframe{width:100%!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+    <a class="logo" href="/" style="display:flex;align-items:center;gap:0.8rem;text-decoration:none"><img src="/harmiq-logo.png" alt="Harmiq Logo" style="height:38px; border-radius:10px; box-shadow: 0 0 15px rgba(124,77,255,0.4)"><span style="background:linear-gradient(135deg,var(--a),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Harmiq</span></a>
+    <button class="nav-back" onclick="location.href='/'">← Volver</button>
+</nav>
+
+<div class="hero">
+    <h1><span class="grad">Hits de Leyenda</span></h1>
+    <p>Listas actualizadas a diario por Spotify. Escucha, descubre y disfruta.</p>
+</div>
+
+<div class="tabs" id="tabs-container">
+    <div class="tab active" onclick="changeTab('top', this)">🌍 Top Charts</div>
+    <div class="tab" onclick="changeTab('novedades', this)">🆕 Novedades 2026</div>
+    <div class="tab" onclick="changeTab('2020s', this)">2020s</div>
+    <div class="tab" onclick="changeTab('2010s', this)">2010s</div>
+    <div class="tab" onclick="changeTab('2000s', this)">2000s</div>
+    <div class="tab" onclick="changeTab('90s', this)">90s</div>
+    <div class="tab" onclick="changeTab('80s', this)">80s</div>
+    <div class="tab" onclick="changeTab('70s', this)">70s</div>
+    <div class="tab" onclick="changeTab('60s', this)">60s</div>
+</div>
+
+<div class="content">
+    <div id="list-container"></div>
+</div>
+
+<footer>
+    <p>© 2026 Harmiq · Listas oficiales de Spotify · Actualizadas a diario</p>
+</footer>
+
+<script>
+const SPOTIFY_TOP50 = {
+    GLOBAL: "37i9dQZEVXbMDoHDwVN2tF",
+    ES: "37i9dQZEVXbNFJfN1Vw8d9",
+    US: "37i9dQZEVXbLRQDuF5jeBp",
+    MX: "37i9dQZEVXbO3qyFxbkOQ1",
+    AR: "37i9dQZEVXbMMy2roB9myp",
+    CO: "37i9dQZEVXbOa2lmxNORXQ",
+    CL: "37i9dQZEVXbL0GavIqMTeb",
+    GB: "37i9dQZEVXbLnolsZ8PSNw",
+    FR: "37i9dQZEVXbIPWwFssbupI",
+    DE: "37i9dQZEVXbJiZcmkrIHGU",
+    IT: "37i9dQZEVXbIQnj7RRhdSX",
+    PT: "37i9dQZEVXbKyJS56d1pgi",
+    BR: "37i9dQZEVXbMXbN3EUUhlg",
+    JP: "37i9dQZEVXbKXQ4mDTEBXq",
+    CA: "37i9dQZEVXbKj23U1GF4IR"
+};
+
+const SPOTIFY_PLAYLISTS = {
+    novedades: "37i9dQZF1DXcBWIGoYBM5M",
+    "2020s": "37i9dQZF1DX2L0iB23Enbq",
+    "2010s": "37i9dQZF1DX5Ejj0EkURtP",
+    "2000s": "37i9dQZF1DX4o1oenSJRJd",
+    "90s": "37i9dQZF1DXbTxRx0MVQev",
+    "80s": "37i9dQZF1DX4UtSsGT1Sbe",
+    "70s": "37i9dQZF1DWTJ7xPn4vNaz",
+    "60s": "37i9dQZF1DXaKIA8E7WcJj"
+};
+
+let userCC = "GLOBAL";
+
+async function detectGeo() {
+    try {
+        const ctrl = new AbortController();
+        setTimeout(() => ctrl.abort(), 3000);
+        const res = await fetch('https://ipapi.co/json/', { signal: ctrl.signal });
+        const data = await res.json();
+        if (data.country_code) userCC = data.country_code;
+    } catch(e) { console.log("Geo fallback: GLOBAL"); }
+}
+
+function renderSpotifyEmbed(playlistId, title) {
+    return `
+    <div class="spotify-section">
+        <h2 style="text-align:center;font-family:'Outfit';font-size:1.8rem;margin-bottom:0.5rem">${title}</h2>
+        <iframe 
+            src="https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=0" 
+            width="100%" height="552" frameBorder="0" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy" style="max-width:800px;min-height:352px">
+        </iframe>
+    </div>`;
+}
+
+function renderTopCharts() {
+    const localId = SPOTIFY_TOP50[userCC] || SPOTIFY_TOP50.GLOBAL;
+    const globalId = SPOTIFY_TOP50.GLOBAL;
+    const names = {
+        ES:"España 🇪🇸",US:"USA 🇺🇸",MX:"México 🇲🇽",AR:"Argentina 🇦🇷",
+        CO:"Colombia 🇨🇴",CL:"Chile 🇨🇱",GB:"UK 🇬🇧",FR:"Francia 🇫🇷",
+        DE:"Alemania 🇩🇪",IT:"Italia 🇮🇹",PT:"Portugal 🇵🇹",BR:"Brasil 🇧🇷",
+        JP:"Japón 🇯🇵",CA:"Canadá 🇨🇦",GLOBAL:"Global 🌍"
+    };
+    const name = names[userCC] || "Global 🌍";
+    let html = '';
+    if (userCC !== "GLOBAL" && localId !== globalId) {
+        html += renderSpotifyEmbed(localId, `🏆 Top 50 ${name}`);
+        html += '<div style="height:2rem"></div>';
+        html += renderSpotifyEmbed(globalId, "🌍 Top 50 Global");
+    } else {
+        html += renderSpotifyEmbed(globalId, "🌍 Top 50 Global");
+    }
+    html += `
+    <div style="text-align:center;margin-top:2rem;padding:1.5rem;background:var(--card);border-radius:20px;border:1px solid rgba(255,255,255,0.06)">
+        <p style="color:var(--m);font-size:0.85rem;margin-bottom:1rem;font-weight:700">¿Prefieres otra plataforma?</p>
+        <div class="platform-links">
+            <a href="https://music.apple.com/us/playlist/top-100-global/pl.d25f5d1181894928af76c85c967f8f31" target="_blank" rel="noopener" class="btn-apple">🍎 Apple Music</a>
+            <a href="https://music.amazon.com/playlists/B07FHDC281" target="_blank" rel="noopener" class="btn-amazon">🎵 Amazon Music</a>
+            <a href="https://open.spotify.com/playlist/${SPOTIFY_TOP50.GLOBAL}" target="_blank" rel="noopener" class="btn-spotify">🎧 Abrir en Spotify</a>
+        </div>
+    </div>`;
+    return html;
+}
+
+function renderDecade(decade) {
+    const id = SPOTIFY_PLAYLISTS[decade];
+    if (!id) return '<p style="text-align:center;color:var(--m)">Sin datos para esta década.</p>';
+    const titles = {
+        novedades:"🆕 Lo Más Nuevo de 2026",
+        "2020s":"📀 Éxitos 2020s","2010s":"📀 Éxitos 2010s",
+        "2000s":"📀 Éxitos 2000s","90s":"📀 Éxitos 90s",
+        "80s":"📀 Éxitos 80s","70s":"📀 Éxitos 70s","60s":"📀 Éxitos 60s"
+    };
+    return renderSpotifyEmbed(id, titles[decade] || "Éxitos");
+}
+
+function changeTab(tab, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    const c = document.getElementById('list-container');
+    c.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Cargando...</p></div>';
+    setTimeout(() => {
+        c.innerHTML = tab === 'top' ? renderTopCharts() : renderDecade(tab);
+    }, 300);
+}
+
+window.onload = async () => {
+    await detectGeo();
+    document.getElementById('list-container').innerHTML = renderTopCharts();
+};
+</script>
+</body>
+</html>
