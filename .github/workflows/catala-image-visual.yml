@@ -1,0 +1,89 @@
+name: Apply Catalan visual image cards
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  visual:
+    if: ${{ !startsWith(github.event.head_commit.message, 'feat: apply Catalan image visual') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Catalan visual
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('modul-catala.html')
+          s=p.read_text()
+          old='''  .art-card{background:linear-gradient(160deg,rgba(22,39,55,.90),rgba(8,17,27,.92));border:1px solid rgba(255,255,255,.08)!important;border-radius:22px!important;padding:1.35rem!important;text-align:left!important;box-shadow:0 12px 30px rgba(0,0,0,.15);min-height:155px;position:relative;overflow:hidden}'''
+          new='''  .art-card{background:linear-gradient(160deg,rgba(22,39,55,.90),rgba(8,17,27,.94));border:1px solid rgba(255,255,255,.08)!important;border-radius:22px!important;padding:0!important;text-align:left!important;box-shadow:0 12px 30px rgba(0,0,0,.18);min-height:0;position:relative;overflow:hidden;cursor:pointer}.art-card:before{content:'';position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,var(--hm-blue),var(--hm-gold));opacity:.9;z-index:5}.art-card:hover{transform:translateY(-6px)!important;border-color:rgba(90,200,255,.4)!important;box-shadow:0 22px 45px rgba(0,0,0,.30)}
+  .art-av-wrap{height:185px!important;margin:0!important;display:block!important;position:relative!important;overflow:hidden!important;background:linear-gradient(135deg,#10283a,#0a1119)!important}.art-photo{width:100%!important;height:100%!important;display:block;object-fit:cover!important;object-position:center!important;transition:transform .5s ease,filter .5s ease!important}.art-card:hover .art-photo{transform:scale(1.045);filter:saturate(1.08)}.art-av{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;border-radius:0!important;display:flex;align-items:center;justify-content:center;font-size:2rem!important;background:linear-gradient(135deg,#16344c,#111827)!important}.art-av-wrap:after{content:'';position:absolute;inset:35% 0 0;background:linear-gradient(180deg,transparent,rgba(4,10,16,.88));pointer-events:none}.art-card .art-nom,.art-card .art-gen,.art-card .art-bio,.art-card .em-badge{position:relative;z-index:3;margin-left:1.2rem;margin-right:1.2rem}.art-card .art-nom{font-size:1.08rem!important;margin-top:1rem!important}.art-card .art-gen{margin-top:.2rem!important}.art-card .art-bio{padding-bottom:1.2rem!important}.art-card .em-badge{margin-top:.9rem}.v5-province{background-color:#10202d!important}.v5-province.has-photo{background-size:cover!important;background-position:center!important}.v5-province.has-photo:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,14,.08),rgba(2,8,14,.78));z-index:1}.v5-province.has-photo span{z-index:3}'''
+          if old not in s: raise SystemExit('CSS anchor not found')
+          s=s.replace(old,new,1)
+          s=s.replace('<div class="v5-province v5-bcn">','<div class="v5-province v5-bcn" data-artist="Julieta">',1)
+          s=s.replace('<div class="v5-province v5-gir">','<div class="v5-province v5-gir" data-artist="Txarango">',1)
+          s=s.replace('<div class="v5-province v5-tar">','<div class="v5-province v5-tar" data-artist="Els Pets">',1)
+          s=s.replace('<div class="v5-province v5-lle">','<div class="v5-province v5-lle" data-artist="The Tyets">',1)
+          marker='''<script id="harmiq-catala-v5-enhancer">'''
+          inject='''<style id="harmiq-catala-v5-image-polish">
+  .v5-province{transition:transform .45s ease,filter .45s ease}.v5-province:hover{filter:saturate(1.08);transform:translateY(-3px) skewX(-4deg)}
+  @media(max-width:900px){.v5-province:hover{transform:translateY(-3px)}}
+</style>
+
+'''
+          if marker not in s: raise SystemExit('enhancer marker not found')
+          s=s.replace(marker,inject+marker,1)
+          p.write_text(s)
+
+          p=Path('modul-catala-v3.js')
+          s=p.read_text()
+          old_line='''if (d.url) { IMG_CACHE[name] = d.url; imgEl.src = d.url; imgEl.style.display = "block"; imgEl.style.borderRadius = "50%"; imgEl.style.objectFit = "cover"; fallbackEl.style.display = "none"; }'''
+          new_line='''if (d.url) { IMG_CACHE[name] = d.url; imgEl.src = d.url; imgEl.style.display = "block"; imgEl.style.borderRadius = imgEl.classList.contains("art-photo") ? "0" : "50%"; imgEl.style.objectFit = "cover"; fallbackEl.style.display = "none"; }'''
+          if old_line not in s: raise SystemExit('photo line not found')
+          s=s.replace(old_line,new_line,1)
+          p.write_text(s)
+          PY
+      - name: Add province photography and commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('modul-catala.html')
+          s=p.read_text()
+          marker='''<script id="harmiq-catala-v5-enhancer">'''
+          add='''<script id="harmiq-catala-v5-real-images">
+  (() => {
+    const base = 'https://hamiq-harmiq-backend1.hf.space';
+    const items = document.querySelectorAll('.v5-province[data-artist]');
+    items.forEach(el => {
+      const name = el.getAttribute('data-artist');
+      fetch(base + '/artist-image?name=' + encodeURIComponent(name), {signal: AbortSignal.timeout(6000)})
+        .then(r => r.ok ? r.json() : null)
+        .then(d => {
+          if (d && d.url) { el.style.backgroundImage = `linear-gradient(180deg,rgba(2,8,14,.08),rgba(2,8,14,.78)),url("${d.url}")`; el.classList.add('has-photo'); }
+        }).catch(() => {});
+    });
+  })();
+</script>
+
+'''
+          if marker not in s: raise SystemExit('marker missing')
+          if 'harmiq-catala-v5-real-images' not in s: s=s.replace(marker,add+marker,1)
+          p.write_text(s)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add modul-catala.html modul-catala-v3.js
+          git commit -m 'feat: apply Catalan image visual'
+          git push
+      - name: Remove temporary workflow
+        if: ${{ success() }}
+        run: |
+          rm -f .github/workflows/catala-image-visual.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u .github/workflows/catala-image-visual.yml
+          git commit -m 'chore: remove temporary Catalan image workflow'
+          git push
