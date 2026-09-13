@@ -1,6 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Il·lustració cinematogràfica de Girona, l’Onyar i la catedral">
-<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#18365f"/><stop offset=".55" stop-color="#75afd0"/><stop offset="1" stop-color="#e7a86b"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#4e8eaa"/><stop offset="1" stop-color="#152b45"/></linearGradient></defs>
-<rect width="1200" height="700" fill="url(#sky)"/><circle cx="955" cy="155" r="80" fill="#ffe1a0" opacity=".6"/><path d="M0 390 Q180 320 350 380 T700 365 T1200 350 V700H0Z" fill="#243c4c"/><path d="M0 500 Q250 450 500 500 T900 485 T1200 495 V700H0Z" fill="url(#water)"/>
-<g stroke="#4a3838" stroke-width="5"><path d="M35 480V265h105v215Z" fill="#d96f58"/><path d="M140 480V225h120v255Z" fill="#e4a35e"/><path d="M260 480V290h115v190Z" fill="#c85d55"/><path d="M375 480V250h120v230Z" fill="#e5bd69"/><path d="M495 480V275h115v205Z" fill="#d26b55"/><path d="M610 480V220h120v260Z" fill="#e2a05a"/><path d="M730 480V255h115v225Z" fill="#d66d55"/><path d="M845 480V235h130v245Z" fill="#e8b667"/><path d="M975 480V270h110v210Z" fill="#d36d55"/></g>
-<g transform="translate(265 50)"><path d="M0 430V160L90 35l90 125v270Z" fill="#c8bda6" stroke="#4e403c" stroke-width="8"/><path d="M42 175h96L90 70Z" fill="#8f8177"/><path d="M73 125h34v72H73z" fill="#293d50"/><path d="M85 35V5" stroke="#d9c477" stroke-width="9"/></g>
-<path d="M0 505 Q300 530 600 510 T1200 505" fill="none" stroke="#b9dce2" stroke-width="5" opacity=".5"/><path d="M250 495 Q350 445 450 495 T650 495" fill="none" stroke="#d8b879" stroke-width="12"/><g opacity=".35" stroke="#fff" stroke-width="2"><path d="M40 570h300"/><path d="M710 560h350"/><path d="M400 620h260"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Girona, l’Onyar i la catedral, il·lustració cinematogràfica">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#122b54"/><stop offset=".45" stop-color="#679bc1"/><stop offset=".78" stop-color="#e6a36b"/><stop offset="1" stop-color="#f3c57d"/></linearGradient>
+ <linearGradient id="water" x2="0" y2="1"><stop stop-color="#4e9eb1"/><stop offset="1" stop-color="#122b45"/></linearGradient>
+ <linearGradient id="wall" x2="0" y2="1"><stop stop-color="#f0bd72"/><stop offset="1" stop-color="#9b5d43"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="1200" height="700" fill="url(#sky)"/>
+<circle cx="965" cy="155" r="155" fill="#ffe2a0" opacity=".35" filter="url(#glow)"/><circle cx="965" cy="155" r="52" fill="#ffe8ae" opacity=".8"/>
+<path d="M0 390 Q180 315 350 370 T700 360 T1200 345 V700H0Z" fill="#304a4d"/>
+<g stroke="#5a3d3a" stroke-width="5">
+<path d="M0 500V300h112v200Z" fill="#cf6756"/><path d="M112 500V245h122v255Z" fill="#e3a05c"/><path d="M234 500V315h112v185Z" fill="#b95851"/><path d="M346 500V270h125v230Z" fill="#e9c16f"/><path d="M471 500V305h118v195Z" fill="#c96053"/><path d="M589 500V235h126v265Z" fill="#e4a05d"/><path d="M715 500V285h118v215Z" fill="#c95c50"/><path d="M833 500V255h130v245Z" fill="#e6ad62"/><path d="M963 500V300h130v200Z" fill="#ca6253"/><path d="M1093 500V275h107v225Z" fill="#e0a35e"/>
+</g>
+<g fill="#493b39" stroke="#332c30" stroke-width="8"><path d="M260 500V190L350 48l90 142v310Z" fill="#cbbda4"/><path d="M300 192h100L350 82Z" fill="#8c7b72"/><path d="M328 165h44v88h-44z" fill="#30475c"/><path d="M350 50V10" stroke="#d8c77e" stroke-width="9"/></g>
+<path d="M0 500 Q160 535 320 505 T640 510 T960 500 T1200 510 V700H0Z" fill="url(#water)"/>
+<path d="M0 510 Q300 550 600 515 T1200 510" fill="none" stroke="#b9e1e4" stroke-width="7" opacity=".6"/>
+<path d="M250 500 Q350 450 450 500 T650 500" fill="none" stroke="#c99a5b" stroke-width="15"/>
+<g fill="#f4c879" opacity=".5"><circle cx="100" cy="550" r="3"/><circle cx="170" cy="585" r="2"/><circle cx="1040" cy="555" r="3"/><circle cx="1120" cy="590" r="2"/></g>
+<path d="M0 640 Q300 600 600 630 T1200 610 V700H0Z" fill="#091523" opacity=".72"/>
+</svg>
