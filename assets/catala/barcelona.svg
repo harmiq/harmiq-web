@@ -1,15 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Il·lustració cinematogràfica de la Sagrada Família de Barcelona">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Barcelona i la Sagrada Família, il·lustració cinematogràfica">
 <defs>
- <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#172a55"/><stop offset=".52" stop-color="#a45f73"/><stop offset="1" stop-color="#f5b45f"/></linearGradient>
- <linearGradient id="city" x2="0" y2="1"><stop stop-color="#39456c"/><stop offset="1" stop-color="#121a2c"/></linearGradient>
- <linearGradient id="stone" x2="0" y2="1"><stop stop-color="#f3c97b"/><stop offset=".55" stop-color="#b66c42"/><stop offset="1" stop-color="#563a3a"/></linearGradient>
- <linearGradient id="glass" x2="0" y2="1"><stop stop-color="#79d0db"/><stop offset="1" stop-color="#263e70"/></linearGradient>
- <filter id="glow"><feGaussianBlur stdDeviation="18"/></filter>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#101d45"/><stop offset=".38" stop-color="#4e4771"/><stop offset=".72" stop-color="#e08b69"/><stop offset="1" stop-color="#f6c978"/></linearGradient>
+ <linearGradient id="stone" x2="0" y2="1"><stop stop-color="#f5d58b"/><stop offset=".45" stop-color="#d28a4e"/><stop offset="1" stop-color="#65404a"/></linearGradient>
+ <linearGradient id="glass" x2="0" y2="1"><stop stop-color="#b5e8df"/><stop offset="1" stop-color="#294d78"/></linearGradient>
+ <radialGradient id="sun"><stop stop-color="#fff0b0" stop-opacity=".9"/><stop offset="1" stop-color="#ffc86b" stop-opacity="0"/></radialGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="20"/></filter>
+ <filter id="soft"><feGaussianBlur stdDeviation="4"/></filter>
 </defs>
-<rect width="1200" height="700" fill="url(#sky)"/><circle cx="930" cy="210" r="115" fill="#ffd77b" opacity=".5" filter="url(#glow)"/><circle cx="930" cy="210" r="48" fill="#ffe4a0" opacity=".75"/>
-<path d="M0 470 Q160 405 330 455 T680 445 T1200 430 V700H0Z" fill="url(#city)"/>
-<g opacity=".55" fill="#18243b"><path d="M40 430h55v-75h45v75h45v-110h45v110h60v-60h42v60h55v-95h48v95h55v-125h52v125h62v-80h48v80h65v-105h50v105h62v-70h45v70h80v-120h48v120h70v-75h42v75h85v-110h45v110h70v-60h55v60H40z"/></g>
-<g transform="translate(310 90)
-"><path d="M60 515V280L115 185l55 95v235Z" fill="url(#stone)" stroke="#6b4036" stroke-width="7"/><path d="M150 515V205L215 95l65 110v310Z" fill="url(#stone)" stroke="#6b4036" stroke-width="7"/><path d="M250 515V165L315 35l65 130v350Z" fill="url(#stone)" stroke="#6b4036" stroke-width="7"/><path d="M350 515V205L415 95l65 110v310Z" fill="url(#stone)" stroke="#6b4036" stroke-width="7"/><path d="M440 515V280L495 185l55 95v235Z" fill="url(#stone)" stroke="#6b4036" stroke-width="7"/><path d="M108 285h54v145h-54zM190 210h50v190h-50zM292 170h48v235h-48zM395 210h50v190h-50zM476 285h38v145h-38z" fill="url(#glass)" opacity=".9"/><path d="M315 35v-32" stroke="#e9c26e" stroke-width="10"/><circle cx="315" cy="-8" r="13" fill="#ffd978"/></g>
-<path d="M0 610 Q210 540 420 600 T850 580 T1200 560 V700H0Z" fill="#0c1423" opacity=".82"/>
-<g fill="#f7c96d" opacity=".6"><circle cx="80" cy="555" r="3"/><circle cx="115" cy="530" r="2"/><circle cx="1020" cy="520" r="3"/><circle cx="1080" cy="550" r="2"/></g></svg>
+<rect width="1200" height="700" fill="url(#sky)"/>
+<circle cx="930" cy="210" r="180" fill="url(#sun)"/><circle cx="930" cy="210" r="48" fill="#ffe6a2"/>
+<path d="M0 470 Q170 405 330 450 T650 445 T900 425 T1200 440 V700H0Z" fill="#27324e"/>
+<g fill="#1a263e" opacity=".62"><path d="M0 470h55v-70h32v70h58v-110h40v110h60v-65h35v65h70v-130h42v130h62v-85h36v85h60v-115h45v115h62v-75h38v75h75v-120h42v120h70v-85h36v85h75v-125h45v125h78v-70h38v70h75v-105h43v105h90v230H0Z"/></g>
+<g transform="translate(290 62)">
+ <path d="M40 540V315L105 190l65 125v225Z" fill="url(#stone)" stroke="#654039" stroke-width="8"/>
+ <path d="M135 540V240L210 95l75 145v300Z" fill="url(#stone)" stroke="#654039" stroke-width="8"/>
+ <path d="M245 540V190L320 25l75 165v350Z" fill="url(#stone)" stroke="#654039" stroke-width="8"/>
+ <path d="M355 540V240L430 95l75 145v300Z" fill="url(#stone)" stroke="#654039" stroke-width="8"/>
+ <path d="M450 540V315L515 190l65 125v225Z" fill="url(#stone)" stroke="#654039" stroke-width="8"/>
+ <g fill="url(#glass)" opacity=".95"><path d="M88 325h34v145H88z"/><path d="M175 265h45v190h-45z"/><path d="M288 215h50v235h-50z"/><path d="M400 265h45v190h-45z"/><path d="M492 325h35v145h-35z"/></g>
+ <g fill="#fff0b0" opacity=".7"><circle cx="320" cy="78" r="7"/><circle cx="210" cy="145" r="6"/><circle cx="430" cy="145" r="6"/></g>
+ <path d="M320 25V-8" stroke="#f2ca75" stroke-width="10"/><circle cx="320" cy="-18" r="12" fill="#ffe29a"/>
+</g>
+<path d="M0 590 Q180 525 360 585 T720 570 T1200 545 V700H0Z" fill="#0a1424" opacity=".9"/>
+<g fill="#f9c970" opacity=".65"><circle cx="90" cy="555" r="3"/><circle cx="140" cy="575" r="2"/><circle cx="1040" cy="545" r="3"/><circle cx="1100" cy="570" r="2"/></g>
+<path d="M0 665 Q260 625 500 650 T1200 635" fill="none" stroke="#ff9e68" stroke-width="3" opacity=".35"/>
+</svg>
