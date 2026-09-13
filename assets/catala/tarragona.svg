@@ -1,5 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Il·lustració cinematogràfica de l’amfiteatre romà de Tarragona">
-<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#17446e"/><stop offset=".55" stop-color="#71b8d1"/><stop offset="1" stop-color="#f0b36a"/></linearGradient><linearGradient id="sea" x2="0" y2="1"><stop stop-color="#277c9b"/><stop offset="1" stop-color="#0d344e"/></linearGradient><linearGradient id="stone" x2="0" y2="1"><stop stop-color="#d9a35e"/><stop offset="1" stop-color="#75472f"/></linearGradient></defs>
-<rect width="1200" height="700" fill="url(#sky)"/><circle cx="950" cy="155" r="85" fill="#ffe4a1" opacity=".65"/><rect y="360" width="1200" height="340" fill="url(#sea)"/><path d="M0 420 Q160 350 330 395 T650 385 T950 400 T1200 370 V500H0Z" fill="#5e805c" opacity=".8"/><path d="M0 530 Q250 450 470 515 T900 500 T1200 470 V700H0Z" fill="#2c4d48"/>
-<g transform="translate(125 265)"><ellipse cx="475" cy="270" rx="455" ry="185" fill="url(#stone)" stroke="#57372c" stroke-width="12"/><ellipse cx="475" cy="280" rx="350" ry="125" fill="#74452f" stroke="#4c3029" stroke-width="10"/><ellipse cx="475" cy="290" rx="250" ry="78" fill="#292125"/><path d="M55 260 Q475 40 895 260" fill="none" stroke="#f0c97c" stroke-width="22"/><path d="M120 320 Q475 105 830 320" fill="none" stroke="#c78c50" stroke-width="18"/><path d="M200 370 Q475 195 750 370" fill="none" stroke="#a96e43" stroke-width="15"/><g fill="#8a5335"><path d="M30 245h38v190H30z"/><path d="M130 185h38v245h-38z"/><path d="M245 145h36v290h-36z"/><path d="M670 145h36v290h-36z"/><path d="M785 185h38v245h-38z"/><path d="M882 245h38v190h-38z"/></g></g>
-<path d="M0 615 Q250 565 500 615 T1000 600 T1200 590 V700H0Z" fill="#0b1b2a" opacity=".8"/><g stroke="#d8c37f" opacity=".5"><path d="M70 430l70-10"/><path d="M1010 455l90-12"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Tarragona, amfiteatre romà i Mediterrània, il·lustració cinematogràfica">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#123761"/><stop offset=".42" stop-color="#5c9fc4"/><stop offset=".72" stop-color="#efad69"/><stop offset="1" stop-color="#f5d18b"/></linearGradient>
+ <linearGradient id="sea" x2="0" y2="1"><stop stop-color="#2386a5"/><stop offset="1" stop-color="#123c56"/></linearGradient>
+ <linearGradient id="stone" x2="0" y2="1"><stop stop-color="#edc77d"/><stop offset=".5" stop-color="#b77545"/><stop offset="1" stop-color="#67402f"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="20"/></filter>
+</defs>
+<rect width="1200" height="700" fill="url(#sky)"/>
+<circle cx="955" cy="160" r="170" fill="#ffe0a0" opacity=".32" filter="url(#glow)"/><circle cx="955" cy="160" r="48" fill="#ffe5a4" opacity=".85"/>
+<rect y="360" width="1200" height="340" fill="url(#sea)"/>
+<path d="M0 420 Q180 355 350 395 T700 385 T1200 370 V510H0Z" fill="#64815e" opacity=".85"/>
+<path d="M0 525 Q250 450 470 515 T900 500 T1200 470 V700H0Z" fill="#31544c"/>
+<g transform="translate(105 260)">
+ <ellipse cx="495" cy="285" rx="470" ry="195" fill="url(#stone)" stroke="#56382c" stroke-width="13"/>
+ <ellipse cx="495" cy="295" rx="365" ry="137" fill="#875134" stroke="#4e3028" stroke-width="11"/>
+ <ellipse cx="495" cy="302" rx="265" ry="88" fill="#241f22"/>
+ <path d="M40 280 Q495 35 950 280" fill="none" stroke="#f2ce84" stroke-width="24"/>
+ <path d="M105 340 Q495 110 885 340" fill="none" stroke="#c98d50" stroke-width="19"/>
+ <path d="M190 390 Q495 210 800 390" fill="none" stroke="#a86c42" stroke-width="16"/>
+ <g fill="#8b5738"><path d="M15 265h42v195H15z"/><path d="M120 205h42v255h-42z"/><path d="M240 160h40v300h-40z"/><path d="M710 160h40v300h-40z"/><path d="M828 205h42v255h-42z"/><path d="M933 265h42v195h-42z"/></g>
+ <g fill="#e8bb70" opacity=".55"><circle cx="95" cy="350" r="5"/><circle cx="890" cy="355" r="5"/><circle cx="495" cy="185" r="4"/></g>
+</g>
+<path d="M0 615 Q250 570 500 615 T1000 600 T1200 590 V700H0Z" fill="#0a1b29" opacity=".82"/>
+<path d="M55 445 Q210 430 330 445 M890 450 Q1040 430 1160 442" fill="none" stroke="#b8dfe1" stroke-width="5" opacity=".55"/>
+</svg>
