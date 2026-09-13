@@ -1,0 +1,38 @@
+name: One-time Catalan local artwork
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Switch province backgrounds to local artwork
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('modul-catala.html')
+          s = p.read_text(encoding='utf-8')
+          replacements = {
+            "url('https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1400')": "url('/assets/catala/barcelona.svg')",
+            "url('https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1400')": "url('/assets/catala/girona.svg')",
+            "url('https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1400')": "url('/assets/catala/tarragona.svg')",
+            "url('https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1400')": "url('/assets/catala/lleida.svg')"
+          }
+          for old, new in replacements.items():
+              if old not in s:
+                  raise SystemExit(f'Missing expected image URL: {old}')
+              s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add modul-catala.html
+          git commit -m 'feat: use local Catalan landmark artwork'
+          git rm .github/workflows/catala-local-artwork-once.yml
+          git commit -m 'chore: remove one-time local artwork workflow'
+          git push
