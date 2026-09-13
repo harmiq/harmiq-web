@@ -9,41 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Replace later photo override with local artwork
+      - name: Replace all Wikimedia Catalan artwork URLs
+        shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           p = Path('modul-catala.html')
           s = p.read_text(encoding='utf-8')
-          old = '''  /* Real territory photography — stable Wikimedia Commons files */
-  .v5-bcn{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1200")}
-  .v5-gir{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1200")}
-  .v5-tar{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1200")}
-  .v5-lle{--prov-bg:url("https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1200")}
-  .v5-province{background-image:linear-gradient(180deg,rgba(3,10,18,.08),rgba(0,0,0,.82)),var(--prov-bg)!important;background-size:cover!important;background-position:center!important}
-  .v5-region.b{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1000")}
-  .v5-region.g{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1000")}
-  .v5-region.t{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1000")}
-  .v5-region.l{--region:url("https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1000")}
-  .v5-region{background-image:linear-gradient(180deg,rgba(4,10,16,.03),rgba(0,0,0,.88)),var(--region)!important;background-size:cover!important;background-position:center!important}
-  .catala-photo-credit{width:min(1200px,92%);margin:.7rem auto 0;color:#718096;font-size:.68rem;line-height:1.4;text-align:right}
-  .catala-photo-credit a{color:#94a3b8;text-decoration:underline}
-'''
-          new = '''  /* Local Harmiq artwork — no remote photography override */
-  .v5-bcn{--prov-bg:url('/assets/catala/barcelona.svg')}
-  .v5-gir{--prov-bg:url('/assets/catala/girona.svg')}
-  .v5-tar{--prov-bg:url('/assets/catala/tarragona.svg')}
-  .v5-lle{--prov-bg:url('/assets/catala/lleida.svg')}
-  .v5-province{background-image:linear-gradient(180deg,rgba(3,10,18,.08),rgba(0,0,0,.82)),var(--prov-bg)!important;background-size:cover!important;background-position:center!important}
-  .v5-region.b{--region:url('/assets/catala/barcelona.svg')}
-  .v5-region.g{--region:url('/assets/catala/girona.svg')}
-  .v5-region.t{--region:url('/assets/catala/tarragona.svg')}
-  .v5-region.l{--region:url('/assets/catala/lleida.svg')}
-  .v5-region{background-image:linear-gradient(180deg,rgba(4,10,16,.03),rgba(0,0,0,.88)),var(--region)!important;background-size:cover!important;background-position:center!important}
-'''
-          if old not in s:
-              raise SystemExit('Expected old remote-photo override block was not found')
-          s = s.replace(old, new, 1)
+          replacements = {
+            'https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1200': '/assets/catala/barcelona.svg',
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1200': '/assets/catala/girona.svg',
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1200': '/assets/catala/tarragona.svg',
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1200': '/assets/catala/lleida.svg',
+            'https://commons.wikimedia.org/wiki/Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg?width=1000': '/assets/catala/barcelona.svg',
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Onyar%20River%20Houses.JPG?width=1000': '/assets/catala/girona.svg',
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Tarragona%20Amphitheatre.jpg?width=1000': '/assets/catala/tarragona.svg',
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Seu%20vella%20de%20lleida.jpg?width=1000': '/assets/catala/lleida.svg',
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new)
           if 'commons.wikimedia.org' in s:
               raise SystemExit('Remote Wikimedia image references remain in modul-catala.html')
           p.write_text(s, encoding='utf-8')
