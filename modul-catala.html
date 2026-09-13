@@ -385,5 +385,55 @@
 .v5-province{transition:transform .45s ease,filter .45s ease}.v5-province:hover{filter:saturate(1.08);transform:translateY(-3px) skewX(-4deg)}
 @media(max-width:900px){.v5-province:hover{transform:translateY(-3px)}}
 </style>
-\n<script id="harmiq-catala-image-loader">\n(()=>{\n const langs=['ca','es','en'],cache=new Map(),clean=v=>(v||'').replace(/\\s+/g,' ').trim();\n const get=async n=>{const k=n.toLowerCase();if(cache.has(k))return cache.get(k);const q=(async()=>{for(const l of langs){try{const r=await fetch(`https://${l}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(n)}`,{cache:'force-cache'});if(!r.ok)continue;const d=await r.json(),u=d?.originalimage?.source||d?.thumbnail?.source;if(u)return u}catch(_){}}return null})();cache.set(k,q);return q};\n const load=async c=>{if(c.dataset.photoLoaded)return;const n=clean(c.querySelector('h3,h4,strong')?.textContent),w=c.querySelector('.art-av-wrap'),f=c.querySelector('.art-av');if(!n||!w)return;c.dataset.photoLoaded='1';const u=await get(n);if(!u)return;const i=document.createElement('img');i.className='art-photo';i.src=u;i.alt=`${n} — artista de música en català`;i.loading='lazy';i.decoding='async';i.addEventListener('load',()=>{i.classList.add('loaded');f?.classList.add('hidden')},{once:true});i.addEventListener('error',()=>i.remove(),{once:true});w.prepend(i)};\n const ob='IntersectionObserver'in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){load(e.target);ob.unobserve(e.target)}}),{rootMargin:'900px 0px'}):null;\n const scan=()=>document.querySelectorAll('#ag .art-card,#eg .art-card').forEach(c=>ob?ob.observe(c):load(c));\n const start=()=>{scan();new MutationObserver(scan).observe(document.body,{childList:true,subtree:true})};\n document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start,{once:true}):start();\n})();\n</script>\n</body>
+
+<script id="harmiq-catala-image-loader">
+(() => {
+  const langs = ['ca','es','en'];
+  const cache = new Map();
+  const clean = v => (v || '').replace(/\s+/g, ' ').trim();
+  async function getImage(name) {
+    const key = name.toLowerCase();
+    if (cache.has(key)) return cache.get(key);
+    const promise = (async () => {
+      for (const lang of langs) {
+        try {
+          const r = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`, {cache:'force-cache'});
+          if (!r.ok) continue;
+          const d = await r.json();
+          const url = d?.originalimage?.source || d?.thumbnail?.source;
+          if (url) return url;
+        } catch (_) {}
+      }
+      return null;
+    })();
+    cache.set(key, promise);
+    return promise;
+  }
+  async function loadCard(card) {
+    if (card.dataset.photoLoaded) return;
+    const name = clean(card.querySelector('h3,h4,strong')?.textContent);
+    const wrap = card.querySelector('.art-av-wrap');
+    const fallback = card.querySelector('.art-av');
+    if (!name || !wrap) return;
+    card.dataset.photoLoaded = '1';
+    const url = await getImage(name);
+    if (!url) return;
+    const img = document.createElement('img');
+    img.className = 'art-photo';
+    img.src = url;
+    img.alt = `${name} — artista de música en català`;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.addEventListener('load', () => { img.classList.add('loaded'); if (fallback) fallback.classList.add('hidden'); }, {once:true});
+    img.addEventListener('error', () => img.remove(), {once:true});
+    wrap.prepend(img);
+  }
+  const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => entries.forEach(entry => { if (!entry.isIntersecting) return; loadCard(entry.target); observer.unobserve(entry.target); }), {rootMargin:'900px 0px'}) : null;
+  function scan() { document.querySelectorAll('#ag .art-card, #eg .art-card').forEach(card => observer ? observer.observe(card) : loadCard(card)); }
+  function start() { scan(); new MutationObserver(scan).observe(document.body, {childList:true, subtree:true}); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true}); else start();
+})();
+</script>
+
+</body>
 </html>
