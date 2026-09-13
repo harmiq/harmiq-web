@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Il·lustració de Girona amb l'Onyar i la catedral">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#183b62"/><stop offset=".58" stop-color="#8bb9d6"/><stop offset="1" stop-color="#f2c77a"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#4a9bb0"/><stop offset="1" stop-color="#163d58"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#sky)"/><circle cx="930" cy="145" r="105" fill="#ffe09a" opacity=".55"/><path d="M0 510 Q300 450 600 500 T1200 470 V900 H0Z" fill="url(#water)"/>
+<g stroke="#493b39" stroke-width="6" stroke-linejoin="round"><path d="M55 505V370h120v135z" fill="#d86f54"/><path d="M175 505V330h130v175z" fill="#e4a04d"/><path d="M305 505V385h130v120z" fill="#c95e50"/><path d="M435 505V345h125v160z" fill="#e8c26b"/><path d="M560 505V365h125v140z" fill="#c96b4f"/><path d="M685 505V320h130v185z" fill="#e6a052"/><path d="M815 505V355h125v150z" fill="#d16b52"/><path d="M940 505V335h145v170z" fill="#e8b45d"/></g>
+<g fill="#4a3b36" stroke="#2e2929" stroke-width="7"><path d="M250 500V245l95-155 95 155v255Z"/><path d="M285 245h120L345 125Z"/><path d="M345 90v-55"/><path d="M310 205h70v35h-70z"/></g>
+<path d="M0 515 Q150 540 300 520 T600 525 T900 515 T1200 520" fill="none" stroke="#b9e3e8" stroke-width="8" opacity=".55"/>
+<text x="70" y="105" fill="white" font-family="sans-serif" font-size="54" font-weight="800">GIRONA</text><text x="74" y="155" fill="#ffe3a1" font-family="sans-serif" font-size="25" letter-spacing="5">ONYAR · HISTÒRIA · VEU</text>
+</svg>
