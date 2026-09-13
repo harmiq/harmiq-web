@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://harmiq.app/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://harmiq.app/home-studio/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://harmiq.app/que-tipo-de-voz-tengo</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://harmiq.app/que-cantante-soy</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://harmiq.app/politica-privacidad</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
