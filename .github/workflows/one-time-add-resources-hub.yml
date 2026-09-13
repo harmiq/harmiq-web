@@ -1,0 +1,63 @@
+name: One-time add resources hub
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-add-resources-hub.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Add resources hub links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          marker = '''        <!-- Tarjeta: Home Studio -->\n        <a href="/home-studio" class="mod-card">\n            <div class="mod-icon">📦</div>\n            <div>\n                <h3>Tu Home Studio</h3>\n                <p>Equípate como un profesional. Micros y accesorios recomendados para tu timbre.</p>\n            </div>\n            <div class="mod-link">Ver Equipamiento →</div>\n        </a>'''
+          card = marker + '''\n\n        <!-- Tarjeta: Recursos para músicos -->\n        <a href="/recursos/" class="mod-card" style="border-color:rgba(124,77,255,0.35);background:linear-gradient(135deg,rgba(124,77,255,0.10),rgba(255,79,163,0.04))">\n            <div class="mod-icon" style="background:linear-gradient(135deg,#7C4DFF,#FF4FA3)">🎛️</div>\n            <div>\n                <h3>Recursos para músicos</h3>\n                <p>Karaoke, tonalidad, stems, IA musical, producción y herramientas para cantar mejor.</p>\n            </div>\n            <div class="mod-link">Explorar herramientas →</div>\n        </a>'''
+          if 'href="/recursos/" class="mod-card"' not in text:
+              if marker not in text:
+                  raise SystemExit('No se encontró la tarjeta Home Studio; no se modifica index.html')
+              text = text.replace(marker, card, 1)
+              index.write_text(text, encoding='utf-8')
+
+          redirects = Path('_redirects')
+          rtext = redirects.read_text(encoding='utf-8')
+          if '/recursos              /recursos/  301' not in rtext:
+              rtext = rtext.rstrip() + '\n/recursos              /recursos/  301\n'
+              redirects.write_text(rtext, encoding='utf-8')
+
+          sitemap = Path('sitemap.xml')
+          stext = sitemap.read_text(encoding='utf-8')
+          loc = '  <url><loc>https://harmiq.app/recursos/</loc></url>\n'
+          if 'https://harmiq.app/recursos/' not in stext:
+              anchor = '  <url><loc>https://harmiq.app/</loc></url>\n'
+              if anchor not in stext:
+                  raise SystemExit('No se encontró la URL raíz del sitemap; no se modifica sitemap.xml')
+              stext = stext.replace(anchor, anchor + loc, 1)
+              sitemap.write_text(stext, encoding='utf-8')
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html _redirects sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git commit -m "feat: add resources hub to site navigation"
+          git push origin main
