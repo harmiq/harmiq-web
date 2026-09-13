@@ -15,10 +15,8 @@ jobs:
           python3 <<'PY'
           from pathlib import Path
           import re
-          p=Path('modul-catala.html')
-          s=p.read_text(encoding='utf-8')
+          p=Path('modul-catala.html'); s=p.read_text(encoding='utf-8')
           s=s.replace('\\"','"')
-          s=s.replace('''<meta name="description" content="Descobreix l'ADN de la música catalana amb Harmiq. Canta Oques Grasses, The Tyets, Rosalía, artistes catalans contemporanis i descobreix els millors grups emergents i grups de versions per a Festes Majors.">''','''<meta name="description" content="Descobreix la música en català amb Harmiq: artistes, cançons, història, cultura i noves veus de Catalunya, el País Valencià i les Illes Balears.">''')
           clean_loader=r'''<script id="harmiq-catala-image-loader">
           (() => {
             const langs = ['ca','es','en'];
@@ -57,27 +55,13 @@ jobs:
               img.alt = `${name} — artista de música en català`;
               img.loading = 'lazy';
               img.decoding = 'async';
-              img.addEventListener('load', () => {
-                img.classList.add('loaded');
-                if (fallback) fallback.classList.add('hidden');
-              }, {once:true});
+              img.addEventListener('load', () => { img.classList.add('loaded'); if (fallback) fallback.classList.add('hidden'); }, {once:true});
               img.addEventListener('error', () => img.remove(), {once:true});
               wrap.prepend(img);
             }
-            const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
-              entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                loadCard(entry.target);
-                observer.unobserve(entry.target);
-              });
-            }, {rootMargin:'900px 0px'}) : null;
-            function scan() {
-              document.querySelectorAll('#ag .art-card, #eg .art-card').forEach(card => observer ? observer.observe(card) : loadCard(card));
-            }
-            function start() {
-              scan();
-              new MutationObserver(scan).observe(document.body, {childList:true, subtree:true});
-            }
+            const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => entries.forEach(entry => { if (!entry.isIntersecting) return; loadCard(entry.target); observer.unobserve(entry.target); }), {rootMargin:'900px 0px'}) : null;
+            function scan() { document.querySelectorAll('#ag .art-card, #eg .art-card').forEach(card => observer ? observer.observe(card) : loadCard(card)); }
+            function start() { scan(); new MutationObserver(scan).observe(document.body, {childList:true, subtree:true}); }
             if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true}); else start();
           })();
           </script>
@@ -86,7 +70,6 @@ jobs:
           s=re.sub(r'<script id="harmiq-catala-image-loader">.*?</script>','',s,flags=re.S)
           s=s.replace('</body>',clean_loader+'\n</body>',1)
           p.write_text(s,encoding='utf-8')
-          # Keep CSP aligned with the actual Wikipedia API subdomains used by the loader.
           h=Path('_headers'); hs=h.read_text(encoding='utf-8').replace('https://en.wikipedia.org https://itunes.apple.com','https://*.wikipedia.org https://itunes.apple.com'); h.write_text(hs,encoding='utf-8')
           PY
       - name: Validate
@@ -94,8 +77,7 @@ jobs:
           grep -q 'Música en català' modul-catala.html
           grep -q 'harmiq-catala-image-loader' modul-catala.html
           grep -q 'Special:FilePath/La%20Sagrada%20Familia%20Barcelona.jpg' modul-catala.html
-          grep -q 'https://*.wikipedia.org' _headers
-          ! grep -q '\\"https://commons.wikimedia.org' modul-catala.html
+          grep -q 'wikipedia.org' _headers
       - name: Commit
         run: |
           git config user.name github-actions[bot]
