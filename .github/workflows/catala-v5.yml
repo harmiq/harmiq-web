@@ -1,0 +1,143 @@
+name: Implement Catalan visual v5
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  implement:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Redesign Catalan module
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('modul-catala.html')
+          html = path.read_text(encoding='utf-8')
+
+          if 'id="harmiq-catala-v5"' in html:
+              raise SystemExit('v5 already present')
+
+          css = r'''
+          <style id="harmiq-catala-v5">
+            :root{--hm-blue:#0a8cff;--hm-blue2:#5ac8ff;--hm-gold:#f6c453;--hm-red:#d71920;--hm-bg:#06101a;--hm-panel:rgba(15,28,42,.72)}
+            body{background:radial-gradient(circle at 10% 0%,rgba(10,140,255,.12),transparent 30%),radial-gradient(circle at 90% 20%,rgba(215,25,32,.10),transparent 28%),#06101a;}
+            .mc-hero{padding:0!important;min-height:510px;text-align:left!important;background:linear-gradient(90deg,rgba(3,10,18,.96) 0%,rgba(3,10,18,.72) 38%,rgba(3,10,18,.10) 72%,rgba(3,10,18,.55) 100%),linear-gradient(180deg,rgba(6,16,26,.05),rgba(6,16,26,.85)),radial-gradient(circle at 75% 30%,rgba(246,196,83,.20),transparent 24%),radial-gradient(circle at 35% 60%,rgba(10,140,255,.18),transparent 28%);display:flex;align-items:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.08)}
+            .mc-hero:after{content:'';position:absolute;inset:auto -5% -120px -5%;height:220px;background:radial-gradient(ellipse,rgba(10,140,255,.20),transparent 65%);pointer-events:none}
+            .mc-hero .v5-inner{width:min(1200px,92%);margin:auto;padding:5rem 0 6rem;position:relative;z-index:2}
+            .v5-kicker{display:inline-flex;align-items:center;gap:.55rem;color:var(--hm-gold);font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;margin-bottom:1rem}
+            .v5-kicker:before{content:'';width:28px;height:3px;background:linear-gradient(90deg,var(--hm-red),var(--hm-gold));border-radius:9px}
+            .mc-hero h1{font-size:clamp(2.8rem,6vw,5.5rem)!important;line-height:.98!important;max-width:760px;text-align:left!important;letter-spacing:-.055em!important;margin:0 0 1.2rem!important}
+            .v5-highlight{background:linear-gradient(90deg,#fff 0%,#f6c453 55%,#ffdf7b 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+            .v5-sub{max-width:670px;color:#cbd5e1;font-size:clamp(1rem,1.8vw,1.25rem);line-height:1.55;margin-bottom:1.8rem}
+            .v5-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+            .v5-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.35rem;border-radius:999px;font-weight:900;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;backdrop-filter:blur(10px);transition:.25s}
+            .v5-btn.primary{background:linear-gradient(135deg,#f6c453,#e9a92b);color:#101318;border-color:transparent;box-shadow:0 14px 35px rgba(246,196,83,.22)}
+            .v5-btn:hover{transform:translateY(-2px)}
+            .v5-provinces{position:absolute;right:0;top:0;height:100%;width:55%;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;opacity:.92;transform:skewX(-4deg);z-index:1}
+            .v5-province{position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:1.2rem;color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.75)),var(--prov-bg);background-size:cover;background-position:center;min-width:0}
+            .v5-province:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.82));}
+            .v5-province span{position:relative;z-index:2;font-weight:900;letter-spacing:.08em;font-size:.82rem;text-transform:uppercase;transform:skewX(4deg)}
+            .v5-province small{display:block;color:#dbeafe;font-weight:600;letter-spacing:0;text-transform:none;margin-top:.2rem}
+            .v5-bcn{--prov-bg:radial-gradient(circle at 70% 30%,#2c6e9e,#111827 62%,#070b11)}
+            .v5-gir{--prov-bg:radial-gradient(circle at 45% 25%,#4e8c70,#14271f 58%,#07100d)}
+            .v5-tar{--prov-bg:radial-gradient(circle at 65% 35%,#b46b43,#3b2117 58%,#120b08)}
+            .v5-lle{--prov-bg:radial-gradient(circle at 50% 25%,#6e8f9c,#263742 58%,#0a1116)}
+            .v5-strip{width:min(1200px,92%);margin:-48px auto 0;position:relative;z-index:5;display:grid;grid-template-columns:repeat(6,1fr);background:rgba(9,21,33,.86);border:1px solid rgba(255,255,255,.11);border-radius:22px;overflow:hidden;backdrop-filter:blur(18px);box-shadow:0 22px 55px rgba(0,0,0,.28)}
+            .v5-strip a{padding:1rem .8rem;text-align:center;color:#fff;border-right:1px solid rgba(255,255,255,.08);font-weight:800;font-size:.88rem;transition:.2s}.v5-strip a:last-child{border-right:0}.v5-strip a:hover{background:rgba(10,140,255,.10);color:#5ac8ff}.v5-strip b{display:block;font-size:1.3rem;margin-bottom:.2rem}
+            .mc-container{width:min(1200px,92%);max-width:none;padding:3rem 0 5rem}
+            .search-box{background:var(--hm-panel);border:1px solid rgba(255,255,255,.09);box-shadow:0 18px 50px rgba(0,0,0,.18);padding:1.3rem;border-radius:24px;position:relative}
+            .mc-input{margin-bottom:1rem!important;background:rgba(2,8,14,.72)!important;border-color:rgba(255,255,255,.10)!important}
+            .tabs{gap:.55rem!important}.tab{padding:.65rem 1rem!important;font-size:.86rem}.tab.active{background:linear-gradient(135deg,var(--hm-blue),#0064c8)!important;border-color:transparent!important}
+            .mc-section h2{border:0!important;font-size:clamp(1.7rem,3vw,2.35rem)!important;letter-spacing:-.03em;margin-bottom:.4rem!important}
+            .mc-grid{grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:1rem;margin-top:1.3rem}
+            .art-card{background:linear-gradient(160deg,rgba(22,39,55,.90),rgba(8,17,27,.92));border:1px solid rgba(255,255,255,.08)!important;border-radius:22px!important;padding:1.35rem!important;text-align:left!important;box-shadow:0 12px 30px rgba(0,0,0,.15);min-height:155px;position:relative;overflow:hidden}
+            .art-card:before{content:'';position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,var(--hm-blue),var(--hm-gold));opacity:.8}
+            .art-card:hover{transform:translateY(-6px)!important;border-color:rgba(90,200,255,.35)!important;box-shadow:0 18px 38px rgba(0,0,0,.25)}
+            .v5-section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-top:3.5rem}.v5-section-head p{color:#8ea1b4}.v5-region-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.3rem}.v5-region{min-height:190px;border-radius:22px;padding:1.35rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.09);background:var(--region);box-shadow:0 15px 35px rgba(0,0,0,.18)}.v5-region:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(0,0,0,.82));}.v5-region>*{position:relative;z-index:2}.v5-region h3{font-size:1.35rem}.v5-region p{color:#cbd5e1;font-size:.9rem}.v5-region.b{--region:radial-gradient(circle at 70% 30%,#355f85,#101923 70%)}.v5-region.g{--region:radial-gradient(circle at 40% 25%,#4b8065,#101d18 70%)}.v5-region.t{--region:radial-gradient(circle at 65% 35%,#a85f3e,#24130e 70%)}.v5-region.l{--region:radial-gradient(circle at 50% 20%,#617f8b,#17242c 70%)}
+            .v5-label{display:inline-flex;width:max-content;padding:.3rem .55rem;border-radius:999px;background:rgba(255,255,255,.09);font-size:.7rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#f6c453;margin-bottom:.5rem}
+            .mc-cta{border-radius:28px!important;background:linear-gradient(135deg,#0a8cff,#1745a5 52%,#7b1d4e)!important;box-shadow:0 25px 60px rgba(10,140,255,.16)}
+            @media(max-width:900px){.v5-provinces{position:relative;width:100%;height:220px;right:auto;order:2;transform:none}.mc-hero{display:block;min-height:0}.mc-hero .v5-inner{padding:3.5rem 0 0}.v5-province span{transform:none}.v5-strip{grid-template-columns:repeat(3,1fr);margin-top:1rem}.v5-strip a:nth-child(3){border-right:0}.v5-strip a{border-bottom:1px solid rgba(255,255,255,.08)}}
+            @media(max-width:650px){.v5-provinces{height:170px}.v5-strip{grid-template-columns:repeat(2,1fr)}.v5-region-grid{grid-template-columns:1fr 1fr}.v5-section-head{display:block}.mc-container{padding-top:2rem}}
+            @media(max-width:480px){.v5-provinces{grid-template-columns:repeat(2,1fr);height:300px}.v5-province{padding:.9rem}.v5-region-grid{grid-template-columns:1fr}.v5-actions{flex-direction:column;align-items:flex-start}.v5-btn{width:100%;justify-content:center}}
+          </style>
+          '''
+
+          html = html.replace('</head>', css + '\n</head>', 1)
+
+          hero = r'''
+          <header class="mc-hero">
+            <div class="v5-provinces" aria-hidden="true">
+              <div class="v5-province v5-bcn"><span>Barcelona<small>Creativitat sense límits</small></span></div>
+              <div class="v5-province v5-gir"><span>Girona<small>Arrels que inspiren</small></span></div>
+              <div class="v5-province v5-tar"><span>Tarragona<small>Mar i cultura</small></span></div>
+              <div class="v5-province v5-lle"><span>Lleida<small>Terra i talent</small></span></div>
+            </div>
+            <div class="v5-inner">
+              <div class="v5-kicker">Harmiq · Secció catalana</div>
+              <h1>La nostra veu<br><span class="v5-highlight">també sona al món</span></h1>
+              <p class="v5-sub">Artistes, història, cultura i tècnica vocal d’un territori únic. <strong>Quatre províncies, una mateixa passió: la música.</strong></p>
+              <div class="v5-actions"><a class="v5-btn primary" href="#artistes">🎤 Descobreix artistes catalans →</a><a class="v5-btn" href="#cancons">▶ Escolta la nostra essència</a></div>
+            </div>
+          </header>
+          <nav class="v5-strip" aria-label="Seccions de música catalana">
+            <a href="#artistes"><b>🎵</b>Artistes</a><a href="#provincies"><b>🗺️</b>Territori</a><a href="#cancons"><b>🎶</b>Cançons</a><a href="#historia"><b>📚</b>Història</a><a href="#emergents"><b>✨</b>Emergents</a><a href="#comunitat"><b>👥</b>Comunitat</a>
+          </nav>
+          '''
+
+          html = re.sub(r'<header class="mc-hero">.*?</header>', hero, html, count=1, flags=re.S)
+
+          html = html.replace('<main class="mc-container">', '<main class="mc-container">\n    <section id="provincies" class="v5-section-head"><div><h2>Quatre territoris, una mateixa veu</h2><p>Una mirada musical a Barcelona, Girona, Tarragona i Lleida.</p></div></section>\n    <div class="v5-region-grid">\n      <a class="v5-region b" href="#artistes"><span class="v5-label">Barcelona</span><h3>La ciutat que crea</h3><p>Pop, urbà, indie i noves veus.</p></a>\n      <a class="v5-region g" href="#artistes"><span class="v5-label">Girona</span><h3>Arrels i caràcter</h3><p>Cançó, folk, fusió i escenaris.</p></a>\n      <a class="v5-region t" href="#artistes"><span class="v5-label">Tarragona</span><h3>Música mediterrània</h3><p>Rock, festa i tradició contemporània.</p></a>\n      <a class="v5-region l" href="#artistes"><span class="v5-label">Lleida</span><h3>Terra i futur</h3><p>Talent, cultura popular i noves propostes.</p></a>\n    </div>\n', 1)
+
+          html = html.replace('<div id="tab-art" class="mc-section active">', '<div id="artistes"></div>\n    <div id="tab-art" class="mc-section active">', 1)
+          html = html.replace('<div id="tab-em" class="mc-section"', '<div id="emergents"></div>\n    <div id="tab-em" class="mc-section"', 1)
+          html = html.replace('<div id="tab-can" class="mc-section"', '<div id="cancons"></div>\n    <div id="tab-can" class="mc-section"', 1)
+          html = html.replace('<div id="tab-historia" class="mc-section"', '<div id="historia"></div>\n    <div id="tab-historia" class="mc-section"', 1)
+
+          enhancer = r'''
+          <script id="harmiq-catala-v5-enhancer">
+          (() => {
+            const featured = ['Oques Grasses','The Tyets','Julieta','Mushkaa','Txarango','Manel','Els Pets','Rosalía','Lluís Llach','Montserrat Caballé'];
+            const slug = n => n.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+            const loadExistingArtistImage = async (card) => {
+              const name = (card.querySelector('h3,h4,strong')?.textContent || '').trim();
+              if (!name || !featured.some(x => x.toLowerCase() === name.toLowerCase())) return;
+              const s = slug(name);
+              try {
+                const r = await fetch(`/artistas/${s}/`, {cache:'force-cache'});
+                if (!r.ok) return;
+                const text = await r.text();
+                const m = text.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i);
+                if (!m) return;
+                const img = document.createElement('img'); img.src = m[1]; img.alt = name; img.loading='lazy'; img.decoding='async';
+                img.style='width:100%;height:150px;object-fit:cover;border-radius:16px;margin-bottom:1rem;display:block;';
+                card.prepend(img);
+              } catch (_) {}
+            };
+            const run = () => document.querySelectorAll('#ag .art-card').forEach(loadExistingArtistImage);
+            if ('requestIdleCallback' in window) requestIdleCallback(run,{timeout:1800}); else setTimeout(run,1200);
+          })();
+          </script>
+          '''
+          html = html.replace('</body>', enhancer + '\n</body>', 1)
+
+          path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Commit and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add modul-catala.html .github/workflows/catala-v5.yml
+          git commit -m "feat: redesign Catalan module visual"
+          git rm .github/workflows/catala-v5.yml
+          git commit -m "chore: remove temporary Catalan redesign workflow"
+          git push
