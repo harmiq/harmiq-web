@@ -1,0 +1,38 @@
+name: One-time Catalan artwork cache bust
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-catala-cache-bust.yml'
+permissions:
+  contents: write
+jobs:
+  bust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Bust artwork URLs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('modul-catala.html')
+          s = p.read_text(encoding='utf-8')
+          for name in ('barcelona','girona','tarragona','lleida'):
+              s = s.replace(f'/assets/catala/{name}.svg")', f'/assets/catala/{name}.svg?v=3")')
+              s = s.replace(f'/assets/catala/{name}.svg\'"', f'/assets/catala/{name}.svg?v=3\'"')
+              s = s.replace(f'/assets/catala/{name}.svg"', f'/assets/catala/{name}.svg?v=3"')
+              s = s.replace(f'/assets/catala/{name}.svg\'', f'/assets/catala/{name}.svg?v=3\'')
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit cache bust and remove workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add modul-catala.html
+          git commit -m "fix: bust Catalan artwork cache" || true
+          git push origin main
+          git rm .github/workflows/one-time-catala-cache-bust.yml || true
+          git commit -m "chore: remove one-time cache bust workflow" || true
+          git push origin main || true
