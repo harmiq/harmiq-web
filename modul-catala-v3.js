@@ -108,7 +108,7 @@ function loadArtistPhoto(name, imgEl, fallbackEl) {
   fetch(HF_BASE + "/artist-image?name=" + encodeURIComponent(name), { signal: AbortSignal.timeout(6000) })
     .then(function (r) { return r.json(); })
     .then(function (d) {
-      if (d.url) { IMG_CACHE[name] = d.url; imgEl.src = d.url; imgEl.style.display = "block"; imgEl.style.borderRadius = "50%"; imgEl.style.objectFit = "cover"; fallbackEl.style.display = "none"; }
+      if (d.url) { IMG_CACHE[name] = d.url; imgEl.src = d.url; imgEl.style.display = "block"; imgEl.style.borderRadius = imgEl.classList.contains("art-photo") ? "0" : "50%"; imgEl.style.objectFit = "cover"; fallbackEl.style.display = "none"; }
       else { IMG_CACHE[name] = "none"; imgEl.style.display = "none"; fallbackEl.style.display = "flex"; }
     })
     .catch(function () { IMG_CACHE[name] = "none"; imgEl.style.display = "none"; fallbackEl.style.display = "flex"; });
