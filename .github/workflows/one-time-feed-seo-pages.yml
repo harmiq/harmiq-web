@@ -1,0 +1,125 @@
+name: One-time feed SEO ranking pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add targeted SEO content and internal links
+        shell: python
+        run: |
+          from pathlib import Path
+
+          def inject(path, marker, block):
+              p = Path(path)
+              if not p.exists():
+                  return False
+              text = p.read_text(encoding='utf-8')
+              if marker in text:
+                  return False
+              pos = text.rfind('</body>')
+              if pos < 0:
+                  return False
+              text = text[:pos] + block + '\n' + text[pos:]
+              p.write_text(text, encoding='utf-8')
+              return True
+
+          common_css = '''<style>
+          .seo-feed{margin:5rem 0 2rem;padding:2.5rem;background:linear-gradient(145deg,rgba(124,77,255,.07),rgba(255,79,163,.04));border:1px solid rgba(255,255,255,.09);border-radius:36px}
+          .seo-feed h2{font-size:2rem;font-weight:900;margin-bottom:1rem}.seo-feed h3{font-size:1.15rem;margin:1.4rem 0 .45rem}.seo-feed p{color:#A5A3B8}.seo-links{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem}.seo-links a{color:#fff;text-decoration:none;padding:.7rem 1rem;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-weight:800;font-size:.9rem}.seo-links a:hover{border-color:#7C4DFF}
+          </style>'''
+
+          baritone = common_css + '''
+          <section class="seo-feed" aria-labelledby="seo-baritono-title">
+            <h2 id="seo-baritono-title">Cómo saber si tu voz es de <span class="grad">barítono</span></h2>
+            <p>La etiqueta barítono no depende únicamente de una nota máxima o mínima. Para identificar tu tipo de voz conviene observar el rango cómodo, la zona de resonancia, el timbre y dónde puedes cantar durante una canción sin forzar.</p>
+            <h3>¿Qué rango suele tener un barítono?</h3>
+            <p>En repertorio moderno es habitual encontrar voces masculinas centradas en la zona media y media-grave. Los rangos publicados son orientativos: dos cantantes con la misma clasificación pueden tener extensiones y zonas cómodas diferentes.</p>
+            <h3>¿Cómo puedo comprobarlo?</h3>
+            <p>La forma más útil en Harmiq es analizar una grabación real de tu voz y comparar el resultado con otros perfiles. Después puedes explorar ejercicios y recursos para trabajar técnica vocal.</p>
+            <div class="seo-links">
+              <a href="/#app">🎤 Analiza tu voz con Harmiq</a>
+              <a href="/tipos-de-voz/">🎼 Explorar tipos de voz</a>
+              <a href="/artistas/david-bowie/">🎙️ David Bowie</a>
+              <a href="/artistas/elvis-presley/">🎙️ Elvis Presley</a>
+              <a href="/artistas/bad-bunny/">🎙️ Bad Bunny</a>
+              <a href="/recursos/">🎛️ Recursos para músicos</a>
+            </div>
+          </section>'''
+
+          mezzo = common_css + '''
+          <section class="seo-feed" aria-labelledby="seo-mezzo-title">
+            <h2 id="seo-mezzo-title">Mezzosoprano: rango, características y cómo identificar tu voz</h2>
+            <p>La clasificación mezzosoprano describe una voz femenina situada habitualmente entre soprano y contralto. El timbre y la zona cómoda son tan importantes como la extensión total: alcanzar una nota concreta no determina por sí solo el tipo de voz.</p>
+            <h3>¿Cómo saber si soy mezzosoprano?</h3>
+            <p>Observa dónde tu voz se siente estable, qué notas puedes mantener con comodidad y cómo cambia el timbre al subir o bajar. Un análisis vocal puede servir como punto de partida, pero la clasificación artística siempre debe interpretarse junto con la técnica y el repertorio.</p>
+            <h3>¿Qué puedo hacer después de analizar mi voz?</h3>
+            <p>Compara tu perfil con cantantes, explora otros tipos de voz y utiliza recursos de técnica vocal para trabajar tus puntos fuertes sin forzar la voz.</p>
+            <div class="seo-links">
+              <a href="/#app">🎤 Analiza tu voz con Harmiq</a>
+              <a href="/tipos-de-voz/">🎼 Explorar tipos de voz</a>
+              <a href="/artistas/adele/">🎙️ Adele</a>
+              <a href="/artistas/amy-winehouse/">🎙️ Amy Winehouse</a>
+              <a href="/recursos/">🎛️ Recursos para músicos</a>
+            </div>
+          </section>'''
+
+          artist_template = lambda name: common_css + f'''
+          <section class="seo-feed" aria-labelledby="seo-artist-title">
+            <h2 id="seo-artist-title">La voz de {name}: análisis, técnica y referencias</h2>
+            <p>Explora el perfil vocal de {name}, sus características interpretativas y las referencias que utiliza Harmiq para contextualizar su voz. Las clasificaciones vocales de artistas son orientativas y pueden variar según la fuente, la época y el repertorio.</p>
+            <h3>¿Quieres comparar tu voz con la de {name}?</h3>
+            <p>Graba una muestra y utiliza el analizador de Harmiq para conocer tu rango y características vocales. Después puedes consultar otros artistas y tipos de voz para ampliar la comparación.</p>
+            <div class="seo-links">
+              <a href="/#app">🎤 Analiza tu voz</a>
+              <a href="/artistas/">🎙️ Explorar artistas</a>
+              <a href="/tipos-de-voz/">🎼 Tipos de voz</a>
+              <a href="/recursos/">🎛️ Herramientas para músicos</a>
+            </div>
+          </section>'''
+
+          changed = []
+          if inject('tipo-de-voz/baritono/index.html', 'seo-baritono-title', baritone): changed.append('baritono')
+          if inject('tipo-de-voz/mezzosoprano/index.html', 'seo-mezzo-title', mezzo): changed.append('mezzosoprano')
+
+          for p in Path('artistas').glob('*/index.html'):
+              try:
+                  text = p.read_text(encoding='utf-8')
+              except Exception:
+                  continue
+              for name, marker in [
+                  ('Paulina Rubio', 'seo-artist-paulina'),
+                  ('Gloria Trevi', 'seo-artist-gloria'),
+                  ('Zez Di Camargo', 'seo-artist-zez'),
+              ]:
+                  if name in text and marker not in text:
+                      block = artist_template(name).replace('seo-artist-title', marker + '-title')
+                      pos = text.rfind('</body>')
+                      if pos >= 0:
+                          p.write_text(text[:pos] + block + '\n' + text[pos:], encoding='utf-8')
+                          changed.append(str(p))
+                      break
+
+          print('Updated:', changed)
+
+      - name: Commit changes and remove one-time workflow
+        shell: bash
+        run: |
+          git config user.name "harmiq"
+          git config user.email "dapuig2@gmail.com"
+          git add tipo-de-voz/baritono/index.html tipo-de-voz/mezzosoprano/index.html artistas/*/index.html .github/workflows/one-time-feed-seo-pages.yml
+          git diff --cached --quiet && exit 0 || true
+          git commit -m "SEO: deepen pages already gaining search visibility"
+          git push
+          rm .github/workflows/one-time-feed-seo-pages.yml
+          git add .github/workflows/one-time-feed-seo-pages.yml
+          git commit -m "chore: remove one-time SEO feed workflow"
+          git push
