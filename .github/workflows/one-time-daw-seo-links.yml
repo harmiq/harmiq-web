@@ -1,0 +1,47 @@
+name: One-time DAW SEO links
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-time-daw-seo-links.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update resources hub, sitemap and redirects
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          hub=Path('recursos/index.html')
+          text=hub.read_text(encoding='utf-8')
+          marker='<!-- HARMiq DAW SEO -->'
+          block='''<!-- HARMiq DAW SEO -->\n<section class="section wrap" id="daw">\n<div class="section-head"><div><h2>🎛️ DAW y producción musical</h2><p>¿No sabes qué DAW elegir? Comparamos las principales opciones por estilo musical, flujo de trabajo, funciones y herramientas de IA.</p></div></div>\n<div class="grid">\n<a class="card" href="/recursos/daw/ableton-live/"><span class="tag">ELECTRÓNICA · DIRECTO</span><h3>Ableton Live</h3><p>Session View, producción electrónica, sampling y directo.</p><span class="go">Leer guía →</span></a>\n<a class="card" href="/recursos/daw/fl-studio/"><span class="tag">BEATS · EDM</span><h3>FL Studio</h3><p>Piano Roll, beatmaking, stems y Gopher.</p><span class="go">Leer guía →</span></a>\n<a class="card" href="/recursos/daw/reason/"><span class="tag">RACK · SÍNTESIS</span><h3>Reason</h3><p>Rack modular, instrumentos y Reason+.</p><span class="go">Leer guía →</span></a>\n<a class="card" href="/recursos/daw/logic-pro/"><span class="tag">MAC · IA</span><h3>Logic Pro</h3><p>Composición, producción y Apple Intelligence.</p><span class="go">Leer guía →</span></a>\n<a class="card" href="/recursos/daw/cubase/"><span class="tag">AUDIO · MIDI</span><h3>Cubase</h3><p>Composición, grabación, VariAudio y stems con IA.</p><span class="go">Leer guía →</span></a>\n<a class="card" href="/recursos/daw/bitwig/"><span class="tag">MODULAR · SOUND DESIGN</span><h3>Bitwig Studio</h3><p>Modulación, The Grid, hardware y Clip Launcher.</p><span class="go">Leer guía →</span></a>\n<a class="card" href="/recursos/daw/pro-tools/"><span class="tag">ESTUDIO · POST</span><h3>Pro Tools</h3><p>Grabación, mezcla, postproducción y audio inmersivo.</p><span class="go">Leer guía →</span></a>\n<a class="card" href="/recursos/daw/studio-one/"><span class="tag">PRODUCCIÓN · MEZCLA</span><h3>Studio One</h3><p>Producción, grabación, mezcla y masterización.</p><span class="go">Leer guía →</span></a>\n</div><p style="margin-top:1rem"><a href="/recursos/daw/">Ver comparativa completa de DAW →</a></p></section>\n'''
+          if marker not in text:
+              text=text.replace('</main>', block+'</main>')
+              hub.write_text(text,encoding='utf-8')
+          sm=Path('sitemap.xml')
+          s=sm.read_text(encoding='utf-8')
+          urls=['/recursos/daw/','/recursos/daw/ableton-live/','/recursos/daw/fl-studio/','/recursos/daw/reason/','/recursos/daw/logic-pro/','/recursos/daw/cubase/','/recursos/daw/bitwig/','/recursos/daw/pro-tools/','/recursos/daw/studio-one/']
+          for u in urls:
+              tag=f'<url><loc>https://harmiq.app{u}</loc></url>'
+              if tag not in s:
+                  s=s.replace('</urlset>',f'  {tag}\n</urlset>')
+          sm.write_text(s,encoding='utf-8')
+          red=Path('_redirects')
+          r=red.read_text(encoding='utf-8')
+          if '/recursos/daw ' not in r:
+              r += '\n/recursos/daw   /recursos/daw/   301\n'
+              red.write_text(r,encoding='utf-8')
+          PY
+      - name: Commit changes and remove workflow
+        run: |
+          git config user.name 'harmiq'
+          git config user.email 'dapuig2@gmail.com'
+          git add recursos/index.html sitemap.xml _redirects .github/workflows/one-time-daw-seo-links.yml
+          git commit -m 'Add internal links and sitemap entries for DAW SEO' || exit 0
+          git rm .github/workflows/one-time-daw-seo-links.yml
+          git commit -m 'Remove one-time DAW SEO workflow'
+          git push
