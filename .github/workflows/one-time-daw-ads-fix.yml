@@ -1,0 +1,31 @@
+name: One-time DAW ads script fix
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-time-daw-ads-fix.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix AdSense client parameter
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for p in Path('recursos/daw').glob('*/index.html'):
+              s=p.read_text(encoding='utf-8')
+              s=s.replace('https://pagead2.googlesyndication.com/pagead/js?id=ca-pub-6942632470990007','https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-6942632470990007')
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit and remove workflow
+        run: |
+          git config user.name 'harmiq'
+          git config user.email 'dapuig2@gmail.com'
+          git add recursos/daw .github/workflows/one-time-daw-ads-fix.yml
+          git commit -m 'Fix AdSense client script on DAW pages'
+          git rm .github/workflows/one-time-daw-ads-fix.yml
+          git commit -m 'Remove one-time DAW ads fix workflow'
+          git push
