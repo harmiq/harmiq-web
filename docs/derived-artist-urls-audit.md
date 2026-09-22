@@ -19,28 +19,25 @@ Result:
 
 This is a discovery heuristic only. It does not establish what the URL represents.
 
-Examples with an existing prefix include multiple pages derived from artists such as:
+## Stronger evidence from the historical import
 
-- Wolfgang Amadeus Mozart
-- Yuvan Shankar Raja
-- Illenium
-- Armin van Buuren
-- Hillsong Worship
-- Martin Garrix
-- Above & Beyond
-- Anirudh Ravichander
-- A. R. Rahman
-- J Balvin
+The large import commit `d7aaac4c2e702a7ec9c21ec2532f5153be6e952d` (13 September 2026) added the V5 artist corpus.
 
-Examples without a directory-prefix match include:
+Representative imported titles explicitly contain semicolon-separated entities, for example:
 
-- 3LAU + Bright Lights
-- A. R. Rahman + Arijit Singh + Shashaa Tirupati
-- Aitana-related collaborations
-- Afrojack collaborations
-- Alka Yagnik collaborations
-- Alejandro Fernández-related entries
-- multiple soundtrack/cast or ensemble combinations
+- `22Gz;Kodak Black`
+- `3 Doors Down;Jack Joseph Puig`
+- `3LAU;Bright Lights`
+- `509-E;Dexter;Afro-X`
+- `A Great Big World;Christina Aguilera`
+- `A-ha;Kygo`
+- `A.R. Rahman;Arijit Singh;Shashaa Tirupati`
+- `A1 x J1;Nemzzz`
+- `Aaron Kwok;Beta Soul`
+
+The imported V5 template then assigns one generic voice category and reusable editorial blocks to the combined entity, including equipment, nutrition and Bio-Hacking sections.
+
+That makes these pages materially different from a genuine single-artist profile: the combined entity is being treated as though it were one vocalist.
 
 ## Content pattern
 
@@ -58,7 +55,7 @@ The page titles and canonical URLs are generated for the combined slug.
 
 The 2,764 URLs are not safe to classify as individual artist profiles.
 
-The current evidence supports treating them as a separate **derived/legacy URL corpus** until their origin and intended semantic type are established.
+The current evidence supports treating them as a separate **derived/legacy URL corpus** until their origin and intended semantic type is established.
 
 No canonical, redirect, robots or noindex changes are made by this audit.
 
