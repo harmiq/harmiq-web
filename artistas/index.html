@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">\n    <link rel="canonical" href="https://harmiq.app/artistas/">
+    <meta name="referrer" content="no-referrer">
+    <link rel="canonical" href="https://harmiq.app/artistas/">
     <title>Directorio de artistas y cantantes por tipo de voz | Harmiq</title>
     <meta name="description" content="Consulta el directorio de más de 9.000 artistas y cantantes clasificados por tipo de voz. Explora tenores, barítonos, bajos, sopranos, mezzosopranos y contraltos.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Baloo+2:wght@700;800;900&display=swap" rel="stylesheet">
@@ -49,7 +50,7 @@
         
         .artist-info{padding:1.5rem;}
         .artist-info h3{font-size:1.3rem; font-weight:800; margin-bottom:0.2rem; letter-spacing:-0.5px;}
-        .artist-genre{font-size:0.75rem; color:var(--p); font-weight:700; text-transform:uppercase; margin-bottom:0.8rem;}
+        .artist-voice{font-size:0.8rem;color:var(--m);font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
         .artist-desc{font-size:0.85rem; color:var(--m); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
         
         #resultCount{text-align:center; margin-bottom:2rem; font-weight:700; color:var(--p); font-size:1.2rem;}
@@ -69,9 +70,8 @@
 
         <div class="stats-bar">
             <div class="stat-item"><span class="stat-num" id="statArtists">9.187</span><span class="stat-label">Artistas en la base de datos</span></div>
-            <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Registros</span></div>
-            <div class="stat-item"><span class="stat-num">35</span><span class="stat-label">Géneros</span></div>
-            <div class="stat-item"><span class="stat-num">IA</span><span class="stat-label">Powered</span></div>
+            <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Tipos de voz</span></div>
+            <div class="stat-item"><span class="stat-num">48</span><span class="stat-label">Resultados por página</span></div>
         </div>
 
         <section style="max-width:900px;margin:0 auto 4rem;padding:2rem 2.5rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:2rem;text-align:center"><h2 style="font-size:1.4rem;margin-bottom:.7rem">Sobre las clasificaciones vocales</h2><p style="color:var(--m);font-size:.95rem">Las categorías de este directorio son orientativas. En música popular, una misma voz puede describirse de distintas maneras según la tesitura, el timbre, la técnica y el repertorio. El directorio sirve para explorar referencias vocales y no sustituye una evaluación vocal profesional.</p></section>\n\n<section class="history-section">
@@ -91,16 +91,15 @@
             </div>
             
             <div class="chips-container" id="vTypeChips">
-                <div class="chip active" data-val="" onclick="setVType('', this)">Todos los Registros</div>
-                <div class="chip" data-val="soprano" onclick="setVType('soprano', this)">Soprano</div>
-                <div class="chip" data-val="mezzosoprano" onclick="setVType('mezzosoprano', this)">Mezzosoprano</div>
-                <div class="chip" data-val="tenor" onclick="setVType('tenor', this)">Tenor</div>
-                <div class="chip" data-val="baritono" onclick="setVType('baritono', this)">Barítono</div>
-                <div class="chip" data-val="contralto" onclick="setVType('contralto', this)">Contralto</div>
-                <div class="chip" data-val="bajo" onclick="setVType('bajo', this)">Bajo</div>
+                <button type="button" class="chip active" data-val="" onclick="setVType('', this)">Todos los Registros</button>
+                <button type="button" class="chip" data-val="soprano" onclick="setVType('soprano', this)">Soprano</button>
+                <button type="button" class="chip" data-val="mezzosoprano" onclick="setVType('mezzosoprano', this)">Mezzosoprano</button>
+                <button type="button" class="chip" data-val="tenor" onclick="setVType('tenor', this)">Tenor</button>
+                <button type="button" class="chip" data-val="baritono" onclick="setVType('baritono', this)">Barítono</button>
+                <button type="button" class="chip" data-val="contralto" onclick="setVType('contralto', this)">Contralto</button>
+                <button type="button" class="chip" data-val="bajo" onclick="setVType('bajo', this)">Bajo</button>
             </div>
-
-            </div>
+        </div>
 
         <div id="resultCount">Cargando artistas...</div>
 
@@ -138,7 +137,7 @@
             +'<div class="card-badge" style="background:'+c+'33;border-color:'+c+'66;color:'+c+'">'+escHtml(a.v||'?')+'</div>'
             +'</div>'
             +'<div class="artist-info"><h3>'+escHtml(a.n)+'</h3>'
-            +'<div class="artist-genre" style="color:var(--m);font-size:.8rem">'+escHtml(a.v||'')+'</div>'
+            +'<div class="artist-voice" style="color:var(--m);font-size:.8rem">'+escHtml(a.v||'')+'</div>'
             +'</div></a>';
     }
 
