@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
-    <title>Artistas y Cantantes — Tipo de Voz, Fotos y Curiosidades | Harmiq</title>
-    <meta name="description" content="Descubre el tipo de voz de más de 9.000 artistas: Bad Bunny, Rosalía, Adele, Beyoncé y muchos más. Fotos, curiosidades y análisis vocal.">
+    <meta name="referrer" content="no-referrer">\n    <link rel="canonical" href="https://harmiq.app/artistas/">
+    <title>Directorio de artistas y cantantes por tipo de voz | Harmiq</title>
+    <meta name="description" content="Consulta el directorio de más de 9.000 artistas y cantantes clasificados por tipo de voz. Explora tenores, barítonos, bajos, sopranos, mezzosopranos y contraltos.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Baloo+2:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         :root{--p:#7C4DFF;--a:#FF4FA3;--dark:#05050A;--card:rgba(255,255,255,0.03);--t:#FFFFFF;--m:#94A3B8;--bg-grad:radial-gradient(circle at 50% 0%, #1A1A2E 0%, #05050A 100%);}
@@ -64,8 +64,8 @@
     </nav>
 
     <div class="container">
-        <h1>Enciclopedia de <span style="color:var(--p)">Artistas</span></h1>
-        <p class="subtitle">Análisis técnico de las voces más influyentes del mundo. Aprende de los mejores.</p>
+        <h1>Directorio de <span style="color:var(--p)">Artistas</span></h1>
+        <p class="subtitle">Explora artistas y cantantes por tipo de voz. Las clasificaciones son orientativas y sirven como referencia para descubrir diferentes perfiles vocales.</p>
 
         <div class="stats-bar">
             <div class="stat-item"><span class="stat-num" id="statArtists">9.187</span><span class="stat-label">Artistas en la base de datos</span></div>
@@ -74,7 +74,7 @@
             <div class="stat-item"><span class="stat-num">IA</span><span class="stat-label">Powered</span></div>
         </div>
 
-        <section class="history-section">
+        <section style="max-width:900px;margin:0 auto 4rem;padding:2rem 2.5rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:2rem;text-align:center"><h2 style="font-size:1.4rem;margin-bottom:.7rem">Sobre las clasificaciones vocales</h2><p style="color:var(--m);font-size:.95rem">Las categorías de este directorio son orientativas. En música popular, una misma voz puede describirse de distintas maneras según la tesitura, el timbre, la técnica y el repertorio. El directorio sirve para explorar referencias vocales y no sustituye una evaluación vocal profesional.</p></section>\n\n<section class="history-section">
             <h3 style="font-size:1.8rem; font-weight:900; margin-bottom:1rem;">🧬 Evolución de la Voz</h3>
             <div class="history-grid">
                 <div class="history-card">
@@ -99,7 +99,7 @@
         <div class="controls">
             <div class="search-wrap">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="artistSearch" placeholder="Busca un nombre, género o país..." oninput="filterArtists()">
+                <input type="text" id="artistSearch" placeholder="Busca un nombre..." oninput="filterArtists()">
             </div>
             
             <div class="chips-container" id="vTypeChips">
@@ -129,7 +129,7 @@
         <div id="noResults" style="display:none;text-align:center;padding:4rem 2rem;color:var(--m);">
             <div style="font-size:3rem;margin-bottom:1rem">&#x1F50D;</div>
             <h3 style="color:#fff;margin-bottom:.5rem">No encontramos ese artista</h3>
-            <p>Prueba a analizar tu voz y te compararemos con m&aacute;s de 11.000 cantantes.</p>
+            <p>Prueba a analizar tu voz y te compararemos con artistas de nuestra base de datos.</p>
             <a href="/" style="display:inline-block;margin-top:1.5rem;padding:.8rem 2rem;background:linear-gradient(135deg,#7C4DFF,#FF4FA3);color:#fff;text-decoration:none;border-radius:50px;font-weight:800;">Analizar mi voz</a>
         </div>
 
