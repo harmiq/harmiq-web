@@ -12,9 +12,23 @@ On branch `adsense-editorial-hardening`:
 
 The current repository does not contain an active generator for the V5 artist pages. The large import commit `d7aaac4c2e702a7ec9c21ec2532f5153be6e952d` (13 September 2026) introduced the V5 corpus as static HTML while integrating the older/richer frontend.
 
-Representative imported pages include both individual entities and semicolon-separated combinations.
+The parent tree did not contain the artist corpus, so the generation/import source is not preserved in the current repository history.
+
+## Strong evidence for track artist-credit combinations
+
+Several derived page names exactly match multi-artist music credits found in public music catalogs.
 
 Examples:
+
+- `22Gz;Kodak Black` — Spotify has the track **Up N Stuck (feat. Kodak Black)** credited to 22Gz and Kodak Black.
+- `Above & Beyond;Richard Bedford` — Spotify lists multiple tracks with Above & Beyond and Richard Bedford as the artists.
+- `A.R. Rahman;Arijit Singh;Shashaa Tirupati` — public music catalogs list recordings credited to these artists together.
+
+This does not prove that Spotify was the original source of the import, but it strongly supports the hypothesis that many derived slugs were built from **multi-artist track credits**, rather than being ordinary individual-artist entities.
+
+## Representative imported combinations
+
+The corpus contains combinations such as:
 
 - `22Gz;Kodak Black`
 - `3 Doors Down;Jack Joseph Puig`
@@ -25,8 +39,10 @@ Examples:
 - `A.R. Rahman;Arijit Singh;Shashaa Tirupati`
 - `A1 x J1;Nemzzz`
 - `Aaron Kwok;Beta Soul`
+- `Above & Beyond;Richard Bedford`
+- `Afrojack;David Guetta;Ester Dean`
 
-This strongly indicates that a substantial part of the extra corpus is **combined/derived entity pages**, not ordinary individual artist records.
+The exact semicolon-separated naming pattern is consistent with storing a set of credited artists as one display entity.
 
 ## Heuristic grouping
 
@@ -51,7 +67,7 @@ Recurring blocks include:
 - equipment recommendations;
 - song/repertoire blocks.
 
-For a combined entity this creates a semantic problem: multiple people may be presented as though they were one vocalist, with a single voice classification and generic personal/technical claims.
+For a combined credit this creates a semantic problem: multiple people may be presented as though they were one vocalist, with a single voice classification and generic personal/technical claims.
 
 ## Routing finding
 
@@ -59,20 +75,22 @@ The current `_redirects` file contains no general redirect rule for the derived 
 
 Therefore no safe bulk redirect target can currently be inferred from the routing layer.
 
+## Recommended classification
+
+Treat these URLs as **track-credit-derived legacy entities** unless an individual URL can be independently verified as a real single artist.
+
+The next useful transformation is not to turn them into individual artist profiles. Instead:
+
+1. Recover or reconstruct the underlying artist-credit relationship where possible.
+2. Preserve genuine individual artists as individual profiles.
+3. Treat multi-artist combinations as a separate collaboration/repertoire entity type if Harmiq wants to expose them.
+4. Only index collaboration entities that can contain unique, useful content.
+5. Use redirect/noindex/retirement for legacy combinations that cannot support a useful page.
+
 ## Important conclusion
 
-The 2,764 URLs should remain a separate **derived/legacy URL corpus** while their semantic origin is unresolved.
+The 2,764 URLs should remain a separate **derived/legacy URL corpus** while their exact source mapping is reconstructed.
 
 They should not be added to the sitemap as a bulk set, and they should not receive mass canonical/noindex/redirect changes based only on slug shape.
-
-## Decision framework
-
-After the source data is reconstructed, each URL/family should be assigned to one of these states:
-
-1. **Collaboration/repertoire page** — only where the underlying relationship is known and the page can contain unique, useful content.
-2. **Individual artist profile** — only where the URL resolves to one identifiable artist and the content is genuinely about that artist.
-3. **Redirect/alias** — only where there is a clear canonical entity target.
-4. **Accessible legacy, non-indexed** — where the URL must remain reachable but does not merit search indexation.
-5. **Retired** — where the URL has no defensible user-facing purpose and removal is safe.
 
 No canonical, redirect, robots or noindex changes are made by this audit.
