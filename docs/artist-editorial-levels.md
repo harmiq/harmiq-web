@@ -94,4 +94,4 @@ Antes de añadir las 9.000+ URLs al sitemap se debe definir:
 
 Hasta que exista un dataset editorial específico, `artistas/index.json` debe considerarse únicamente un índice de nombre + slug + voz.
 
-Los datos editoriales adicionales deben vivir en una estructura separada y explícita, no mezclarse silenciosamente con el índice básico.
+Los datos editoriales adicionales deben vivir en una estructura separada y explícita, no mezclarse silenciosamente con el índice básico. La primera implementación es `artistas/editorial-profiles.json`, actualmente limitada a los tres pilotos revisados.
