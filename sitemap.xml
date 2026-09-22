@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://harmiq.app/</loc></url>
+  <url><loc>https://harmiq.app/artistas/</loc></url>
+  <url><loc>https://harmiq.app/tipos-de-voz/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/soprano/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/mezzosoprano/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/tenor/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/baritono/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/bajo/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/contralto/</loc></url>
+  <url><loc>https://harmiq.app/home-studio/</loc></url>
   <url><loc>https://harmiq.app/recursos/</loc></url>
   <url><loc>https://harmiq.app/recursos/lalal-ai/</loc></url>
   <url><loc>https://harmiq.app/recursos/udemy-canto/</loc></url>
