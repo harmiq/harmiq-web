@@ -217,6 +217,37 @@ const legacyCounts = classified.reduce((acc, item) => {
 const noindexCount = classified.filter((item) => item.hasNoindex).length;
 const missingCanonicalCount = classified.filter((item) => !item.hasCanonical).length;
 
+const reasonCounts = classified.reduce((acc, item) => {
+  for (const reason of item.reasons) {
+    acc[reason] = (acc[reason] || 0) + 1;
+  }
+  return acc;
+}, {});
+
+const examples = {};
+for (const className of [
+  "editorial",
+  "directory",
+  "generic-candidate",
+  "legacy-derived-candidate",
+  "legacy-candidate",
+  "derived-candidate",
+  "unresolved"
+]) {
+  examples[className] = classified
+    .filter((item) => item.class === className)
+    .slice(0, 30)
+    .map((item) => ({
+      slug: item.slug,
+      reasons: item.reasons,
+      legacy: item.legacy,
+      generic: item.generic,
+      derived: item.derived,
+      hasNoindex: item.hasNoindex,
+      hasCanonical: item.hasCanonical
+    }));
+}
+
 const summary = {
   directoryRecords: records.length,
   physicalPages: pages.length,
@@ -225,18 +256,8 @@ const summary = {
   pagesWithNoindex: noindexCount,
   pagesMissingCanonical: missingCanonicalCount,
   editorialProfiles: Object.keys(editorialMap).length,
+  reasonCounts,
+  examples,
   generatedAt: new Date().toISOString()
 };
-
 console.log(JSON.stringify(summary, null, 2));
-
-for (const className of [
-  "generic-candidate",
-  "derived-candidate",
-  "unresolved"
-]) {
-  console.log(`\n${className} examples:`);
-  for (const item of classified.filter((x) => x.class === className).slice(0, 30)) {
-    console.log(` - ${item.slug} [${item.reasons.join(", ")}]`);
-  }
-}
