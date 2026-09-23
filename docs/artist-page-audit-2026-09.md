@@ -119,3 +119,33 @@ node scripts/audit-artist-pages.mjs
 The script compares the physical `artistas/*/index.html` corpus with `artistas/index.json`, detects legacy V5 markers, and reports derived-looking URLs. It deliberately does **not** modify canonicals, robots directives, redirects, sitemap entries or files.
 
 This is intended to make the classification reproducible before any bulk SEO action. A page being detected as legacy or derived-looking is evidence for review, not an automatic instruction to deindex it.
+
+## Auditoría adicional del corpus V5 (23 de septiembre de 2026)
+
+El árbol de la rama contiene **11.951** páginas físicas `artistas/*/index.html`.
+
+Un análisis estructural por tamaño de archivo muestra:
+
+- 11.065 páginas entre 7,5 KB y 9 KB.
+- 873 páginas por debajo de 7,5 KB.
+- 13 páginas por encima de 9 KB.
+
+El tamaño no se utiliza como criterio SEO por sí solo: sirve únicamente para localizar familias de plantillas y priorizar muestreo.
+
+Se revisaron ejemplos de varias familias:
+
+- `22gz`, `0to8`, `10-feet`, `Adele`: plantilla V5 con “Perfil Vocal V5”, Bio-Hacking y contenido nutricional genérico.
+- `22gz-kodak-black`, `a-r-rahman-arijit-singh-shashaa-tirupati`, `aaron-smith-krono-luvli`: combinaciones de entidades con la misma plantilla V5.
+- `artista-especial-220`: página V5 claramente genérica, sin una identidad artística verificable en el contenido revisado.
+- `Ed Sheeran`, `Ariana Grande`, `Bad Bunny`: perfiles piloto ya migrados a un formato editorial diferenciado, con fuentes y objetivos técnicos.
+
+### Implicación
+
+No es seguro tratar las 11.951 páginas como un único conjunto. El corpus debe dividirse, como mínimo, en:
+
+1. registros individuales del directorio;
+2. entidades combinadas/derivadas;
+3. páginas genéricas o placeholders;
+4. perfiles editoriales revisados.
+
+La siguiente intervención debe ser **clasificación + estrategia de indexación**, no una reescritura automática de las 11.951 páginas.
