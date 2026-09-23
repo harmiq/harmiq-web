@@ -3,8 +3,6 @@
  * Build a read-only content/template fingerprint report for artist pages.
  *
  * The script does not modify artist pages or SEO directives.
- * It groups pages by a normalized HTML fingerprint intended to reveal
- * repeated templates while preserving useful content differences.
  *
  * Usage:
  *   node scripts/fingerprint-artist-pages.mjs
@@ -37,15 +35,15 @@ function firstMatch(html, re) {
 
 function normalizeForFingerprint(html) {
   return html
-    .replace(/<!--([\\s\\S]*?)-->/g, "")
-    .replace(/<script[\\s\\S]*?<\\/script>/gi, "<script></script>")
-    .replace(/<style[\\s\\S]*?<\\/style>/gi, "<style></style>")
-    .replace(/<title>[\\s\\S]*?<\\/title>/gi, "<title></title>")
-    .replace(/<meta\\s+name=["']description["'][^>]*>/gi, '<meta name="description">')
-    .replace(/<link\\s+rel=["']canonical["'][^>]*>/gi, '<link rel="canonical">')
-    .replace(/https?:\\/\\/[^"'\\s<]+/g, "<URL>")
-    .replace(/\\b[0-9a-f]{40}\\b/gi, "<SHA40>")
-    .replace(/\\s+/g, " ")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "<script></script>")
+    .replace(/<style[\s\S]*?<\/style>/gi, "<style></style>")
+    .replace(/<title>[\s\S]*?<\/title>/gi, "<title></title>")
+    .replace(/<meta\s+name=["']description["'][^>]*>/gi, '<meta name="description">')
+    .replace(/<link\s+rel=["']canonical["'][^>]*>/gi, '<link rel="canonical">')
+    .replace(/https?:\/\/[^"'\s<]+/g, "<URL>")
+    .replace(/\b[0-9a-f]{40}\b/gi, "<SHA40>")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
@@ -56,7 +54,7 @@ function classifyTemplate(html) {
   if (/Perfil vocal editorial|Fuentes y criterio|Análisis vocal, canciones y técnica/i.test(html)) {
     return "editorial";
   }
-  if (/Análisis vocal avanzado en desarrollo\\.|Top Hit 1|Top Hit 2|Artista Especial/i.test(html)) {
+  if (/Análisis vocal avanzado en desarrollo\.|Top Hit 1|Top Hit 2|Artista Especial/i.test(html)) {
     return "generic-placeholder";
   }
   return "other";
@@ -69,10 +67,19 @@ for (const page of pages) {
   const html = fs.readFileSync(page.file, "utf8");
   const normalized = normalizeForFingerprint(html);
   const fingerprint = crypto.createHash("sha256").update(normalized).digest("hex");
-  const title = firstMatch(html, /<title>([^<]*)<\\/title>/i);
-  const description = firstMatch(html, /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i);
-  const canonical = firstMatch(html, /<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']*)["']/i);
-  const robots = firstMatch(html, /<meta[^>]+name=["']robots["'][^>]+content=["']([^"']*)["']/i);
+  const title = firstMatch(html, /<title>([^<]*)<\/title>/i);
+  const description = firstMatch(
+    html,
+    /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i
+  );
+  const canonical = firstMatch(
+    html,
+    /<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']*)["']/i
+  );
+  const robots = firstMatch(
+    html,
+    /<meta[^>]+name=["']robots["'][^>]+content=["']([^"']*)["']/i
+  );
 
   const row = {
     slug: page.slug,
@@ -85,6 +92,7 @@ for (const page of pages) {
     canonical,
     robots
   };
+
   rows.push(row);
 
   const group = fingerprints.get(fingerprint) || {
@@ -93,6 +101,7 @@ for (const page of pages) {
     templates: new Set(),
     slugs: []
   };
+
   group.count += 1;
   group.templates.add(row.template);
   if (group.slugs.length < 10) group.slugs.push(page.slug);
