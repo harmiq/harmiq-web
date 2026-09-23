@@ -14,9 +14,9 @@ This matrix is a decision framework only. It does not modify pages.
 
 ## Current known facts
 
-- 11,951 physical artist pages.
+- 11,931 physical artist pages.
 - 9,187 exact directory records.
-- 2,764 physical pages have no exact directory record.
+- 2,744 physical pages have no exact directory record.
 - The audit has found that pages outside the directory can still be real multi-entity/collaboration pages.
 - Existing legacy pages generally already have canonicals and are currently indexable; therefore canonical presence alone is not evidence that a page should remain indexable.
 
