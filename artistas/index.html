@@ -69,7 +69,7 @@
         <p class="subtitle">Explora artistas y cantantes por tipo de voz. Las clasificaciones son orientativas y sirven como referencia para descubrir diferentes perfiles vocales.</p>
 
         <div class="stats-bar">
-            <div class="stat-item"><span class="stat-num" id="statArtists">9.187</span><span class="stat-label">Artistas en la base de datos</span></div>
+            <div class="stat-item"><span class="stat-num" id="statArtists">9.187</span><span class="stat-label">Registros del directorio</span></div>
             <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Tipos de voz</span></div>
             <div class="stat-item"><span class="stat-num">48</span><span class="stat-label">Resultados por página</span></div>
         </div>
@@ -91,7 +91,7 @@
             </div>
             
             <div class="chips-container" id="vTypeChips">
-                <button type="button" class="chip active" data-val="" onclick="setVType('', this)">Todos los Registros</button>
+                <button type="button" class="chip active" data-val="" onclick="setVType('', this)">Todos</button>
                 <button type="button" class="chip" data-val="soprano" onclick="setVType('soprano', this)">Soprano</button>
                 <button type="button" class="chip" data-val="mezzosoprano" onclick="setVType('mezzosoprano', this)">Mezzosoprano</button>
                 <button type="button" class="chip" data-val="tenor" onclick="setVType('tenor', this)">Tenor</button>
@@ -107,7 +107,7 @@
 
         <div id="noResults" style="display:none;text-align:center;padding:4rem 2rem;color:var(--m);">
             <div style="font-size:3rem;margin-bottom:1rem">&#x1F50D;</div>
-            <h3 style="color:#fff;margin-bottom:.5rem">No encontramos ese artista</h3>
+            <h3 style="color:#fff;margin-bottom:.5rem">No encontramos ese nombre</h3>
             <p>Prueba a analizar tu voz y te compararemos con artistas de nuestra base de datos.</p>
             <a href="/" style="display:inline-block;margin-top:1.5rem;padding:.8rem 2rem;background:linear-gradient(135deg,#7C4DFF,#FF4FA3);color:#fff;text-decoration:none;border-radius:50px;font-weight:800;">Analizar mi voz</a>
         </div>
@@ -218,9 +218,3 @@
     function toggleAnecdote(btn){
         var el = btn.nextElementSibling;
         var open = el.style.display !== 'none';
-        el.style.display = open ? 'none' : 'block';
-        btn.textContent = open ? 'Ver an\u00e9cdota \u25bc' : 'Ocultar \u25b2';
-    }
-    </script>
-</body>
-</html>
