@@ -58,3 +58,35 @@ The 829 pages without a directory prefix need a different review path because th
 The 5 pages with explicit collaboration separators and the single no-semicolon anomaly should be individually checked before any technical action.
 
 No redirects, noindex directives, canonical rewrites or deletions are made by this audit.
+
+## CI classification audit — 2026-09-23
+
+The read-only GitHub Actions audit was executed successfully on the current branch. It now exports the full candidate detail set for subsequent review.
+
+- 11,931 physical pages.
+- 9,187 directory records.
+- 9,184 pages classified as exact directory matches (the remaining 3 directory/editorial records are the explicit editorial profiles).
+- 2,525 legacy-derived-candidate pages.
+- 219 generic-candidate pages.
+- 3 explicit editorial profiles.
+- 0 pages with noindex.
+- 0 pages missing a canonical.
+- 1 repeated normalized fingerprint family: pablo-albor-n / pablo-alboran; the existing 301 for the alias is already documented.
+
+### Generic candidate breakdown
+
+| Subclass | Pages | Additional evidence |
+|---|---:|---|
+| unfinished-content | 72 | 35 without a semicolon title; 37 multi-entity |
+| generic-multientity | 147 | all have semicolon titles; 100 have a directory-prefix signal |
+
+All 219 generic candidates are currently canonicalized and indexable. They are candidates for editorial/SEO treatment because the classifier finds explicit generic markers such as Top Hit 1, Top Hit 2 and, for the unfinished subgroup, Análisis vocal avanzado en desarrollo.
+
+### Next review order
+
+1. Review the 72 unfinished pages at content level. Individual-artist pages should be considered for editorial upgrade rather than being treated as disposable URLs.
+2. Review the 147 generic multi-entity pages separately; do not redirect them to the first named artist merely because a directory prefix exists.
+3. Review the 829 legacy-derived pages without a directory prefix using their actual title/H1/content before any noindex, redirect or deletion decision.
+4. Keep the 1,690 directory-prefix legacy-derived pages indexable until their actual search intent and content are reviewed.
+
+This phase makes no bulk SEO directive changes. The classification remains an evidence-gathering step.
