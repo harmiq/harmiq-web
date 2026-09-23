@@ -49,4 +49,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artist-fingerprint-report
-          path: artist-fingerprint.json
+          path: |
+            artist-fingerprint.json
+            artist-classification.json
