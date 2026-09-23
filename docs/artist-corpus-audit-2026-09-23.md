@@ -59,3 +59,34 @@ A content-level sample was checked across that unresolved set. The sampled pages
 The classifier now records these content signals as evidence (`semicolon-in-title` and `legacy-v5-template`). This improves classification without turning the evidence into an automatic SEO action.
 
 A larger content-level inventory is still required before deciding the final treatment of the unresolved set.
+
+
+## Full classification run after content fingerprinting
+
+The read-only classifier was executed successfully over all 11,951 physical pages.
+
+Final class counts:
+
+| Class | Pages |
+|---|---:|
+| directory | 9,184 |
+| editorial | 3 |
+| legacy-derived-candidate | 2,525 |
+| generic-candidate | 239 |
+| legacy-candidate | 0 |
+| derived-candidate | 0 |
+| unresolved | 0 |
+| **Total** | **11,951** |
+
+This means the 2,764 pages absent from `index.json` are not an amorphous unresolved bucket under the current evidence: 2,525 have strong legacy + derived/multi-entity signals, and 239 have generic/placeholder signals. This is still a **classification result, not an SEO decision**.
+
+A particularly useful content-level signal is that **2,524 pages have a semicolon in the HTML title**, which is consistent with the legacy generator encoding multiple entities in a single title. The classifier also found other derived-structure evidence on a small number of pages.
+
+The three explicit editorial profiles are now correctly recognized as `editorial`, rather than being swallowed by the directory class.
+
+SEO state observed during the same run:
+
+- pages with `noindex`: **0**
+- pages missing canonical: **0**
+
+These observations reinforce the safety rule: the next step is to inspect the 2,525 legacy-derived candidates and 239 generic candidates as separate editorial groups, not to mass-apply `noindex` or redirects.
