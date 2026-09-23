@@ -35,7 +35,7 @@ const recordMap = new Map(records.map((artist) => [artist.s, artist]));
 const editorial = fs.existsSync(editorialPath)
   ? readJson(editorialPath)
   : { profiles: {} };
-const editorialMap = editorial.profiles || {};
+const editorialMap = editorial.profiles || editorial.artists || {};
 
 const pages = fs.readdirSync(artistsDir, { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
