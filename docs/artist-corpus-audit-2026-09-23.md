@@ -112,3 +112,20 @@ The correct next review is therefore to separate:
 3. explicit placeholder records such as the `artista-especial-*` family.
 
 No SEO directive is changed by this classification.
+
+
+## Generic candidates — final subdivision
+
+The 239 generic candidates are now split into mutually exclusive subclasses:
+
+| Subclass | Pages | Meaning |
+|---|---:|---|
+| explicit-placeholder | 20 | `artista-especial-220` through `artista-especial-239`; directly validated as generated placeholder identities |
+| unfinished-content | 72 | legacy pages containing the explicit “Análisis vocal avanzado en desarrollo.” marker |
+| generic-multientity | 147 | generic legacy pages whose title contains multi-entity evidence |
+
+The 20 explicit placeholders were individually checked. All 20 use the title pattern `Artista Especial N | Perfil Vocal V5 | Harmiq` and self-canonicalize to their own placeholder URL.
+
+This establishes a clean separation between explicit placeholder identities and real/multi-entity pages that merely use generic or unfinished legacy modules.
+
+The 20 placeholders are therefore a distinct treatment group for the eventual SEO decision. This audit still does not apply that decision automatically.
