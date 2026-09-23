@@ -128,11 +128,8 @@ const summary = {
   uniqueNormalizedFingerprints: groups.length,
   repeatedFingerprintPages: rows.length - groups.filter((g) => g.count === 1).reduce((n, g) => n + g.count, 0),
   templateCounts,
+  topRepeatedFingerprints: groups.filter((g) => g.count > 1).slice(0, 50),
   generatedAt: new Date().toISOString()
 };
 
 console.log(JSON.stringify(summary, null, 2));
-console.log("\nTop repeated fingerprints:");
-for (const group of groups.slice(0, 50)) {
-  if (group.count > 1) console.log(JSON.stringify(group));
-}
