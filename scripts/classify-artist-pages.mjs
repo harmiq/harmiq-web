@@ -89,7 +89,9 @@ function derivedEvidence(slug, html) {
 
   // Legacy V5 pages encode multi-entity names in the title with semicolons.
   // This is stronger evidence than slug heuristics for collaboration pages.
-  const title = (html.match(/<title>([^<]*)<\\/title>/i) || [null, ""])[1];
+  const titleStart = html.toLowerCase().indexOf("<title>");
+  const titleEnd = titleStart >= 0 ? html.toLowerCase().indexOf("</title>", titleStart + 7) : -1;
+  const title = titleStart >= 0 && titleEnd > titleStart ? html.slice(titleStart + 7, titleEnd) : "";
   if (title.includes(";")) reasons.push("semicolon-in-title");
 
   // The old generator explicitly labels these pages as V5/Bio-Hacking.
