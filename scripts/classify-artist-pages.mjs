@@ -225,7 +225,7 @@ const genericSubclasses = classified
   .filter((item) => item.class === "generic-candidate")
   .reduce((acc, item) => {
     let subclass = "generic-other";
-    if (/^artista-especial-\\d+$/.test(item.slug)) {
+    if (/^artista-especial-\d+$/.test(item.slug)) {
       subclass = "explicit-placeholder";
     } else if (item.generic.includes("Análisis vocal avanzado en desarrollo.")) {
       subclass = "unfinished-content";
