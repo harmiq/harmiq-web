@@ -4,15 +4,15 @@
 
 Read-only audit of the physical artist corpus on branch `adsense-editorial-hardening`.
 
-No artist page, canonical, robots directive, redirect, sitemap entry or production deployment was changed by this audit.
+The audit itself was read-only; a subsequent controlled cleanup removed 20 confirmed generated placeholder pages and added 410 responses for their legacy URLs.
 
 ## Full-corpus fingerprint result
 
 The CI fingerprint ran successfully over the complete physical corpus.
 
-- Physical artist pages: **11,951**
+- Physical artist pages: **11,931**
 - Exact records in `artistas/index.json`: **9,187**
-- Physical pages without an exact directory record: **2,764**
+- Physical pages without an exact directory record: **2,744**
 - Unique normalized HTML fingerprints: **11,950**
 - Pages belonging to a repeated normalized fingerprint family: **2**
 - Repeated family detected: **2 pages**
@@ -26,14 +26,14 @@ The CI fingerprint ran successfully over the complete physical corpus.
 
 The result is stronger than a generic “many duplicate pages” finding.
 
-After conservative normalization, **11,950 of 11,951 pages are structurally unique**. Only one two-page family was repeated.
+After conservative normalization, **11,950 of 11,931 pages are structurally unique**. Only one two-page family was repeated.
 
 Therefore:
 
 1. The corpus is overwhelmingly composed of individualized HTML documents rather than exact copies of one static page.
 2. The previous heuristic classification must not be converted into a mass duplicate-content/noindex decision.
 3. The dominant issue is the **legacy V5 template**, not literal HTML duplication.
-4. The 2,764 pages missing from `index.json` remain a separate editorial/corpus-integrity question.
+4. The 2,744 pages missing from `index.json` remain a separate editorial/corpus-integrity question.
 5. The three editorial pilots are structurally distinct from the legacy corpus and remain separately governed.
 
 ## Duplicate family requiring manual review
@@ -70,7 +70,7 @@ The CI workflow is:
 
 ## Next audit step
 
-The next step is not mass SEO action. It is **content-family and identity analysis** of the 2,764 pages absent from `index.json`, starting with:
+The next step is not mass SEO action. It is **content-family and identity analysis** of the 2,744 pages absent from `index.json`, starting with:
 
 1. artist identity/title extraction;
 2. V5/template markers;
