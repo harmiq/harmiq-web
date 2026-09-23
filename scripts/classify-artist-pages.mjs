@@ -221,6 +221,21 @@ const reasonCounts = classified.reduce((acc, item) => {
   return acc;
 }, {});
 
+const genericSubclasses = classified
+  .filter((item) => item.class === "generic-candidate")
+  .reduce((acc, item) => {
+    let subclass = "generic-other";
+    if (/^artista-especial-\\d+$/.test(item.slug)) {
+      subclass = "explicit-placeholder";
+    } else if (item.generic.includes("Análisis vocal avanzado en desarrollo.")) {
+      subclass = "unfinished-content";
+    } else if (item.derived.includes("semicolon-in-title")) {
+      subclass = "generic-multientity";
+    }
+    acc[subclass] = (acc[subclass] || 0) + 1;
+    return acc;
+  }, {});
+
 const examples = {};
 for (const className of [
   "editorial",
@@ -254,6 +269,7 @@ const summary = {
   pagesMissingCanonical: missingCanonicalCount,
   editorialProfiles: Object.keys(editorialMap).length,
   reasonCounts,
+  genericSubclasses,
   examples,
   generatedAt: new Date().toISOString()
 };
