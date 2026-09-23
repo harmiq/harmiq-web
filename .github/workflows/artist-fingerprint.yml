@@ -1,1 +1,46 @@
-name: Artist corpus fingerprint audit\n\non:\n  push:\n    branches:\n      - adsense-editorial-hardening\n  workflow_dispatch:\n\npermissions:\n  contents: read\n\njobs:\n  fingerprint:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout audit branch\n        uses: actions/checkout@v4\n\n      - name: Run artist fingerprint\n        run: node scripts/fingerprint-artist-pages.mjs > artist-fingerprint.json\n\n      - name: Publish compact audit summary\n        run: |\n          {\n            echo "## Artist corpus fingerprint audit"\n            echo\n            echo '```json'\n            node -e '\n              const fs = require("fs");\n              const r = JSON.parse(fs.readFileSync("artist-fingerprint.json", "utf8"));\n              console.log(JSON.stringify({\n                physicalPages: r.physicalPages,\n                directoryRecords: r.directoryRecords,\n                uniqueNormalizedFingerprints: r.uniqueNormalizedFingerprints,\n                repeatedFingerprintPages: r.repeatedFingerprintPages,\n                templateCounts: r.templateCounts\n              }, null, 2));\n            '\n            echo '```'\n          } >> "$GITHUB_STEP_SUMMARY"\n\n      - name: Upload full fingerprint report\n        uses: actions/upload-artifact@v4\n        with:\n          name: artist-fingerprint-report\n          path: artist-fingerprint.json\n
+name: Artist corpus fingerprint audit
+
+on:
+  push:
+    branches:
+      - adsense-editorial-hardening
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fingerprint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+
+      - name: Run artist fingerprint
+        run: node scripts/fingerprint-artist-pages.mjs > artist-fingerprint.json
+
+      - name: Publish compact audit summary
+        run: |
+          {
+            echo "## Artist corpus fingerprint audit"
+            echo
+            echo '~~~json'
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("artist-fingerprint.json", "utf8"));
+              console.log(JSON.stringify({
+                physicalPages: r.physicalPages,
+                directoryRecords: r.directoryRecords,
+                uniqueNormalizedFingerprints: r.uniqueNormalizedFingerprints,
+                repeatedFingerprintPages: r.repeatedFingerprintPages,
+                templateCounts: r.templateCounts
+              }, null, 2));
+            '
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload full fingerprint report
+        uses: actions/upload-artifact@v4
+        with:
+          name: artist-fingerprint-report
+          path: artist-fingerprint.json
