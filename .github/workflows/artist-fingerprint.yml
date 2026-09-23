@@ -19,9 +19,13 @@ jobs:
       - name: Run artist fingerprint
         run: node scripts/fingerprint-artist-pages.mjs > artist-fingerprint.json
 
+      - name: Run V5 content audit
+        run: node scripts/audit-v5-content.mjs > artist-v5-content.json
+
       - name: Publish compact audit summary
         run: |
           cat artist-fingerprint.json
+          cat artist-v5-content.json
           {
             echo "## Artist corpus fingerprint audit"
             echo
@@ -38,6 +42,23 @@ jobs:
               }, null, 2));
             '
             echo '~~~'
+            echo
+            echo "## V5 content-family audit"
+            echo
+            echo '~~~json'
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("artist-v5-content.json", "utf8"));
+              console.log(JSON.stringify({
+                physicalPages: r.physicalPages,
+                uniqueTemplateFingerprints: r.uniqueTemplateFingerprints,
+                repeatedTemplatePages: r.repeatedTemplatePages,
+                repeatedTemplateFamilies: r.repeatedTemplateFamilies,
+                markerCounts: r.markerCounts,
+                topRepeatedTemplateFamilies: r.topRepeatedTemplateFamilies.slice(0, 10)
+              }, null, 2));
+            '
+            echo '~~~'
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Run artist classification
@@ -45,10 +66,11 @@ jobs:
           node scripts/classify-artist-pages.mjs > artist-classification.json
           cat artist-classification.json
 
-      - name: Upload full fingerprint report
+      - name: Upload full audit reports
         uses: actions/upload-artifact@v4
         with:
-          name: artist-fingerprint-report
+          name: artist-corpus-audit-report
           path: |
             artist-fingerprint.json
+            artist-v5-content.json
             artist-classification.json
