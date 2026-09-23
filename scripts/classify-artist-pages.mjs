@@ -70,6 +70,25 @@ const derivedSeparators = [
 
 const knownSlugs = [...recordMap.keys()].sort((a, b) => b.length - a.length);
 
+function extractPageFields(html) {
+  const titleMatch = html.match(/<title>([\\s\\S]*?)<\\/title>/i);
+  const h1Match = html.match(/<h1[^>]*>([\\s\\S]*?)<\\/h1>/i);
+  const clean = (value) => value
+    ? value.replace(/<[^>]+>/g, "").replace(/\\s+/g, " ").trim()
+    : "";
+  return {
+    title: clean(titleMatch?.[1] || ""),
+    h1: clean(h1Match?.[1] || "")
+  };
+}
+
+function genericSubclass(item) {
+  if (/^artista-especial-\\d+$/.test(item.slug)) return "explicit-placeholder";
+  if (item.generic.includes("Análisis vocal avanzado en desarrollo.")) return "unfinished-content";
+  if (item.derived.includes("semicolon-in-title")) return "generic-multientity";
+  return "generic-other";
+}
+
 function derivedEvidence(slug, html) {
   const reasons = [];
 
@@ -89,9 +108,7 @@ function derivedEvidence(slug, html) {
 
   // Legacy V5 pages encode multi-entity names in the title with semicolons.
   // This is stronger evidence than slug heuristics for collaboration pages.
-  const titleStart = html.toLowerCase().indexOf("<title>");
-  const titleEnd = titleStart >= 0 ? html.toLowerCase().indexOf("</title>", titleStart + 7) : -1;
-  const title = titleStart >= 0 && titleEnd > titleStart ? html.slice(titleStart + 7, titleEnd) : "";
+  const { title } = extractPageFields(html);
   if (title.includes(";")) reasons.push("semicolon-in-title");
 
   return [...new Set(reasons)];
@@ -99,6 +116,7 @@ function derivedEvidence(slug, html) {
 
 function classify(page) {
   const html = fs.readFileSync(page.file, "utf8");
+  const fields = extractPageFields(html);
   const legacy = legacyMarkers.filter((marker) => html.includes(marker));
   const generic = genericMarkers.filter((marker) => html.includes(marker));
   const derived = derivedEvidence(page.slug, html);
@@ -113,6 +131,8 @@ function classify(page) {
       legacy,
       generic,
       derived,
+      title: fields.title,
+      h1: fields.h1,
       hasNoindex,
       hasCanonical
     };
@@ -126,6 +146,8 @@ function classify(page) {
       legacy,
       generic,
       derived,
+      title: fields.title,
+      h1: fields.h1,
       hasNoindex,
       hasCanonical
     };
@@ -139,6 +161,8 @@ function classify(page) {
       legacy,
       generic,
       derived,
+      title: fields.title,
+      h1: fields.h1,
       hasNoindex,
       hasCanonical
     };
@@ -153,6 +177,8 @@ function classify(page) {
       legacy,
       generic,
       derived,
+      title: fields.title,
+      h1: fields.h1,
       hasNoindex,
       hasCanonical
     };
@@ -166,6 +192,8 @@ function classify(page) {
       legacy,
       generic,
       derived,
+      title: fields.title,
+      h1: fields.h1,
       hasNoindex,
       hasCanonical
     };
@@ -179,6 +207,8 @@ function classify(page) {
       legacy,
       generic,
       derived,
+      title: fields.title,
+      h1: fields.h1,
       hasNoindex,
       hasCanonical
     };
@@ -275,6 +305,8 @@ for (const className of [
     .slice(0, 30)
     .map((item) => ({
       slug: item.slug,
+      title: item.title,
+      h1: item.h1,
       reasons: item.reasons,
       legacy: item.legacy,
       generic: item.generic,
@@ -283,6 +315,36 @@ for (const className of [
       hasCanonical: item.hasCanonical
     }));
 }
+
+const candidateDetails = {
+  generic: classified
+    .filter((item) => item.class === "generic-candidate")
+    .map((item) => ({
+      slug: item.slug,
+      title: item.title,
+      h1: item.h1,
+      subclass: genericSubclass(item),
+      reasons: item.reasons,
+      legacy: item.legacy,
+      derived: item.derived,
+      hasNoindex: item.hasNoindex,
+      hasCanonical: item.hasCanonical
+    })),
+  legacyDerivedWithoutDirectoryPrefix: classified
+    .filter((item) =>
+      item.class === "legacy-derived-candidate" &&
+      !item.derived.some((reason) => reason.startsWith("prefix-of-directory-record:"))
+    )
+    .map((item) => ({
+      slug: item.slug,
+      title: item.title,
+      h1: item.h1,
+      reasons: item.reasons,
+      derived: item.derived,
+      hasNoindex: item.hasNoindex,
+      hasCanonical: item.hasCanonical
+    }))
+};
 
 const summary = {
   directoryRecords: records.length,
@@ -297,6 +359,7 @@ const summary = {
   derivedReasonCounts,
   derivedShapeCounts,
   examples,
+  candidateDetails,
   generatedAt: new Date().toISOString()
 };
 console.log(JSON.stringify(summary, null, 2));
