@@ -42,3 +42,20 @@ They use the editorial profile format rather than the legacy V5 template.
 ## Safety rule
 
 This audit is classification only. It does not add `noindex`, redirects, canonical changes, sitemap changes, or deletions.
+
+
+## Follow-up content check
+
+The first structural pass left 952 pages unresolved because their slugs do not reliably reveal the relationship between the entities.
+
+A content-level sample was checked across that unresolved set. The sampled pages consistently used the legacy V5 format and encoded multiple names in the page title with semicolons, for example:
+
+- `3LAU;Bright Lights | Perfil Vocal V5 | Harmiq`
+- `Bethel Music;Steffany Gretzinger | Perfil Vocal V5 | Harmiq`
+- `Frédéric Chopin;Daniel Barenboim | Perfil Vocal V5 | Harmiq`
+- `Pritam;Jubin Nautiyal | Perfil Vocal V5 | Harmiq`
+- `TOKYO ROSE;ALEX | Perfil Vocal V5 | Harmiq`
+
+The classifier now records these content signals as evidence (`semicolon-in-title` and `legacy-v5-template`). This improves classification without turning the evidence into an automatic SEO action.
+
+A larger content-level inventory is still required before deciding the final treatment of the unresolved set.
