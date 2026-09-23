@@ -1,0 +1,79 @@
+name: Artist corpus fingerprint audit
+
+on:
+  push:
+    branches:
+      - adsense-editorial-hardening
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fingerprint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+
+      - name: Run artist fingerprint
+        run: node scripts/fingerprint-artist-pages.mjs > artist-fingerprint.json
+
+      - name: Run V5 content audit
+        run: node scripts/audit-v5-content.mjs > artist-v5-content.json
+
+      - name: Run artist classification
+        run: |
+          node scripts/classify-artist-pages.mjs > artist-classification.json
+
+      - name: Publish compact audit summary
+        run: |
+          cat artist-fingerprint.json
+          cat artist-v5-content.json
+          cat artist-classification.json
+          {
+            echo "## Artist corpus fingerprint audit"
+            echo
+            echo '~~~json'
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("artist-fingerprint.json", "utf8"));
+              console.log(JSON.stringify({
+                physicalPages: r.physicalPages,
+                directoryRecords: r.directoryRecords,
+                uniqueNormalizedFingerprints: r.uniqueNormalizedFingerprints,
+                repeatedFingerprintPages: r.repeatedFingerprintPages,
+                templateCounts: r.templateCounts
+              }, null, 2));
+            '
+            echo '~~~'
+            echo
+            echo "## V5 content-family audit"
+            echo
+            echo '~~~json'
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("artist-v5-content.json", "utf8"));
+              console.log(JSON.stringify({
+                physicalPages: r.physicalPages,
+                uniqueTemplateFingerprints: r.uniqueTemplateFingerprints,
+                repeatedTemplatePages: r.repeatedTemplatePages,
+                repeatedTemplateFamilies: r.repeatedTemplateFamilies,
+                markerCounts: r.markerCounts,
+                topRepeatedTemplateFamilies: r.topRepeatedTemplateFamilies.slice(0, 10)
+              }, null, 2));
+            '
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload full audit reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: artist-corpus-audit-report
+          path: |
+            artist-fingerprint.json
+            artist-v5-content.json
+            artist-classification.json
