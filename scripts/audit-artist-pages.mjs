@@ -62,14 +62,27 @@ const looksDerived = (slug) => {
 const legacy = [];
 const missingFromDirectory = [];
 const derived = [];
+const legacyIndividual = [];
+const legacyDerived = [];
+const noindex = [];
+const missingCanonical = [];
 
 for (const page of pages) {
   const html = fs.readFileSync(page.file, "utf8");
   const isLegacy = legacyMarkers.some((marker) => html.includes(marker));
   if (isLegacy) legacy.push(page.slug);
+  const hasNoindex = /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
+  const hasCanonical = /<link[^>]+rel=["']canonical["']/i.test(html);
+  if (hasNoindex) noindex.push(page.slug);
+  if (!hasCanonical) missingCanonical.push(page.slug);
   if (!recordMap.has(page.slug)) {
     missingFromDirectory.push(page.slug);
-    if (looksDerived(page.slug)) derived.push(page.slug);
+    if (looksDerived(page.slug)) {
+      derived.push(page.slug);
+      if (isLegacy) legacyDerived.push(page.slug);
+    }
+  } else if (isLegacy) {
+    legacyIndividual.push(page.slug);
   }
 }
 
@@ -79,7 +92,11 @@ const summary = {
   pagesWithoutDirectoryRecord: missingFromDirectory.length,
   pagesMatchingDirectoryRecord: pages.length - missingFromDirectory.length,
   legacyV5Pages: legacy.length,
+  legacyIndividualPages: legacyIndividual.length,
+  legacyDerivedPages: legacyDerived.length,
   derivedLookingPages: derived.length,
+  pagesWithNoindex: noindex.length,
+  pagesMissingCanonical: missingCanonical.length,
   editorialProfiles: Object.keys(editorial.profiles || {}).length,
   generatedAt: new Date().toISOString()
 };
