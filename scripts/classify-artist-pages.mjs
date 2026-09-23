@@ -71,14 +71,20 @@ const derivedSeparators = [
 const knownSlugs = [...recordMap.keys()].sort((a, b) => b.length - a.length);
 
 function extractPageFields(html) {
-  const titleMatch = html.match(/<title>([\\s\\S]*?)<\\/title>/i);
-  const h1Match = html.match(/<h1[^>]*>([\\s\\S]*?)<\\/h1>/i);
+  const lower = html.toLowerCase();
+  const extractTag = (tag) => {
+    const open = lower.indexOf("<" + tag);
+    const openEnd = open >= 0 ? lower.indexOf(">", open) : -1;
+    const close = openEnd >= 0 ? lower.indexOf("</" + tag + ">", openEnd + 1) : -1;
+    return openEnd >= 0 && close > openEnd ? html.slice(openEnd + 1, close) : "";
+  };
   const clean = (value) => value
-    ? value.replace(/<[^>]+>/g, "").replace(/\\s+/g, " ").trim()
-    : "";
+    .replace(/<[^>]+>/g, "")
+    .split(/\\s+/).join(" ")
+    .trim();
   return {
-    title: clean(titleMatch?.[1] || ""),
-    h1: clean(h1Match?.[1] || "")
+    title: clean(extractTag("title")),
+    h1: clean(extractTag("h1"))
   };
 }
 
