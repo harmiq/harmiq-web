@@ -80,7 +80,7 @@ function extractPageFields(html) {
   };
   const clean = (value) => value
     .replace(/<[^>]+>/g, "")
-    .split(/\\s+/).join(" ")
+    .replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\t", " ")
     .trim();
   return {
     title: clean(extractTag("title")),
@@ -89,7 +89,8 @@ function extractPageFields(html) {
 }
 
 function genericSubclass(item) {
-  if (/^artista-especial-\\d+$/.test(item.slug)) return "explicit-placeholder";
+  const placeholderSuffix = item.slug.slice("artista-especial-".length);
+  if (item.slug.startsWith("artista-especial-") && placeholderSuffix !== "" && Number.isInteger(Number(placeholderSuffix))) return "explicit-placeholder";
   if (item.generic.includes("Análisis vocal avanzado en desarrollo.")) return "unfinished-content";
   if (item.derived.includes("semicolon-in-title")) return "generic-multientity";
   return "generic-other";
