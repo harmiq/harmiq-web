@@ -221,6 +221,30 @@ const reasonCounts = classified.reduce((acc, item) => {
   return acc;
 }, {});
 
+const derivedReasonCounts = classified
+  .filter((item) => item.class === "legacy-derived-candidate")
+  .reduce((acc, item) => {
+    for (const reason of item.derived) {
+      acc[reason] = (acc[reason] || 0) + 1;
+    }
+    return acc;
+  }, {});
+
+const derivedShapeCounts = classified
+  .filter((item) => item.class === "legacy-derived-candidate")
+  .reduce((acc, item) => {
+    const multiEntity = item.derived.includes("semicolon-in-title");
+    const directoryPrefix = item.derived.some((x) => x.startsWith("prefix-of-directory-record:"));
+    const separator = item.derived.some((x) => x.startsWith("separator:"));
+    const shape = [
+      multiEntity ? "semicolon-title" : "no-semicolon-title",
+      directoryPrefix ? "directory-prefix" : "no-directory-prefix",
+      separator ? "collab-separator" : "no-collab-separator"
+    ].join("+");
+    acc[shape] = (acc[shape] || 0) + 1;
+    return acc;
+  }, {});
+
 const genericSubclasses = classified
   .filter((item) => item.class === "generic-candidate")
   .reduce((acc, item) => {
@@ -270,6 +294,8 @@ const summary = {
   editorialProfiles: Object.keys(editorialMap).length,
   reasonCounts,
   genericSubclasses,
+  derivedReasonCounts,
+  derivedShapeCounts,
   examples,
   generatedAt: new Date().toISOString()
 };
