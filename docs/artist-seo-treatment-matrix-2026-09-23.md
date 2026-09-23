@@ -31,3 +31,30 @@ This matrix is a decision framework only. It does not modify pages.
 ## Next operation
 
 Build a content fingerprint report for the non-directory corpus using title, description, template markers, canonical, robots state and repeated boilerplate. The report should quantify exact template families before any SEO directive is changed.
+
+
+## Quantified legacy-derived subgroup
+
+The full classifier found **2,525** `legacy-derived-candidate` pages.
+
+Their structural evidence breaks down as follows:
+
+| Shape | Pages | Interpretation |
+|---|---:|---|
+| semicolon title + directory prefix | 1,690 | multi-entity legacy page with a known directory artist prefix |
+| semicolon title + no directory prefix | 829 | multi-entity legacy page without an obvious directory anchor |
+| semicolon title + directory prefix + collaboration separator | 3 | explicit collaboration-style slug plus known directory prefix |
+| semicolon title + no directory prefix + collaboration separator | 2 | explicit collaboration-style slug without directory anchor |
+| no semicolon title + directory prefix | 1 | anomalous legacy-derived page requiring individual review |
+
+Additional fact: **2,524/2,525** of this group contain a semicolon in the HTML title.
+
+### Treatment implication
+
+The 1,690 pages with a directory prefix are **not automatically redirect targets**. A prefix only establishes that one known directory record appears to anchor the slug; it does not establish that the collaboration page's search intent, content, or canonical destination is identical to that artist.
+
+The 829 pages without a directory prefix need a different review path because there is no obvious single destination.
+
+The 5 pages with explicit collaboration separators and the single no-semicolon anomaly should be individually checked before any technical action.
+
+No redirects, noindex directives, canonical rewrites or deletions are made by this audit.
