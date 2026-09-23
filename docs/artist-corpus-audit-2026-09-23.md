@@ -90,3 +90,25 @@ SEO state observed during the same run:
 - pages missing canonical: **0**
 
 These observations reinforce the safety rule: the next step is to inspect the 2,525 legacy-derived candidates and 239 generic candidates as separate editorial groups, not to mass-apply `noindex` or redirects.
+
+
+## Generic-candidate breakdown
+
+The 239 generic candidates are consistently marked by the old generated-content signals:
+
+- `Top Hit 1`: **239**
+- `Top Hit 2`: **239**
+- `Análisis vocal avanzado en desarrollo.`: **92**
+- `Artista Especial`: **20**
+- `artista-especial-` slug marker: **20**
+
+These markers can coexist with legacy V5 and with multi-entity title evidence. Therefore “generic” is a template/content-quality class, not proof that the URL is invalid or that it should be redirected.
+
+Representative examples include multi-entity pages such as `a-n-i-m-a-l-chuck-jonhson`, `a-r-rahman-arijit-singh-shashaa-tirupati`, `aaron-smith-krono-luvli`, `above-beyond-richard-bedford-nox-vahn`, and explicit placeholder-style slugs such as `artista-especial-220` onward.
+
+The correct next review is therefore to separate:
+1. genuine artist/collaboration pages whose content is merely using the old V5 generator;
+2. generated pages with insufficient editorial differentiation;
+3. explicit placeholder records such as the `artista-especial-*` family.
+
+No SEO directive is changed by this classification.
