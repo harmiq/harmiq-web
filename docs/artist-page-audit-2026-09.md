@@ -105,3 +105,17 @@ El dataset editorial no debe absorber estas 2.764 URLs por defecto.
 Esta auditoría es documental. No modifica todavía canonical, robots, noindex, redirects ni las páginas heredadas.
 
 La siguiente intervención debería ser una auditoría específica de esas 2.764 URLs para determinar qué proporción corresponde a colaboraciones/repertorio y qué proporción son páginas que simplemente deberían retirarse o quedar fuera del índice.
+
+## Reproducible local audit
+
+A read-only audit script is included at `scripts/audit-artist-pages.mjs`.
+
+Run from the repository root:
+
+```bash
+node scripts/audit-artist-pages.mjs
+```
+
+The script compares the physical `artistas/*/index.html` corpus with `artistas/index.json`, detects legacy V5 markers, and reports derived-looking URLs. It deliberately does **not** modify canonicals, robots directives, redirects, sitemap entries or files.
+
+This is intended to make the classification reproducible before any bulk SEO action. A page being detected as legacy or derived-looking is evidence for review, not an automatic instruction to deindex it.
