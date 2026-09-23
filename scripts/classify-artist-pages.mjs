@@ -147,6 +147,33 @@ function classify(page) {
     };
   }
 
+  // Content evidence outranks slug heuristics for legacy generated pages.
+  if (legacy.length && derived.length) {
+    return {
+      class: "legacy-derived-candidate",
+      confidence: "high",
+      reasons: [...legacy, ...derived],
+      legacy,
+      generic,
+      derived,
+      hasNoindex,
+      hasCanonical
+    };
+  }
+
+  if (legacy.length) {
+    return {
+      class: "legacy-candidate",
+      confidence: "high",
+      reasons: legacy,
+      legacy,
+      generic,
+      derived,
+      hasNoindex,
+      hasCanonical
+    };
+  }
+
   if (derived.length) {
     return {
       class: "derived-candidate",
