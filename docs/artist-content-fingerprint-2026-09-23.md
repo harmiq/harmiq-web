@@ -13,22 +13,22 @@ The CI fingerprint runs over the complete physical corpus.
 - Physical artist pages: **11,931**
 - Exact records in `artistas/index.json`: **9,187**
 - Physical pages without an exact directory record: **2,744**
-- Unique normalized HTML fingerprints: **11,931 maximum / one per physical page**
+- Unique normalized HTML fingerprints: **11,930**
 - Pages belonging to a repeated normalized fingerprint family: **2**
 - Repeated family detected: **2 pages**
   - `pablo-albor-n`
   - `pablo-alboran`
-- Template classification:
-  - `legacy-v5`: **11,948** reported by the current classifier/fingerprint artifact context
+- Template classification expected from the current corpus:
+  - `legacy-v5`: **11,928**
   - `editorial`: **3**
 
-> Note: the previous version of this document incorrectly stated **11,950 unique fingerprints**. That number was arithmetically impossible because there are only 11,931 physical pages. It has been corrected here rather than treating the erroneous figure as evidence.
+> Note: the previous version of this document contained impossible fingerprint/template totals (for example, more unique fingerprints than physical pages). Those figures have been corrected rather than treated as evidence.
 
 ## Important interpretation
 
 The result is stronger than a generic “many duplicate pages” finding.
 
-After conservative normalization, the only confirmed repeated normalized fingerprint family is the two-page `pablo-albor-n` / `pablo-alboran` family.
+After conservative normalization, **11,930 unique normalized fingerprints** remain across **11,931 pages**: one two-page repeated family and 11,929 singleton fingerprints.
 
 Therefore:
 
