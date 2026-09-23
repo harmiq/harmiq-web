@@ -94,11 +94,6 @@ function derivedEvidence(slug, html) {
   const title = titleStart >= 0 && titleEnd > titleStart ? html.slice(titleStart + 7, titleEnd) : "";
   if (title.includes(";")) reasons.push("semicolon-in-title");
 
-  // The old generator explicitly labels these pages as V5/Bio-Hacking.
-  if (/Perfil Vocal V5|Bio-Hacking Vocal/i.test(html)) {
-    reasons.push("legacy-v5-template");
-  }
-
   return [...new Set(reasons)];
 }
 
