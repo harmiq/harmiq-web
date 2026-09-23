@@ -70,7 +70,7 @@ const derivedSeparators = [
 
 const knownSlugs = [...recordMap.keys()].sort((a, b) => b.length - a.length);
 
-function derivedEvidence(slug) {
+function derivedEvidence(slug, html) {
   const reasons = [];
 
   for (const known of knownSlugs) {
@@ -87,6 +87,16 @@ function derivedEvidence(slug) {
   if (slug.includes(";")) reasons.push("semicolon-in-slug");
   if (slug.includes("&")) reasons.push("ampersand-in-slug");
 
+  // Legacy V5 pages encode multi-entity names in the title with semicolons.
+  // This is stronger evidence than slug heuristics for collaboration pages.
+  const title = (html.match(/<title>([^<]*)<\\/title>/i) || [null, ""])[1];
+  if (title.includes(";")) reasons.push("semicolon-in-title");
+
+  // The old generator explicitly labels these pages as V5/Bio-Hacking.
+  if (/Perfil Vocal V5|Bio-Hacking Vocal/i.test(html)) {
+    reasons.push("legacy-v5-template");
+  }
+
   return [...new Set(reasons)];
 }
 
@@ -94,7 +104,7 @@ function classify(page) {
   const html = fs.readFileSync(page.file, "utf8");
   const legacy = legacyMarkers.filter((marker) => html.includes(marker));
   const generic = genericMarkers.filter((marker) => html.includes(marker));
-  const derived = derivedEvidence(page.slug);
+  const derived = derivedEvidence(page.slug, html);
   const hasNoindex = /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
   const hasCanonical = /<link[^>]+rel=["']canonical["']/i.test(html);
 
