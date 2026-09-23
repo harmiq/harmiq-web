@@ -7,13 +7,13 @@ La auditoría del árbol de la rama `adsense-editorial-hardening` encontró una 
 | Fuente | Cantidad |
 |---|---:|
 | Registros de `artistas/index.json` | 9.187 |
-| Directorios con `index.html` bajo `artistas/` | 11.951 |
-| Páginas físicas sin registro correspondiente en `index.json` | 2.764 |
+| Directorios con `index.html` bajo `artistas/` | 11.931 |
+| Páginas físicas sin registro correspondiente en `index.json` | 2.744 |
 | Registros del directorio sin página física | 0 |
 
 Por tanto, el número 9.187 debe entenderse como **registros del directorio**, no como número total de URLs existentes bajo `/artistas/`.
 
-## Qué son las 2.764 páginas adicionales
+## Qué son las 2.744 páginas adicionales
 
 Una muestra de estas URLs muestra nombres compuestos o colaboraciones, por ejemplo:
 
@@ -78,7 +78,7 @@ No deben recibir automáticamente el tratamiento SEO de un perfil individual.
 
 ## Implicación SEO
 
-Antes de ampliar el sitemap con las 9.187 URLs individuales hay que decidir qué hacer con las 2.764 URLs adicionales.
+Antes de ampliar el sitemap con las 9.187 URLs individuales hay que decidir qué hacer con las 2.744 URLs adicionales.
 
 Opciones a evaluar:
 
@@ -96,15 +96,15 @@ No ampliar masivamente la indexación hasta haber separado:
 
 - **9.187 registros de artistas**
 - **perfiles editoriales 1/2**
-- **2.764 URLs heredadas o derivadas**
+- **2.744 URLs heredadas o derivadas**
 
-El dataset editorial no debe absorber estas 2.764 URLs por defecto.
+El dataset editorial no debe absorber estas 2.744 URLs por defecto.
 
 ## Estado
 
 Esta auditoría es documental. No modifica todavía canonical, robots, noindex, redirects ni las páginas heredadas.
 
-La siguiente intervención debería ser una auditoría específica de esas 2.764 URLs para determinar qué proporción corresponde a colaboraciones/repertorio y qué proporción son páginas que simplemente deberían retirarse o quedar fuera del índice.
+La siguiente intervención debería ser una auditoría específica de esas 2.744 URLs para determinar qué proporción corresponde a colaboraciones/repertorio y qué proporción son páginas que simplemente deberían retirarse o quedar fuera del índice.
 
 ## Reproducible local audit
 
@@ -122,7 +122,7 @@ This is intended to make the classification reproducible before any bulk SEO act
 
 ## Auditoría adicional del corpus V5 (23 de septiembre de 2026)
 
-El árbol de la rama contiene **11.951** páginas físicas `artistas/*/index.html`.
+El árbol de la rama contiene **11.931** páginas físicas `artistas/*/index.html`.
 
 Un análisis estructural por tamaño de archivo muestra:
 
@@ -141,11 +141,16 @@ Se revisaron ejemplos de varias familias:
 
 ### Implicación
 
-No es seguro tratar las 11.951 páginas como un único conjunto. El corpus debe dividirse, como mínimo, en:
+No es seguro tratar las 11.931 páginas como un único conjunto. El corpus debe dividirse, como mínimo, en:
 
 1. registros individuales del directorio;
 2. entidades combinadas/derivadas;
 3. páginas genéricas o placeholders;
 4. perfiles editoriales revisados.
 
-La siguiente intervención debe ser **clasificación + estrategia de indexación**, no una reescritura automática de las 11.951 páginas.
+La siguiente intervención debe ser **clasificación + estrategia de indexación**, no una reescritura automática de las 11.931 páginas.
+
+
+## Controlled cleanup — 2026-09-23
+
+The 20 confirmed generated placeholders `artista-especial-220` through `artista-especial-239` were removed from the branch and their URL variants (with and without trailing slash) return HTTP 410 via `_redirects`. No redirect target was invented for these synthetic pages.
