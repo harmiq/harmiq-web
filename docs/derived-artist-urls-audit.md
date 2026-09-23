@@ -1,12 +1,12 @@
-# Audit of 2,764 derived artist URLs
+# Audit of 2,744 derived artist URLs
 
 ## Corpus
 
 On branch `adsense-editorial-hardening`:
 
-- 11,951 physical `artistas/*/index.html` pages.
+- 11,931 physical `artistas/*/index.html` pages.
 - 9,187 directory records in `artistas/index.json`.
-- 2,764 physical pages have no matching directory record.
+- 2,744 physical pages have no matching directory record.
 
 ## Historical origin
 
@@ -50,8 +50,8 @@ A slug was considered **derived-from-an-existing-artist** when it begins with an
 
 Result:
 
-- **1,810 / 2,764** (65.5%) have an identifiable existing artist prefix.
-- **954 / 2,764** (34.5%) do not have such a prefix.
+- **1,810 / 2,744** (65.5%) have an identifiable existing artist prefix.
+- **954 / 2,744** (34.5%) do not have such a prefix.
 
 This is a discovery heuristic only. It does not establish what the URL represents.
 
@@ -89,8 +89,13 @@ The next useful transformation is not to turn them into individual artist profil
 
 ## Important conclusion
 
-The 2,764 URLs should remain a separate **derived/legacy URL corpus** while their exact source mapping is reconstructed.
+The 2,744 URLs should remain a separate **derived/legacy URL corpus** while their exact source mapping is reconstructed.
 
 They should not be added to the sitemap as a bulk set, and they should not receive mass canonical/noindex/redirect changes based only on slug shape.
 
 No canonical, redirect, robots or noindex changes are made by this audit.
+
+
+## Post-cleanup corpus
+
+Twenty confirmed synthetic placeholder URLs were removed from the broader non-directory corpus. The remaining derived corpus is therefore 2,744 pages and continues to require identity/relationship analysis rather than bulk redirects.
