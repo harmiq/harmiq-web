@@ -1890,7 +1890,7 @@ async function analyzeAudio() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 60000); // 60s timeout
 
-    let resp;
+    let resp = null;
     try {
       resp = await fetch(`${HF_API_URL}/analyze`, {
         method: 'POST',
@@ -1898,12 +1898,16 @@ async function analyzeAudio() {
         mode: 'cors',
         signal: controller.signal
       });
+    } catch (networkError) {
+      // La caída de red o el timeout también deben activar el análisis local.
+      // No registrar el audio ni datos sensibles en telemetría.
+      console.warn("Backend /analyze no disponible; se intentará análisis local.", networkError?.name || "network-error");
     } finally {
       clearTimeout(timeout);
     }
 
-    if (!resp.ok) {
-      // Backend con error HTTP → fallback local
+    if (!resp || !resp.ok) {
+      // Backend con error HTTP, timeout o fallo de red → fallback local
       showStatus("⚡ Backend no disponible. Analizando localmente...");
       const feat = await extractFeatures(audioBlob);
       feat._local = true;
