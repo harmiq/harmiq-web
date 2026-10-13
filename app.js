@@ -1825,9 +1825,10 @@ async function analyzeAudio() {
   try {
     updateP(5, "Despertando motor neuronal...");
     
-    // 🔔 WAKE-UP LOOP: Hasta 20 segundos para despertar el Space
+    // 🔔 WAKE-UP LOOP: presupuesto aproximado de 20 segundos.
+    // Evita dejar al usuario esperando casi un minuto antes del análisis local.
     let isAwake = false;
-    const maxRetries = 10;
+    const maxRetries = 6;
     for (let i=0; i<maxRetries; i++) {
         const retryNum = i + 1;
         const progress = Math.min(85, 5 + (i * 8));
@@ -1835,7 +1836,7 @@ async function analyzeAudio() {
         
         try {
             const controller = new AbortController();
-            const tId = setTimeout(() => controller.abort(), 3500);
+            const tId = setTimeout(() => controller.abort(), 2500);
             const h = await fetch(`${HF_API_URL}/health`, { 
                 method: 'GET', 
                 mode: 'cors',
@@ -1846,7 +1847,7 @@ async function analyzeAudio() {
         } catch(e) { 
             console.log("Reintento conexión...", retryNum); 
         }
-        await new Promise(r => setTimeout(r, 1800));
+        if (i < maxRetries - 1) await new Promise(r => setTimeout(r, 1000));
     }
 
     if (!isAwake) {
