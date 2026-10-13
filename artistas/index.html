@@ -218,3 +218,9 @@
     function toggleAnecdote(btn){
         var el = btn.nextElementSibling;
         var open = el.style.display !== 'none';
+        el.style.display = open ? 'none' : 'block';
+        btn.textContent = open ? 'Ver an\u00e9cdota \u25bc' : 'Ocultar \u25b2';
+    }
+    </script>
+</body>
+</html>
