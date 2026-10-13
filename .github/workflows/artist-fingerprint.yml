@@ -19,6 +19,9 @@ jobs:
       - name: Checkout audit branch
         uses: actions/checkout@v4
 
+      - name: Check analyzer regression guards
+        run: node scripts/check-analyzer-regressions.mjs
+
       - name: Run artist fingerprint
         run: node scripts/fingerprint-artist-pages.mjs > artist-fingerprint.json
 
