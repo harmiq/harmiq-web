@@ -154,3 +154,28 @@ La siguiente intervención debe ser **clasificación + estrategia de indexación
 ## Controlled cleanup — 2026-09-23
 
 The 20 confirmed generated placeholders `artista-especial-220` through `artista-especial-239` were removed from the branch and their URL variants (with and without trailing slash) return HTTP 410 via `_redirects`. No redirect target was invented for these synthetic pages.
+
+
+## Follow-up corpus classification — 2026-10-14
+
+A read-only corpus audit was run after the exact-template directory remediation (GitHub Actions run [38559700015](https://github.com/harmiq/harmiq-web/actions/runs/38559700015)). The full fingerprint, content, classification, and claim reports are available as the [artist corpus audit artifact](https://github.com/harmiq/harmiq-web/actions/runs/38559700015/artifacts/11891912510).
+
+The current physical corpus remains 11,931 pages: 9,187 directory records and 2,744 pages with no matching directory record. The classifier separates the latter into:
+
+| Classification | Count | What the audit establishes |
+|---|---:|---|
+| Legacy-derived candidate | 2,525 | Legacy V5 markers plus a derived-looking URL/title signal |
+| Generic candidate | 219 | Generic/unfinished V5 content signals |
+| **Total outside the directory** | **2,744** | No match in `artistas/index.json` |
+
+These are audit classes, not editorial or SEO decisions. Across the full corpus, the audit found zero pages with a robots noindex directive and zero pages missing a canonical.
+
+A manual structural spot-check of `3lau-bright-lights`, `22gz-kodak-black`, and `above-beyond-richard-bedford-nox-vahn` confirmed compound H1/title names, the legacy V5 profile and bio-hacking modules, and page-specific canonicals. Each sampled page has no robots noindex directive. The first two contain the generic equipment/nutrition structure; the third also contains generic “Top Hit” labels. This confirms that the sampled pages represent compound or derived entities, but does not establish the right canonical target or whether each entity merits a standalone page.
+
+### Indexing decision
+
+The artist URLs are still excluded from `sitemap.xml`; only the directory landing page and the three explicit editorial profiles are listed. Keep that separation while these 2,744 URLs remain unreviewed. No mass noindex, redirect, or deletion is justified by the current classifier alone.
+
+### Next review
+
+The next useful unit is a human review of candidate groups by concrete URL/title and source provenance. Confirm whether an entity is a collaboration, a catalog/repertoire record, or a duplicate of an individual artist before selecting a canonical destination or changing its indexability. The classifier and title punctuation are evidence for that review, not an automatic action.
