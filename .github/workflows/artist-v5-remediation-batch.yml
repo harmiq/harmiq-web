@@ -1,4 +1,4 @@
-name: Artist V5 directory remediation batch
+name: Artist V5 directory remediation preview
 
 on:
   push:
@@ -17,51 +17,10 @@ on:
       - .github/workflows/artist-v5-remediation-batch.yml
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  apply-batch:
-    if: github.event_name == 'push' && github.event.head_commit.message == 'Run bounded exact-template batch 10'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: adsense-editorial-hardening
-
-      - name: Validate and preview exact candidates
-        run: |
-          node --check scripts/remediate-v5-directory-pages.mjs
-          node scripts/remediate-v5-directory-pages.mjs --dry-run > preflight.json
-          node -e '
-            const fs = require("fs");
-            const r = JSON.parse(fs.readFileSync("preflight.json", "utf8"));
-            if (r.eligibleExactTemplatePages < 100) throw new Error("Expected at least 100 exact candidates; found " + r.eligibleExactTemplatePages);
-            console.log("Preflight passed: " + r.eligibleExactTemplatePages + " exact candidates.");
-          '
-
-      - name: Apply bounded batch of 100
-        run: |
-          node scripts/remediate-v5-directory-pages.mjs --apply --limit=100 > applied.json
-          node -e '
-            const fs = require("fs");
-            const r = JSON.parse(fs.readFileSync("applied.json", "utf8"));
-            if (r.selectedForThisBatch !== 100 || r.changed.length !== 100) throw new Error("Expected exactly 100 changed pages.");
-            fs.writeFileSync("changed-slugs.txt", r.changed.join("\n") + "\n");
-            console.log(JSON.stringify({ changed: r.changed.length, slugs: r.changed }, null, 2));
-          '
-
-      - name: Commit and push bounded content changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add artistas
-          git commit -F - <<'EOF'
-          Remediate 100 exact generic directory pages
-          EOF
-          git push origin HEAD:adsense-editorial-hardening
-
   preview-only:
-    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.event.head_commit.message != 'Run bounded exact-template batch 10')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
