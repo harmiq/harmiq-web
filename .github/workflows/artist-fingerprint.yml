@@ -1,0 +1,138 @@
+name: Artist corpus fingerprint audit
+
+on:
+  push:
+    branches:
+      - adsense-editorial-hardening
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fingerprint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+
+      - name: Check analyzer regression guards
+        run: node scripts/check-analyzer-regressions.mjs
+
+      - name: Check residual-template auditor syntax
+        run: node --check scripts/audit-residual-directory-templates.mjs
+
+      - name: Group residual directory templates
+        run: node scripts/audit-residual-directory-templates.mjs > residual-directory-templates.json
+
+      - name: Print residual directory family summary
+        run: |
+          node -e '
+            const fs = require("fs");
+            const r = JSON.parse(fs.readFileSync("residual-directory-templates.json", "utf8"));
+            console.log(JSON.stringify({
+              directoryPagesScanned: r.directoryPagesScanned,
+              legacyDirectoryPages: r.legacyDirectoryPages,
+              structuralFamilyCount: r.structuralFamilyCount,
+              largestFamilies: r.groups.slice(0, 12)
+            }, null, 2));
+          '
+
+      - name: Run artist fingerprint
+        run: node scripts/fingerprint-artist-pages.mjs > artist-fingerprint.json
+
+      - name: Run V5 content audit
+        run: node scripts/audit-v5-content.mjs > artist-v5-content.json
+
+      - name: Run artist classification
+        run: |
+          node scripts/classify-artist-pages.mjs > artist-classification.json
+
+      - name: Run artist claim inventory
+        run: node scripts/audit-artist-claims.mjs > artist-claims.json
+
+      - name: Publish compact audit summary
+        run: |
+          cat artist-fingerprint.json
+          cat artist-v5-content.json
+          cat artist-classification.json
+          cat artist-claims.json
+          {
+            echo "## Artist corpus fingerprint audit"
+            echo
+            echo '~~~json'
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("artist-fingerprint.json", "utf8"));
+              console.log(JSON.stringify({
+                physicalPages: r.physicalPages,
+                directoryRecords: r.directoryRecords,
+                uniqueNormalizedFingerprints: r.uniqueNormalizedFingerprints,
+                repeatedFingerprintPages: r.repeatedFingerprintPages,
+                templateCounts: r.templateCounts
+              }, null, 2));
+            '
+            echo '~~~'
+            echo
+            echo "## V5 content-family audit"
+            echo
+            echo '~~~json'
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("artist-v5-content.json", "utf8"));
+              console.log(JSON.stringify({
+                physicalPages: r.physicalPages,
+                uniqueTemplateFingerprints: r.uniqueTemplateFingerprints,
+                repeatedTemplatePages: r.repeatedTemplatePages,
+                repeatedTemplateFamilies: r.repeatedTemplateFamilies,
+                markerCounts: r.markerCounts,
+                topRepeatedTemplateFamilies: r.topRepeatedTemplateFamilies.slice(0, 10)
+              }, null, 2));
+            '
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo
+            echo "## Artist claim inventory (heuristic candidates)"
+            echo
+            echo '~~~json'
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("artist-claims.json", "utf8"));
+              console.log(JSON.stringify({
+                pagesRead: r.pagesRead,
+                findings: Object.fromEntries(Object.entries(r.findings).map(([k, v]) => [k, v.count]))
+              }, null, 2));
+            '
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo
+            echo "## Residual directory template families (structure only)"
+            echo
+            echo '~~~json'
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("residual-directory-templates.json", "utf8"));
+              console.log(JSON.stringify({
+                directoryPagesScanned: r.directoryPagesScanned,
+                legacyDirectoryPages: r.legacyDirectoryPages,
+                structuralFamilyCount: r.structuralFamilyCount,
+                largestFamilies: r.groups.slice(0, 12)
+              }, null, 2));
+            '
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload full audit reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: artist-corpus-audit-report
+          path: |
+            artist-fingerprint.json
+            artist-v5-content.json
+            artist-classification.json
+            artist-claims.json

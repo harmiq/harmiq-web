@@ -1047,12 +1047,10 @@ function stopSpectrum() {
 async function toggleRecording() {
   const btn  = document.getElementById("record-btn");
   const txt  = document.getElementById("btn-record-text");
-  let gender = document.getElementById("user-gender")?.value;
-  if (!gender) {
-    gender = "auto";
-    const sel = document.getElementById("user-gender");
-    if (sel) sel.value = "auto";
-    _setGender("auto", document.getElementById("_gbtn_auto"));
+  const gender = document.getElementById("user-gender")?.value;
+  if (!gender && !isRec) {
+    showStatus("Selecciona Hombre o Mujer antes de grabar.", "err");
+    return;
   }
 
   if (!isRec) {
@@ -1156,7 +1154,11 @@ async function extractFeatures(blob) {
       }
     }
   }
-  if (pitches.length<5) pitches.push(150);
+  // No inventar una F0 cuando el audio no contiene suficientes tramas sonoras fiables.
+  // Un valor sintético de 150 Hz sesga la clasificación hacia barítono/mezzo.
+  if (pitches.length < 5) {
+    throw new Error("No se ha detectado suficiente voz clara. Graba entre 5 y 10 segundos, evita el ruido y prueba de nuevo.");
+  }
   pitches.sort((a,b)=>a-b);
   const n=pitches.length;
   const pm=pitches.reduce((a,v)=>a+v,0)/n;
@@ -1792,10 +1794,8 @@ async function analyzeAudio() {
   const dropZone   = document.getElementById("_drop_zone");
 
   if (!gender) {
-    gender = "male"; // Default intuitivo para evitar bloqueo
-    const sel = document.getElementById("user-gender");
-    if (sel) sel.value = "male";
-    console.log("Gender not selected, defaulting to male for analysis.");
+    showStatus("Selecciona Hombre o Mujer antes de analizar el audio.", "err");
+    return;
   }
   if (!audioBlob) { showStatus(tr("_err_short"), "err"); return; }
   if (!singersDb || !singersDb.length){ showStatus(tr("_err_db"), "err"); return; }
@@ -1825,9 +1825,10 @@ async function analyzeAudio() {
   try {
     updateP(5, "Despertando motor neuronal...");
     
-    // 🔔 WAKE-UP LOOP: Hasta 20 segundos para despertar el Space
+    // 🔔 WAKE-UP LOOP: presupuesto aproximado de 20 segundos.
+    // Evita dejar al usuario esperando casi un minuto antes del análisis local.
     let isAwake = false;
-    const maxRetries = 10;
+    const maxRetries = 6;
     for (let i=0; i<maxRetries; i++) {
         const retryNum = i + 1;
         const progress = Math.min(85, 5 + (i * 8));
@@ -1835,7 +1836,7 @@ async function analyzeAudio() {
         
         try {
             const controller = new AbortController();
-            const tId = setTimeout(() => controller.abort(), 3500);
+            const tId = setTimeout(() => controller.abort(), 2500);
             const h = await fetch(`${HF_API_URL}/health`, { 
                 method: 'GET', 
                 mode: 'cors',
@@ -1846,7 +1847,7 @@ async function analyzeAudio() {
         } catch(e) { 
             console.log("Reintento conexión...", retryNum); 
         }
-        await new Promise(r => setTimeout(r, 1800));
+        if (i < maxRetries - 1) await new Promise(r => setTimeout(r, 1000));
     }
 
     if (!isAwake) {
@@ -1890,7 +1891,7 @@ async function analyzeAudio() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 60000); // 60s timeout
 
-    let resp;
+    let resp = null;
     try {
       resp = await fetch(`${HF_API_URL}/analyze`, {
         method: 'POST',
@@ -1898,12 +1899,16 @@ async function analyzeAudio() {
         mode: 'cors',
         signal: controller.signal
       });
+    } catch (networkError) {
+      // La caída de red o el timeout también deben activar el análisis local.
+      // No registrar el audio ni datos sensibles en telemetría.
+      console.warn("Backend /analyze no disponible; se intentará análisis local.", networkError?.name || "network-error");
     } finally {
       clearTimeout(timeout);
     }
 
-    if (!resp.ok) {
-      // Backend con error HTTP → fallback local
+    if (!resp || !resp.ok) {
+      // Backend con error HTTP, timeout o fallo de red → fallback local
       showStatus("⚡ Backend no disponible. Analizando localmente...");
       const feat = await extractFeatures(audioBlob);
       feat._local = true;
