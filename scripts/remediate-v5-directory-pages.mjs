@@ -86,9 +86,10 @@ function inspect(page) {
   if (!h1 || fold(h1) !== fold(record.n)) return { reason: "h1-not-exact-directory-name" };
   const title = textOnly(titleOf(html));
   if (fold(title) !== fold(record.n + " | Perfil Vocal V5 | Harmiq")) return { reason: "title-not-exact-v5-template" };
+  const hasDescriptionTag = /<meta\b(?=[^>]*name=["']description["'])/i.test(html);
   const description = textOnly(descriptionOf(html));
   const expectedDescription = "Descubre el perfil vocal de " + record.n + ": tipo de voz " + record.v + ", tecnica de canto y equipo recomendado para grabar.";
-  if (fold(description) !== fold(expectedDescription)) return { reason: "description-not-exact-v5-template" };
+  if (hasDescriptionTag && fold(description) !== fold(expectedDescription)) return { reason: "description-not-exact-v5-template" };
   const voice = textOnly(get(html, /<div\b[^>]*letter-spacing:2px;margin-bottom:0\.5rem[^>]*>([\s\S]*?)<\/div>\s*<h1\b/i));
   if (voice !== record.v) return { reason: "hero-classification-mismatch" };
   const tagline = /<p\b[^>]*font-weight:600[^>]*>\s*Bio-Hacking Vocal\s*&(?:amp;)?\s*Análisis de Equipo\s*<\/p>/i;
@@ -104,6 +105,7 @@ function inspect(page) {
   const generatedBioSuffix = generatedBioSuffixByVoice.get(record.v);
   const exactGeneratedBio = Boolean(generatedBioSuffix) && firstBioParagraph === record.n + " " + generatedBioSuffix;
   if (!genericBio.test(grid) && !exactGeneratedBio) return { reason: "bio-not-known-generic-copy" };
+  if (!hasDescriptionTag && !exactGeneratedBio) return { reason: "description-not-exact-v5-template" };
   const h3 = [...grid.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi)].map((m) => textOnly(m[1]).replace(/^[^\p{L}\p{N}]*/u, ""));
   if (h3.length !== expectedH3.size || h3.some((text) => !expectedH3.has(text))) return { reason: "section-headings-not-exact-template" };
   const h4 = [...grid.matchAll(/<h4\b[^>]*>([\s\S]*?)<\/h4>/gi)].map((m) => textOnly(m[1]));
@@ -120,8 +122,10 @@ function inspect(page) {
   const expectedRobots = robotsOf(html);
   const expectedAds = adSignature(html);
   const newTitle = html.replace(/<title>[\s\S]*?<\/title>/i, "<title>" + htmlEscape(record.n + " | Directorio vocal Harmiq") + "</title>");
-  const newDescription = newTitle.replace(/<meta\b(?=[^>]*name=["']description["'])[^>]*content=["'][^"']*["'][^>]*>/i,
-    '<meta name="description" content="' + htmlEscape("Ficha del directorio vocal de Harmiq: " + record.n + " — clasificación registrada: " + record.v + ".") + '">');
+  const directoryDescription = '<meta name="description" content="' + htmlEscape("Ficha del directorio vocal de Harmiq: " + record.n + " — clasificación registrada: " + record.v + ".") + '">';
+  const newDescription = hasDescriptionTag
+    ? newTitle.replace(/<meta\b(?=[^>]*name=["']description["'])[^>]*content=["'][^"']*["'][^>]*>/i, directoryDescription)
+    : newTitle.replace("</head>", directoryDescription + "</head>");
   const cleanTagline = newDescription.replace(tagline, '<p style="color:var(--m);font-weight:600">Ficha del directorio vocal</p>');
   const entry = '<div class="grid-v5"><section class="card-v5" style="grid-column:1 / -1" aria-labelledby="directory-scope"><h2 id="directory-scope">Registro del directorio vocal</h2><dl style="display:grid;grid-template-columns:max-content 1fr;gap:.5rem 1rem;color:var(--m);font-size:1.05rem"><dt>Artista</dt><dd>' + htmlEscape(record.n) + '</dd><dt>Clasificación registrada</dt><dd>' + htmlEscape(record.v) + '</dd></dl><p style="color:var(--m);margin-top:1rem">El directorio registra esta clasificación general; esta ficha no documenta un análisis vocal individual ni fuentes verificadas para equipo, entrenamiento, nutrición o repertorio.</p><p style="color:var(--m);margin-top:1rem">La clasificación del directorio no sustituye una evaluación vocal individual.</p></section></div>';
   const updatedStart = cleanTagline.indexOf('<div class="grid-v5">');
