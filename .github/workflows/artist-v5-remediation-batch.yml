@@ -25,8 +25,8 @@ jobs:
       - name: Capture exact-candidate baseline
         run: node scripts/remediate-v5-directory-pages.mjs --dry-run > remediation-preview.json
 
-      - name: Apply at most 500 exact-template pages
-        run: node scripts/remediate-v5-directory-pages.mjs --apply --limit=500 > remediation-batch.json
+      - name: Apply at most 1000 exact-template pages
+        run: node scripts/remediate-v5-directory-pages.mjs --apply --limit=1000 > remediation-batch.json
 
       - name: Verify bounded batch and post-change inventory
         run: |
@@ -36,7 +36,7 @@ jobs:
             const before = JSON.parse(fs.readFileSync("remediation-preview.json", "utf8"));
             const batch = JSON.parse(fs.readFileSync("remediation-batch.json", "utf8"));
             const after = JSON.parse(fs.readFileSync("remediation-post.json", "utf8"));
-            if (batch.changed.length !== batch.selectedForThisBatch || batch.changed.length > 500) {
+            if (batch.changed.length !== batch.selectedForThisBatch || batch.changed.length > 1000) {
               throw new Error("Batch exceeded its bound or selected count.");
             }
             if (before.eligibleExactTemplatePages - after.eligibleExactTemplatePages !== batch.changed.length) {
@@ -72,5 +72,5 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "content: replace generic V5 blocks with directory entries (batch 1)"
+          git commit -m "content: replace generic V5 blocks with directory entries (batch 2)"
           git push origin HEAD:adsense-editorial-hardening
