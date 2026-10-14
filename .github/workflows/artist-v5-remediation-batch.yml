@@ -10,7 +10,7 @@ on:
       - .github/workflows/artist-v5-remediation-batch.yml
   pull_request:
     branches:
-      - adsense-editorial-hardening
+      - main
     paths:
       - scripts/remediate-v5-directory-pages.mjs
       - scripts/audit-residual-directory-templates.mjs
