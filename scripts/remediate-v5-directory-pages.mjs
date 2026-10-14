@@ -35,6 +35,7 @@ const titleOf = (html) => get(html, /<title>([\s\S]*?)<\/title>/i);
 // Description attributes may contain apostrophes in artist names; capture by matching quote type.
 // Parse the full quoted meta description even when an artist name contains an apostrophe.
 // The filtered candidate set is reviewed as a bounded exact-template batch.
+// The final residual cohort is constrained to its exact four-page preview.
 const descriptionOf = (html) => {
   const match = html.match(/<meta\b(?=[^>]*name=["']description["'])[^>]*content=(["'])(.*?)\1[^>]*>/i);
   return match?.[2] || "";
