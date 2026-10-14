@@ -32,7 +32,10 @@ const get = (html, re) => (html.match(re) || [null, ""])[1] || "";
 const canonicalOf = (html) => get(html, /<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i);
 const robotsOf = (html) => get(html, /<meta\b[^>]*name=["']robots["'][^>]*content=["']([^"']+)["']/i);
 const titleOf = (html) => get(html, /<title>([\s\S]*?)<\/title>/i);
-const descriptionOf = (html) => get(html, /<meta\b(?=[^>]*name=["']description["'])[^>]*content=["']([^"']*)["'][^>]*>/i);
+const descriptionOf = (html) => {
+  const match = html.match(/<meta\b(?=[^>]*name=["']description["'])[^>]*content=(["'])(.*?)\1[^>]*>/i);
+  return match?.[2] || "";
+};
 const adSignature = (html) => {
   const scripts = [...html.matchAll(/<script\b[\s\S]*?<\/script>/gi)].map((m) => m[0]).filter((x) => /adsbygoogle|pagead|ca-pub-|google_ad_client/i.test(x));
   const attrs = [...html.matchAll(/\b(?:data-ad-client|data-ad-slot)=["'][^"']+["']/gi)].map((m) => m[0]);
