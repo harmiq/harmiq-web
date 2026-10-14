@@ -59,6 +59,11 @@ const balanced = (html) => {
   return stack.length === 0;
 };
 const genericBio = /(?:La voz masculina más aguda y brillante, con una capacidad de proyección emocional que la convierte en la más admirada del repertorio\.|Voz masculina que equilibra potencia y calidez, con graves resonantes y agudos accesibles\. El tipo vocal más común entre grandes intérpretes\.|La voz masculina más grave, con un timbre oscuro e inconfundible que aporta autoridad y presencia única\.|La voz masculina más aguda y brillante, con proyección emocional y facilidad natural en los registros agudos\.)/i;
+const generatedBioSuffixByVoice = new Map([
+  ["Bajo", "posee una voz de bajo, con un timbre profundo y oscuro que transmite autoridad vocal."],
+  ["Tenor", "posee una voz de tenor, con proyeccion brillante y facilidad natural en los registros agudos."],
+  ["Barítono", "posee una voz de barítono, con un timbre calido y equilibrado que le aporta presencia y expresividad."]
+]);
 const expectedH3 = new Set(["Perfil Biomecánico", "Guía de Nutrición Vocal", "Vocal Bio-Hacking Kit", "Mejores Interpretaciones"]);
 const expectedProducts = new Set(["Lax Vox (Terapia de Pajita)", "Beltbox (Máscara Vocal)", "Nebulizador Vocal"]);
 const allowedSongLabels = new Set(["Top Hit 1", "Top Hit 2", "Mejores canciones", "En vivo", "Grandes éxitos"]);
@@ -95,7 +100,10 @@ function inspect(page) {
   const grid = html.slice(start, end);
   if (/adsbygoogle|pagead|ca-pub-|google_ad_client/i.test(grid)) return { reason: "adsense-inside-replaced-region" };
   if (!grid.includes("Lax Vox (Terapia de Pajita)") || !grid.includes("Beltbox (Máscara Vocal)") || !grid.includes("Nebulizador Vocal")) return { reason: "products-not-exact-template" };
-  if (!genericBio.test(grid)) return { reason: "bio-not-known-generic-copy" };
+  const firstBioParagraph = textOnly(get(grid, /<p\\b[^>]*>([\\s\\S]*?)<\\/p>/i));
+  const generatedBioSuffix = generatedBioSuffixByVoice.get(record.v);
+  const exactGeneratedBio = Boolean(generatedBioSuffix) && firstBioParagraph === record.n + " " + generatedBioSuffix;
+  if (!genericBio.test(grid) && !exactGeneratedBio) return { reason: "bio-not-known-generic-copy" };
   const h3 = [...grid.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi)].map((m) => textOnly(m[1]).replace(/^[^\p{L}\p{N}]*/u, ""));
   if (h3.length !== expectedH3.size || h3.some((text) => !expectedH3.has(text))) return { reason: "section-headings-not-exact-template" };
   const h4 = [...grid.matchAll(/<h4\b[^>]*>([\s\S]*?)<\/h4>/gi)].map((m) => textOnly(m[1]));
