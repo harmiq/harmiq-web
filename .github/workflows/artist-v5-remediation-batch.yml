@@ -1,0 +1,41 @@
+name: Artist V5 directory remediation batch
+
+on:
+  push:
+    branches:
+      - adsense-editorial-hardening
+    paths:
+      - scripts/remediate-v5-directory-pages.mjs
+      - .github/workflows/artist-v5-remediation-batch.yml
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate remediation script syntax
+        run: node --check scripts/remediate-v5-directory-pages.mjs
+      - name: Preview exact directory-template candidates
+        run: node scripts/remediate-v5-directory-pages.mjs --dry-run > remediation-preview.json
+      - name: Publish preview summary
+        run: |
+          node -e '
+            const fs = require("fs");
+            const r = JSON.parse(fs.readFileSync("remediation-preview.json", "utf8"));
+            console.log(JSON.stringify({
+              mode: r.mode,
+              pagesScanned: r.pagesScanned,
+              directoryRecords: r.directoryRecords,
+              eligibleExactTemplatePages: r.eligibleExactTemplatePages,
+              selectedForThisBatch: r.selectedForThisBatch,
+              skippedByReason: r.skippedByReason,
+              eligibleSamples: r.eligibleSamples.slice(0, 20)
+            }, null, 2));
+          ' | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: artist-v5-remediation-preview
+          path: remediation-preview.json
