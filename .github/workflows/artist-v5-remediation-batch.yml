@@ -6,6 +6,7 @@ on:
       - adsense-editorial-hardening
     paths:
       - scripts/remediate-v5-directory-pages.mjs
+      - scripts/audit-residual-directory-templates.mjs
       - .github/workflows/artist-v5-remediation-batch.yml
 
 permissions:
@@ -21,6 +22,30 @@ jobs:
 
       - name: Validate remediation script syntax
         run: node --check scripts/remediate-v5-directory-pages.mjs
+
+      - name: Validate residual-template audit syntax
+        run: node --check scripts/audit-residual-directory-templates.mjs
+
+      - name: Group residual directory templates
+        run: |
+          node scripts/audit-residual-directory-templates.mjs > residual-directory-templates.json
+          node -e '
+            const fs = require("fs");
+            const result = JSON.parse(fs.readFileSync("residual-directory-templates.json", "utf8"));
+            console.log(JSON.stringify({
+              directoryPagesScanned: result.directoryPagesScanned,
+              legacyDirectoryPages: result.legacyDirectoryPages,
+              structuralFamilyCount: result.structuralFamilyCount,
+              largestFamilies: result.groups.slice(0, 12)
+            }, null, 2));
+          ' | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload residual-template report
+        uses: actions/upload-artifact@v4
+        with:
+          name: residual-directory-template-audit
+          path: residual-directory-templates.json
+          if-no-files-found: error
 
       - name: Preview remaining exact-template pages
         run: |
