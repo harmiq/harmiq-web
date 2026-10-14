@@ -84,7 +84,7 @@ for (const page of pages) {
   if (!groups.has(key)) groups.set(key, { count: 0, shape, samples: [] });
   const group = groups.get(key);
   group.count++;
-  if (group.samples.length < 50) group.samples.push(page.slug);
+  if (group.samples.length < 8) group.samples.push(page.slug);
 }
 
 const orderedGroups = [...groups.values()].sort((a, b) => b.count - a.count || JSON.stringify(a.shape).localeCompare(JSON.stringify(b.shape)));
