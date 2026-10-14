@@ -188,3 +188,8 @@ The post-remediation audit still finds 854 directory-class pages with V5 markers
 For example, `artistas/0to8/index.html` is a directory record with a page-specific canonical and the old V5 title, but its content grid contains only the “Vocal Bio-Hacking Kit” and “Mejores Interpretaciones” sections. It does not match the batch's required biomechanical/nutrition sections or its allowlisted generic voice copy. Replacing its entire grid with the standard directory card would therefore require a separate, reviewed rule for this variant.
 
 Treat these 854 pages as a distinct follow-up cohort. First group them by actual markup and source-backed content, then remediate only a verified repeated structure. Do not infer that every remaining V5 marker means the same claims or that the pages should receive the same replacement.
+
+
+### Internal-linking spot-check
+
+The `/artistas/` directory fetches `/artistas/index.json` in client-side JavaScript and renders cards in batches of 48. Further records are added only when the user activates “load more”; the initial HTML does not contain links to all directory pages. This makes the current listing useful for visitors but does not provide a complete static link graph. Before adding thousands of individual URLs to the sitemap, provide crawlable pagination or another static route to the intended indexable profiles and verify the rendered links.
