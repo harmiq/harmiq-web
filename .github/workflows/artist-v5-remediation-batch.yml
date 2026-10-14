@@ -13,7 +13,7 @@ on:
       - adsense-editorial-hardening
     paths:
       - scripts/remediate-v5-directory-pages.mjs
-      - scripts/audit-residual-directory-templates.mml
+      - scripts/audit-residual-directory-templates.mjs
       - .github/workflows/artist-v5-remediation-batch.yml
 
 permissions:
