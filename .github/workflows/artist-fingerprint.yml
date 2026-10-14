@@ -28,6 +28,19 @@ jobs:
       - name: Group residual directory templates
         run: node scripts/audit-residual-directory-templates.mjs > residual-directory-templates.json
 
+      - name: Print residual directory family summary
+        run: |
+          node -e '
+            const fs = require("fs");
+            const r = JSON.parse(fs.readFileSync("residual-directory-templates.json", "utf8"));
+            console.log(JSON.stringify({
+              directoryPagesScanned: r.directoryPagesScanned,
+              legacyDirectoryPages: r.legacyDirectoryPages,
+              structuralFamilyCount: r.structuralFamilyCount,
+              largestFamilies: r.groups.slice(0, 12)
+            }, null, 2));
+          '
+
       - name: Run artist fingerprint
         run: node scripts/fingerprint-artist-pages.mjs > artist-fingerprint.json
 
