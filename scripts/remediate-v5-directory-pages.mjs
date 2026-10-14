@@ -38,6 +38,7 @@ const titleOf = (html) => get(html, /<title>([\s\S]*?)<\/title>/i);
 // The final residual cohort is constrained to its exact four-page preview.
 // Apply the next capped cohort only after exact-copy and structure checks pass.
 // This bounded run handles only the next 250 candidates from the validated cohort.
+// This final capped run processes only the remaining 205 exact matches.
 const descriptionOf = (html) => {
   const match = html.match(/<meta\b(?=[^>]*name=["']description["'])[^>]*content=(["'])(.*?)\1[^>]*>/i);
   return match?.[2] || "";
