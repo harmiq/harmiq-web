@@ -32,7 +32,7 @@ const get = (html, re) => (html.match(re) || [null, ""])[1] || "";
 const canonicalOf = (html) => get(html, /<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i);
 const robotsOf = (html) => get(html, /<meta\b[^>]*name=["']robots["'][^>]*content=["']([^"']+)["']/i);
 const titleOf = (html) => get(html, /<title>([\s\S]*?)<\/title>/i);
-const descriptionOf = (html) => {
+// Description attributes may contain apostrophes in artist names; capture by matching quote type.\nconst descriptionOf = (html) => {
   const match = html.match(/<meta\b(?=[^>]*name=["']description["'])[^>]*content=(["'])(.*?)\1[^>]*>/i);
   return match?.[2] || "";
 };
