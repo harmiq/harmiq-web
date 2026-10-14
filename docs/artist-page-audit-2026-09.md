@@ -179,3 +179,12 @@ The artist URLs are still excluded from `sitemap.xml`; only the directory landin
 ### Next review
 
 The next useful unit is a human review of candidate groups by concrete URL/title and source provenance. Confirm whether an entity is a collaboration, a catalog/repertoire record, or a duplicate of an individual artist before selecting a canonical destination or changing its indexability. The classifier and title punctuation are evidence for that review, not an automatic action.
+
+
+### Residual directory pages after the exact-template batch
+
+The post-remediation audit still finds 854 directory-class pages with V5 markers. These were not part of the 8,329-page exact-template batch because their content structure does not satisfy the batch's whole-block replacement rules.
+
+For example, `artistas/0to8/index.html` is a directory record with a page-specific canonical and the old V5 title, but its content grid contains only the “Vocal Bio-Hacking Kit” and “Mejores Interpretaciones” sections. It does not match the batch's required biomechanical/nutrition sections or its allowlisted generic voice copy. Replacing its entire grid with the standard directory card would therefore require a separate, reviewed rule for this variant.
+
+Treat these 854 pages as a distinct follow-up cohort. First group them by actual markup and source-backed content, then remediate only a verified repeated structure. Do not infer that every remaining V5 marker means the same claims or that the pages should receive the same replacement.
