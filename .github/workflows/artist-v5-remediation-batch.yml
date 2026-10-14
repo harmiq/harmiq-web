@@ -1,4 +1,4 @@
-name: Artist V5 directory remediation preview
+name: Artist V5 directory remediation batch
 
 on:
   push:
@@ -17,52 +17,71 @@ on:
       - .github/workflows/artist-v5-remediation-batch.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  preview-only:
+  apply-batch:
+    if: github.event_name == 'push' && github.event.head_commit.message == 'Run bounded exact-template batch 10'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: adsense-editorial-hardening
 
-      - name: Validate remediation script syntax
-        run: node --check scripts/remediate-v5-directory-pages.mjs
-
-      - name: Validate residual-template audit syntax
-        run: node --check scripts/audit-residual-directory-templates.mjs
-
-      - name: Group residual directory templates
+      - name: Validate and preview exact candidates
         run: |
-          node scripts/audit-residual-directory-templates.mjs > residual-directory-templates.json
+          node --check scripts/remediate-v5-directory-pages.mjs
+          node scripts/remediate-v5-directory-pages.mjs --dry-run > preflight.json
           node -e '
             const fs = require("fs");
-            const result = JSON.parse(fs.readFileSync("residual-directory-templates.json", "utf8"));
-            console.log(JSON.stringify({
-              directoryPagesScanned: result.directoryPagesScanned,
-              legacyDirectoryPages: result.legacyDirectoryPages,
-              structuralFamilyCount: result.structuralFamilyCount,
-              largestFamilies: result.groups.slice(0, 12)
-            }, null, 2));
-          ' | tee -a "$GITHUB_STEP_SUMMARY"
+            const r = JSON.parse(fs.readFileSync("preflight.json", "utf8"));
+            if (r.eligibleExactTemplatePages < 100) throw new Error("Expected at least 100 exact candidates; found " + r.eligibleExactTemplatePages);
+            console.log("Preflight passed: " + r.eligibleExactTemplatePages + " exact candidates.");
+          '
 
-      - name: Upload residual-template report
-        uses: actions/upload-artifact@v4
+      - name: Apply bounded batch of 100
+        run: |
+          node scripts/remediate-v5-directory-pages.mjs --apply --limit=100 > applied.json
+          node -e '
+            const fs = require("fs");
+            const r = JSON.parse(fs.readFileSync("applied.json", "utf8"));
+            if (r.selectedForThisBatch !== 100 || r.changed.length !== 100) throw new Error("Expected exactly 100 changed pages.");
+            fs.writeFileSync("changed-slugs.txt", r.changed.join("\n") + "\n");
+            console.log(JSON.stringify({ changed: r.changed.length, slugs: r.changed }, null, 2));
+          '
+
+      - name: Commit and push bounded content changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add artistas
+          git commit -F - <<'EOF'
+          Remediate 100 exact generic directory pages
+          EOF
+          git push origin HEAD:adsense-editorial-hardening
+
+  preview-only:
+    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.event.head_commit.message != 'Run bounded exact-template batch 10')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
         with:
-          name: residual-directory-template-audit
-          path: residual-directory-templates.json
-          if-no-files-found: error
+          ref: adsense-editorial-hardening
+
+      - name: Validate remediation and audit syntax
+        run: |
+          node --check scripts/remediate-v5-directory-pages.mjs
+          node --check scripts/audit-residual-directory-templates.mjs
 
       - name: Preview remaining exact-template pages
         run: |
           node scripts/remediate-v5-directory-pages.mjs --dry-run > remediation-preview.json
           node -e '
             const fs = require("fs");
-            const result = JSON.parse(fs.readFileSync("remediation-preview.json", "utf8"));
+            const r = JSON.parse(fs.readFileSync("remediation-preview.json", "utf8"));
             console.log(JSON.stringify({
-              mode: result.mode,
-              eligibleExactTemplatePages: result.eligibleExactTemplatePages,
-              skippedByReason: result.skippedByReason
+              mode: r.mode,
+              eligibleExactTemplatePages: r.eligibleExactTemplatePages,
+              skippedByReason: r.skippedByReason
             }, null, 2));
-          ' | tee -a "$GITHUB_STEP_SUMMARY"
+          '
