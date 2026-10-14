@@ -24,7 +24,7 @@ const decode = (s) => s
   .replace(/&#([0-9]+);/g, (_, n) => String.fromCodePoint(Number(n)));
 const visible = (s) => decode(s.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim());
 const matchCount = (s, re) => [...s.matchAll(re)].length;
-const headings = (s, tag) => [...s.matchAll(new RegExp("<" + tag + "\\b[^>]*>([\\\\s\\\\S]*?)<\\/" + tag + ">", "gi"))]
+const headings = (s, tag) => [...s.matchAll(new RegExp("<" + tag + "\\b[^>]*>([\\s\\S]*?)<\\/" + tag + ">", "gi"))]
   .map((m) => visible(m[1]).replace(/^[^\p{L}\p{N}]*/u, "").trim())
   .filter(Boolean);
 
