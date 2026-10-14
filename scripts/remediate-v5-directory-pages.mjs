@@ -100,7 +100,7 @@ function inspect(page) {
   const grid = html.slice(start, end);
   if (/adsbygoogle|pagead|ca-pub-|google_ad_client/i.test(grid)) return { reason: "adsense-inside-replaced-region" };
   if (!grid.includes("Lax Vox (Terapia de Pajita)") || !grid.includes("Beltbox (Máscara Vocal)") || !grid.includes("Nebulizador Vocal")) return { reason: "products-not-exact-template" };
-  const firstBioParagraph = textOnly(get(grid, /<p\\b[^>]*>([\\s\\S]*?)<\\/p>/i));
+  const firstBioParagraph = textOnly(get(grid, /<p\b[^>]*>([\s\S]*?)<\/p>/i));
   const generatedBioSuffix = generatedBioSuffixByVoice.get(record.v);
   const exactGeneratedBio = Boolean(generatedBioSuffix) && firstBioParagraph === record.n + " " + generatedBioSuffix;
   if (!genericBio.test(grid) && !exactGeneratedBio) return { reason: "bio-not-known-generic-copy" };
