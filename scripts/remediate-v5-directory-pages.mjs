@@ -33,6 +33,7 @@ const canonicalOf = (html) => get(html, /<link\b[^>]*rel=["']canonical["'][^>]*h
 const robotsOf = (html) => get(html, /<meta\b[^>]*name=["']robots["'][^>]*content=["']([^"']+)["']/i);
 const titleOf = (html) => get(html, /<title>([\s\S]*?)<\/title>/i);
 // Description attributes may contain apostrophes in artist names; capture by matching quote type.
+// Parse the full quoted meta description even when an artist name contains an apostrophe.
 const descriptionOf = (html) => {
   const match = html.match(/<meta\b(?=[^>]*name=["']description["'])[^>]*content=(["'])(.*?)\1[^>]*>/i);
   return match?.[2] || "";
