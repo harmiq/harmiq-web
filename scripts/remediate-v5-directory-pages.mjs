@@ -36,6 +36,7 @@ const titleOf = (html) => get(html, /<title>([\s\S]*?)<\/title>/i);
 // Parse the full quoted meta description even when an artist name contains an apostrophe.
 // The filtered candidate set is reviewed as a bounded exact-template batch.
 // The final residual cohort is constrained to its exact four-page preview.
+// Apply the next capped cohort only after exact-copy and structure checks pass.
 const descriptionOf = (html) => {
   const match = html.match(/<meta\b(?=[^>]*name=["']description["'])[^>]*content=(["'])(.*?)\1[^>]*>/i);
   return match?.[2] || "";
