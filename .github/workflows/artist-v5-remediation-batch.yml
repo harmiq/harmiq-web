@@ -9,33 +9,68 @@ on:
       - .github/workflows/artist-v5-remediation-batch.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  preview:
+  apply-bounded-batch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: adsense-editorial-hardening
+
       - name: Validate remediation script syntax
         run: node --check scripts/remediate-v5-directory-pages.mjs
-      - name: Preview exact directory-template candidates
+
+      - name: Capture exact-candidate baseline
         run: node scripts/remediate-v5-directory-pages.mjs --dry-run > remediation-preview.json
-      - name: Publish preview summary
+
+      - name: Apply at most 500 exact-template pages
+        run: node scripts/remediate-v5-directory-pages.mjs --apply --limit=500 > remediation-batch.json
+
+      - name: Verify bounded batch and post-change inventory
         run: |
+          node scripts/remediate-v5-directory-pages.mjs --dry-run > remediation-post.json
           node -e '
             const fs = require("fs");
-            const r = JSON.parse(fs.readFileSync("remediation-preview.json", "utf8"));
+            const before = JSON.parse(fs.readFileSync("remediation-preview.json", "utf8"));
+            const batch = JSON.parse(fs.readFileSync("remediation-batch.json", "utf8"));
+            const after = JSON.parse(fs.readFileSync("remediation-post.json", "utf8"));
+            if (batch.changed.length !== batch.selectedForThisBatch || batch.changed.length > 500) {
+              throw new Error("Batch exceeded its bound or selected count.");
+            }
+            if (before.eligibleExactTemplatePages - after.eligibleExactTemplatePages !== batch.changed.length) {
+              throw new Error("Post-change candidate count does not match changed-file count.");
+            }
             console.log(JSON.stringify({
-              mode: r.mode,
-              pagesScanned: r.pagesScanned,
-              directoryRecords: r.directoryRecords,
-              eligibleExactTemplatePages: r.eligibleExactTemplatePages,
-              selectedForThisBatch: r.selectedForThisBatch,
-              skippedByReason: r.skippedByReason,
-              eligibleSamples: r.eligibleSamples.slice(0, 20)
+              eligibleBefore: before.eligibleExactTemplatePages,
+              changed: batch.changed.length,
+              eligibleAfter: after.eligibleExactTemplatePages,
+              sampleChanged: batch.changed.slice(0, 20)
             }, null, 2));
           ' | tee -a "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
-        with:
-          name: artist-v5-remediation-preview
-          path: remediation-preview.json
+
+      - name: Ensure only artist pages changed
+        run: |
+          git add artistas
+          git diff --cached --name-only > changed-files.txt
+          node -e '
+            const fs = require("fs");
+            const batch = JSON.parse(fs.readFileSync("remediation-batch.json", "utf8"));
+            const files = fs.readFileSync("changed-files.txt", "utf8").trim().split(/\r?\n/).filter(Boolean);
+            if (files.length !== batch.changed.length || files.some((file) => !/^artistas\/[^/]+\/index\.html$/.test(file))) {
+              throw new Error("Unexpected files or changed-file count in remediation batch.");
+            }
+            console.log("Verified " + files.length + " artist pages and no other files.");
+          '
+
+      - name: Commit and push bounded batch to PR branch
+        run: |
+          if git diff --cached --quiet; then
+            echo "No eligible files changed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "content: replace generic V5 blocks with directory entries (batch 1)"
+          git push origin HEAD:adsense-editorial-hardening
