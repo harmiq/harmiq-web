@@ -109,7 +109,10 @@ function inspect(page) {
     '<meta name="description" content="' + htmlEscape("Ficha del directorio vocal de Harmiq: " + record.n + " — clasificación registrada: " + record.v + ".") + '">');
   const cleanTagline = newDescription.replace(tagline, '<p style="color:var(--m);font-weight:600">Ficha del directorio vocal</p>');
   const entry = '<div class="grid-v5"><section class="card-v5" style="grid-column:1 / -1" aria-labelledby="directory-scope"><h2 id="directory-scope">Registro del directorio vocal</h2><dl style="display:grid;grid-template-columns:max-content 1fr;gap:.5rem 1rem;color:var(--m);font-size:1.05rem"><dt>Artista</dt><dd>' + htmlEscape(record.n) + '</dd><dt>Clasificación registrada</dt><dd>' + htmlEscape(record.v) + '</dd></dl><p style="color:var(--m);margin-top:1rem">El directorio registra esta clasificación general; esta ficha no documenta un análisis vocal individual ni fuentes verificadas para equipo, entrenamiento, nutrición o repertorio.</p><p style="color:var(--m);margin-top:1rem">La clasificación del directorio no sustituye una evaluación vocal individual.</p></section></div>';
-  const updated = cleanTagline.slice(0, start) + entry + cleanTagline.slice(end);
+  const updatedStart = cleanTagline.indexOf('<div class="grid-v5">');
+  const updatedEnd = cleanTagline.indexOf(marker, updatedStart);
+  if (updatedStart < 0 || updatedEnd < 0) return { reason: "rewritten-grid-boundary-not-exact" };
+  const updated = cleanTagline.slice(0, updatedStart) + entry + cleanTagline.slice(updatedEnd);
   if (canonicalOf(updated) !== expectedCanonical) return { reason: "canonical-changed" };
   if (robotsOf(updated) !== expectedRobots) return { reason: "robots-changed" };
   if (adSignature(updated) !== expectedAds) return { reason: "adsense-changed" };
