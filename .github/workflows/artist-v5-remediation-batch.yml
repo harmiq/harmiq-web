@@ -72,5 +72,5 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "content: replace generic V5 blocks with directory entries (batch 4)"
+          git commit -m "content: replace generic V5 blocks with directory entries (batch 5)"
           git push origin HEAD:adsense-editorial-hardening
