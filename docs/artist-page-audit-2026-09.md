@@ -217,3 +217,16 @@ Reviewed `recursos/index.html`, the LALAL.AI and Udemy landing pages, `recursos/
 - The resources index links to those local landing pages; its other external destinations point directly to vendor/product sites without referral parameters in their URLs.
 - The DAW detail pages link to official vendor destinations and contain no affiliate tracking parameters.
 - No missing `rel="sponsored"` was found among the referral links in this reviewed resource section. This is a code-level URL audit; it does not establish whether a direct vendor link is covered by a separate commercial agreement.
+
+
+## Voice category cleanup — 2026-10-21
+
+Updated the six category pages under `tipo-de-voz/` on `adsense-editorial-hardening`:
+
+- Removed the repeated generic “Vocal Bio-Hacking Kit” Amazon module and unsupported “Tu Dieta Vocal” food/avoidance claims.
+- Removed malformed wrapper markup and duplicate document closing tags. On the mezzosoprano and baritone pages, moved the existing SEO feed stylesheet into `<head>` and its content back inside `<body>`; on tenor, discarded an orphaned fragment after the document close.
+- Postflight confirms one canonical per page, balanced `<div>` tags, one `</body>` and `</html>`, and no change to AdSense signatures. The six pages contained no AdSense loader or publisher code.
+
+Commit: `2ed21785393e9069ccecf9ae8bd9074e21ef3edf`. Both corpus audit and directory-remediation preview passed (runs [39628406919](https://github.com/harmiq/harmiq-web/actions/runs/39628406919) and [39628406948](https://github.com/harmiq/harmiq-web/actions/runs/39628406948)).
+
+This removes generic health/product claims but does not complete the factual review of the individual vocal-history, physiology, and artist examples on these pages.
