@@ -193,3 +193,17 @@ Treat these 854 pages as a distinct follow-up cohort. First group them by actual
 ### Internal-linking spot-check
 
 The `/artistas/` directory fetches `/artistas/index.json` in client-side JavaScript and renders cards in batches of 48. Further records are added only when the user activates “load more”; the initial HTML does not contain links to all directory pages. This makes the current listing useful for visitors but does not provide a complete static link graph. Before adding thousands of individual URLs to the sitemap, provide crawlable pagination or another static route to the intended indexable profiles and verify the rendered links.
+
+
+## Follow-up content remediation — 2026-10-21
+
+Two reviewed directory-page families were updated on `adsense-editorial-hardening`:
+
+- 25 pages had unsupported artist-specific equipment and nutrition claims plus generic `Top Hit 1/2` placeholders removed. Their directory voice labels remain clearly scoped as Harmiq classifications, and the generic preparation guidance remains.
+- 11 pages had unsupported equipment and nutrition claims removed. Their named song links were retained.
+
+All 36 pages retained exactly one page-specific canonical; opening and closing `div` counts balance. Existing AdSense code was not changed (these pages contained no AdSense loader or publisher ID). No sitemap, robots, redirect, or deletion changes were made in this batch.
+
+The read-only corpus workflow passed on commit `17c34b7666feac2eaa3aea2737e19118e13a2069` (run [39585535823](https://github.com/harmiq/harmiq-web/actions/runs/39585535823)). It now reports **70 legacy directory pages** across **14 structural families**, down from 81 after the preceding batch. The remediation workflow passed in run [39585535996](https://github.com/harmiq/harmiq-web/actions/runs/39585535996).
+
+These changes do not classify or alter the 2,744 physical pages outside `artistas/index.json`; their content and indexing decision remain pending human review.
