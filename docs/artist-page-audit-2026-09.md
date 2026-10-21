@@ -256,3 +256,4 @@ Additional claim corrections completed after commit `ee64a71345c7da09260cb4064ff
 - Baritone claims linking Spanish phonetics/flamenco to a supposedly favored voice type: commit `4cfa1f9d00203f96d2e5e46074ee15a2cab12bec`.
 
 The targeted claims were replaced with scoped, non-diagnostic language. These are narrow corrections, not a full factual review of every remaining profile claim.
+- Mezzosoprano: removed unsupported claims about Rosalía's vocal training, classification, and artistic intent: commit `bb6bf1aa12b47d582f1cda546b11faa3dbef3e8f`.
