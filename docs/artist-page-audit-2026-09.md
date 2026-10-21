@@ -230,3 +230,17 @@ Updated the six category pages under `tipo-de-voz/` on `adsense-editorial-harden
 Commit: `2ed21785393e9069ccecf9ae8bd9074e21ef3edf`. Both corpus audit and directory-remediation preview passed (runs [39628406919](https://github.com/harmiq/harmiq-web/actions/runs/39628406919) and [39628406948](https://github.com/harmiq/harmiq-web/actions/runs/39628406948)).
 
 This removes generic health/product claims but does not complete the factual review of the individual vocal-history, physiology, and artist examples on these pages.
+
+
+## Additional voice-guide claim cleanup — 2026-10-21
+
+A follow-up review removed several unsupported or internally inconsistent claims from the voice-category guides:
+
+- `contralto/index.html`: removed the conflicting “2%” / “1 in 10,000” prevalence claims.
+- `tenor/index.html`: removed the unsupported Pavarotti anecdote and view-count claim.
+- `soprano/index.html`: replaced unsupported vocal-fold measurements and anatomy claims with a classification caveat.
+- `baritono/index.html`: removed unverified range, research-institute, and technique claims about Freddie Mercury.
+- `bajo/index.html`: removed the unsupported Tom Waits biography/range anecdote.
+
+These edits preserve one canonical and balanced `div` markup; AdSense signatures are unchanged. The pages still need a fuller factual review of their remaining artist examples, ranges, and voice-type descriptions.
+
