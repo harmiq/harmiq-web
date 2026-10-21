@@ -257,3 +257,15 @@ Additional claim corrections completed after commit `ee64a71345c7da09260cb4064ff
 
 The targeted claims were replaced with scoped, non-diagnostic language. These are narrow corrections, not a full factual review of every remaining profile claim.
 - Mezzosoprano: removed unsupported claims about Rosalía's vocal training, classification, and artistic intent: commit `bb6bf1aa12b47d582f1cda546b11faa3dbef3e8f`.
+
+
+## Unfinished non-directory page cleanup — 2026-10-21
+
+Updated the 72 pages classified by the read-only corpus audit as `unfinished-content` among the 2,744 physical URLs absent from `artistas/index.json`.
+
+- Removed the repeated unsupported voice classification, recording-equipment recommendations, generic vocal-diet claims, Vocal Bio-Hacking Kit product claims, and placeholder “Top Hit 1/2” links.
+- Replaced the old V5 content and comparison CTA with a transparent editorial-review status. Updated each page's title, meta description, and hero label accordingly.
+- Preserved each page's URL, H1 entity name, canonical, navigation, image handling, and any AdSense signatures present. All 72 pages still have one canonical, balanced `div` markup, and one body/html close.
+- No robots, sitemap, redirect, deletion, or indexability directive was changed. The pages remain outside the sitemap pending individual URL strategy.
+
+The 147 `generic-multientity` candidates and 2,525 `legacy-derived-candidate` URLs remain unmodified and require separate content/provenance review.
