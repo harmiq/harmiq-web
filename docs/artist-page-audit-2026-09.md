@@ -244,3 +244,15 @@ A follow-up review removed several unsupported or internally inconsistent claims
 
 These edits preserve one canonical and balanced `div` markup; AdSense signatures are unchanged. The pages still need a fuller factual review of their remaining artist examples, ranges, and voice-type descriptions.
 
+
+
+Additional claim corrections completed after commit `ee64a71345c7da09260cb4064ff4ec20ef49600b`:
+
+- Contralto prevalence claim: commit `50ff104e2ebad1fddc80f1e9f9b788a29e5ef5f8`.
+- Tenor anecdote about Pavarotti: commit `55c60fc7fa0343185ed1b9b9dfc0260350387175`.
+- Soprano vocal-fold measurements, disputed Freddie Mercury assertions, and Tom Waits range/biography claims: commit `fd9e2963352faa2686c699f940b0674f3c8cf3a5`.
+- Mezzosoprano claims about Amy Winehouse's smoking and Adele's intentional passaggio: commit `1dd9409979385dd2a66179b15a5d795ce0e9e71f`.
+- Soprano “five octaves” and Ariana Grande's unsupported high-note claim: commit `e9db10368309c0469ec950a33e032532f4005440`.
+- Baritone claims linking Spanish phonetics/flamenco to a supposedly favored voice type: commit `4cfa1f9d00203f96d2e5e46074ee15a2cab12bec`.
+
+The targeted claims were replaced with scoped, non-diagnostic language. These are narrow corrections, not a full factual review of every remaining profile claim.
