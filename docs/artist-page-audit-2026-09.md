@@ -207,3 +207,13 @@ All 36 pages retained exactly one page-specific canonical; opening and closing `
 The read-only corpus workflow passed on commit `17c34b7666feac2eaa3aea2737e19118e13a2069` (run [39585535823](https://github.com/harmiq/harmiq-web/actions/runs/39585535823)). It now reports **70 legacy directory pages** across **14 structural families**, down from 81 after the preceding batch. The remediation workflow passed in run [39585535996](https://github.com/harmiq/harmiq-web/actions/runs/39585535996).
 
 These changes do not classify or alter the 2,744 physical pages outside `artistas/index.json`; their content and indexing decision remain pending human review.
+
+
+## Affiliate link audit — 2026-10-21
+
+Reviewed `recursos/index.html`, the LALAL.AI and Udemy landing pages, `recursos/daw/index.html`, and all 13 DAW detail pages.
+
+- The referral URLs on the LALAL.AI page (`fp_ref`) and Udemy page (`trk.udemy.com`) already use `rel="sponsored noopener"`.
+- The resources index links to those local landing pages; its other external destinations point directly to vendor/product sites without referral parameters in their URLs.
+- The DAW detail pages link to official vendor destinations and contain no affiliate tracking parameters.
+- No missing `rel="sponsored"` was found among the referral links in this reviewed resource section. This is a code-level URL audit; it does not establish whether a direct vendor link is covered by a separate commercial agreement.
