@@ -269,3 +269,14 @@ Updated the 72 pages classified by the read-only corpus audit as `unfinished-con
 - No robots, sitemap, redirect, deletion, or indexability directive was changed. The pages remain outside the sitemap pending individual URL strategy.
 
 The 147 `generic-multientity` candidates and 2,525 `legacy-derived-candidate` URLs remain unmodified and require separate content/provenance review.
+
+
+## Generic multientity page cleanup — 2026-10-22
+
+Updated the 147 pages classified as `generic-multientity` after the 72 `unfinished-content` pages were cleaned.
+
+- All 147 had compound H1/title names, generic “Top Hit 1/2” placeholders, and the “Vocal Bio-Hacking Kit” module. Removed the unsupported V5 profile/module claims and placeholder links; retained the H1 entity name and URL while marking each page for editorial review.
+- Updated title, meta description, voice label, tagline, and comparison CTA.
+- Preserved each page's canonical, balanced body markup, and AdSense signatures. No robots, sitemap, redirects, or deletions changed.
+
+The corpus audit still reports 2,525 `legacy-derived-candidate` URLs outside the directory for content/provenance review. These 147 pages remain outside the sitemap.
