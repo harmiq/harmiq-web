@@ -280,3 +280,12 @@ Updated the 147 pages classified as `generic-multientity` after the 72 `unfinish
 - Preserved each page's canonical, balanced body markup, and AdSense signatures. No robots, sitemap, redirects, or deletions changed.
 
 The corpus audit still reports 2,525 `legacy-derived-candidate` URLs outside the directory for content/provenance review. These 147 pages remain outside the sitemap.
+
+
+## Derived V5 page cleanup — 2026-10-22
+
+Remediated 831 of the 831 pages listed by the corpus audit as legacy-derived without a directory-prefix match. Every changed page independently matched the V5 profile, bio-hacking kit and biomechanical-module markers, had one page-specific canonical, a compound H1, and balanced document structure.
+
+- Removed repeated unsupported voice/equipment/nutrition/product claims and generic recommendation modules; updated title, description, hero label and comparison CTA to an editorial-review status.
+- Preserved URLs, canonical tags, body structure, and any AdSense signatures. No indexability, sitemap, redirect, or deletion actions were taken.
+- 0 pages did not match the exact transformation guard and were left unchanged for separate review.
