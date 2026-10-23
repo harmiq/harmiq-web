@@ -13,6 +13,8 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const artistsDir = path.join(root, "artistas");
+const directoryRecords = JSON.parse(fs.readFileSync(path.join(artistsDir, "index.json"), "utf8"));
+const directorySlugs = new Set(directoryRecords.map((artist) => artist.s));
 const pages = fs.readdirSync(artistsDir, { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map((entry) => ({ slug: entry.name, file: path.join(artistsDir, entry.name, "index.html") }))
@@ -38,7 +40,12 @@ for (const page of pages) {
   }
 }
 const summary = Object.fromEntries(Object.entries(findings).map(([name, slugs]) => [
-  name, { count: slugs.length, examples: slugs.slice(0, 20) }
+  name, {
+    count: slugs.length,
+    examples: slugs.slice(0, 20),
+    outsideDirectoryCount: slugs.filter((slug) => !directorySlugs.has(slug)).length,
+    outsideDirectory: slugs.filter((slug) => !directorySlugs.has(slug))
+  }
 ]));
 console.log(JSON.stringify({
   pagesRead,
