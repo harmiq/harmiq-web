@@ -308,3 +308,12 @@ Se limpiaron 18 páginas adicionales de la muestra del inventario de afirmacione
 - Retirados bloques genéricos de clasificación vocal, equipo, nutrición y gadgets; se mantuvieron H1, URL, canonical, navegación, estilos y scripts.
 - Estructura de etiquetas balanceada en las 18. No se detectaron marcadores AdSense en el contenido editado.
 - Sin cambios de robots, indexabilidad, sitemap, redirecciones o eliminación.
+
+
+## Tercera muestra de fichas compuestas V5 — 2026-10-23
+
+Se limpiaron 17 páginas adicionales que aparecían en los ejemplos del inventario de claims repetidos y cumplían los guardas exactos: title V5, H1 compuesto, kit y nutrición genérica, canonical individual y módulo V5 balanceado.
+
+- Retirados claims genéricos de voz, equipo, nutrición y gadgets; se conservaron H1, URL, canonical, navegación, estilos y scripts.
+- HTML equilibrado en las 17. No se detectaron marcadores AdSense en el contenido antes de editar.
+- Sin cambios de indexabilidad, robots, sitemap, redirects ni eliminación.
