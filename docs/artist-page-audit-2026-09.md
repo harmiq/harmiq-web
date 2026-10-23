@@ -299,3 +299,12 @@ Se revisaron 18 ejemplos adicionales del inventario de afirmaciones repetidas. L
 - Los 18 tenían estructura de etiquetas equilibrada; el contenido no contenía códigos AdSense antes de la edición.
 - No se cambió robots, indexabilidad, sitemap, redirecciones ni archivos.
 - Son una muestra priorizada por evidencia del inventario de claims; no representan la totalidad de las 1.454 fichas detectadas con claims repetidos.
+
+
+## Lote de claims compuestos V5 — 2026-10-23
+
+Se limpiaron 18 páginas adicionales de la muestra del inventario de afirmaciones repetidas. Cada archivo coincidió con los marcadores V5, Vocal Bio-Hacking Kit, nutrición genérica, canonical individual y H1 compuesto.
+
+- Retirados bloques genéricos de clasificación vocal, equipo, nutrición y gadgets; se mantuvieron H1, URL, canonical, navegación, estilos y scripts.
+- Estructura de etiquetas balanceada en las 18. No se detectaron marcadores AdSense en el contenido editado.
+- Sin cambios de robots, indexabilidad, sitemap, redirecciones o eliminación.
