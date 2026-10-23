@@ -344,3 +344,12 @@ La salida del inventario de claims se amplió para separar páginas fuera de `ar
 - Se limpiaron las 1.342 páginas compuestas: retirados claims genéricos de voz, equipo, nutrición y kit; conservados H1, URLs y canonicals específicos, estilos, navegación y scripts.
 - Canonical, H1, equilibrio de div, cierres body/html y firma AdSense comparados antes/después para cada página. Los elementos AdSense se conservaron sin cambios; no se añadieron ni eliminaron.
 - No se cambió robots, indexabilidad, sitemap, redirects ni se eliminaron páginas.
+
+
+## Último lote de claims V5 detectados fuera del directorio — 2026-10-23
+
+De las 265 páginas restantes con la plantilla V5 y nutrición genérica fuera de `artistas/index.json`, 264 coincidieron con H1 compuesto, canonical específico y módulo Vocal Bio-Hacking. Se limpiaron las 264; `pablo-albor-n` se dejó sin cambios por ser H1 singular y requerir revisión de canonical/procedencia.
+
+- Retirados módulos y claims genéricos de voz, equipo, nutrición y kit; se conservaron URLs, H1, canonicals y scripts.
+- Canonical, H1, equilibrio de etiquetas, cierres body/html y firma AdSense verificados antes y después para cada página.
+- Sin cambios de robots, indexabilidad, sitemap, redirects o eliminación.
