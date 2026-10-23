@@ -326,3 +326,12 @@ Se limpiaron 17 URLs adicionales fuera de `artistas/index.json`, seleccionadas d
 - Se sustituyó el bloque de claims por estado de revisión editorial; se conservaron H1, URL, canonical, navegación, estilos y scripts.
 - Balance de etiquetas y canonical verificados en las 17. No había marcadores AdSense en los originales.
 - No se tocó indexabilidad, robots, sitemap, redirecciones ni eliminación.
+
+
+## Quinta muestra de fichas compuestas V5 — 2026-10-23
+
+Se limpiaron 17 URLs adicionales no presentes en `artistas/index.json`, todas con H1 compuesto, title V5, módulo de kit y nutrición genérica, y canonical específico.
+
+- Se retiraron los bloques de claims genéricos; se conservaron H1, URL, canonical, navegación, estilos y scripts.
+- Estructura HTML equilibrada en las 17. No había marcadores AdSense en los archivos originales.
+- No se alteró la indexabilidad, robots, sitemap, redirects o eliminación.
