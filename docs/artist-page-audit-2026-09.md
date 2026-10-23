@@ -335,3 +335,12 @@ Se limpiaron 17 URLs adicionales no presentes en `artistas/index.json`, todas co
 - Se retiraron los bloques de claims genéricos; se conservaron H1, URL, canonical, navegación, estilos y scripts.
 - Estructura HTML equilibrada en las 17. No había marcadores AdSense en los archivos originales.
 - No se alteró la indexabilidad, robots, sitemap, redirects o eliminación.
+
+
+## Lote ampliado de páginas derivadas V5 — 2026-10-23
+
+La salida del inventario de claims se amplió para separar páginas fuera de `artistas/index.json`. De 1.343 URLs con afirmaciones de equipo repetidas fuera del directorio, 1.342 coincidieron con la plantilla compuesta V5 y sus marcadores exactos; la URL singular `pablo-albor-n` quedó fuera de este cambio para revisión de canonical/procedencia.
+
+- Se limpiaron las 1.342 páginas compuestas: retirados claims genéricos de voz, equipo, nutrición y kit; conservados H1, URLs y canonicals específicos, estilos, navegación y scripts.
+- Canonical, H1, equilibrio de div, cierres body/html y firma AdSense comparados antes/después para cada página. Los elementos AdSense se conservaron sin cambios; no se añadieron ni eliminaron.
+- No se cambió robots, indexabilidad, sitemap, redirects ni se eliminaron páginas.
