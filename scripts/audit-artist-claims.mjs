@@ -44,7 +44,9 @@ const summary = Object.fromEntries(Object.entries(findings).map(([name, slugs]) 
     count: slugs.length,
     examples: slugs.slice(0, 20),
     outsideDirectoryCount: slugs.filter((slug) => !directorySlugs.has(slug)).length,
-    outsideDirectory: slugs.filter((slug) => !directorySlugs.has(slug))
+    outsideDirectory: slugs.filter((slug) => !directorySlugs.has(slug)),
+    directoryCount: slugs.filter((slug) => directorySlugs.has(slug)).length,
+    directorySlugs: slugs.filter((slug) => directorySlugs.has(slug))
   }
 ]));
 console.log(JSON.stringify({
