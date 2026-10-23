@@ -317,3 +317,12 @@ Se limpiaron 17 páginas adicionales que aparecían en los ejemplos del inventar
 - Retirados claims genéricos de voz, equipo, nutrición y gadgets; se conservaron H1, URL, canonical, navegación, estilos y scripts.
 - HTML equilibrado en las 17. No se detectaron marcadores AdSense en el contenido antes de editar.
 - Sin cambios de indexabilidad, robots, sitemap, redirects ni eliminación.
+
+
+## Cuarta muestra de fichas compuestas V5 — 2026-10-23
+
+Se limpiaron 17 URLs adicionales fuera de `artistas/index.json`, seleccionadas de los ejemplos del inventario de claims repetidos. Las 17 coincidían con title V5, H1 compuesto, kit, nutrición genérica y canonical propio.
+
+- Se sustituyó el bloque de claims por estado de revisión editorial; se conservaron H1, URL, canonical, navegación, estilos y scripts.
+- Balance de etiquetas y canonical verificados en las 17. No había marcadores AdSense en los originales.
+- No se tocó indexabilidad, robots, sitemap, redirecciones ni eliminación.
