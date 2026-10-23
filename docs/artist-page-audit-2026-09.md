@@ -289,3 +289,13 @@ Remediated 831 of the 831 pages listed by the corpus audit as legacy-derived wit
 - Removed repeated unsupported voice/equipment/nutrition/product claims and generic recommendation modules; updated title, description, hero label and comparison CTA to an editorial-review status.
 - Preserved URLs, canonical tags, body structure, and any AdSense signatures. No indexability, sitemap, redirect, or deletion actions were taken.
 - 0 pages did not match the exact transformation guard and were left unchanged for separate review.
+
+
+## Muestra compuesta V5 — 2026-10-23
+
+Se revisaron 18 ejemplos adicionales del inventario de afirmaciones repetidas. Los 18 tenían H1 compuesto, title V5, canonical específico y el módulo compartido de equipo/nutrición/kit. Se sustituyeron esos módulos por un aviso de revisión editorial y se eliminaron la etiqueta y el CTA que insinuaban una comparación vocal.
+
+- Se conservaron H1, URLs, canonical, estilos, navegación y script de imagen.
+- Los 18 tenían estructura de etiquetas equilibrada; el contenido no contenía códigos AdSense antes de la edición.
+- No se cambió robots, indexabilidad, sitemap, redirecciones ni archivos.
+- Son una muestra priorizada por evidencia del inventario de claims; no representan la totalidad de las 1.454 fichas detectadas con claims repetidos.
