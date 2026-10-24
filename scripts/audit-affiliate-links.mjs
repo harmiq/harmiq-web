@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ignored = new Set([".git", "node_modules", "dist", "build", ".netlify", ".vercel"]);
-const affiliateDomain = /(?:^|[./])(?:awin1\.com|shareasale\.com|impact\.com|impactradius\.com|rakutenadvertising\.com|partnerize\.com|tradetracker\.net)(?:[:/?#]|$)/i;
+const affiliateDomain = /(?:^|[./])(?:amzn\.to|awin1\.com|shareasale\.com|impact\.com|impactradius\.com|rakutenadvertising\.com|partnerize\.com|tradetracker\.net)(?:[:/?#]|$)/i;
 const referralParameter = /[?&](?:tag|aff|affid|affiliate|partner|partnerid|ascsubtag|linkcode|ref_|ref=|irclickid|clickid)=/i;
 const files = [];
 function walk(dir) {
