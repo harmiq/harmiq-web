@@ -353,3 +353,13 @@ De las 265 páginas restantes con la plantilla V5 y nutrición genérica fuera d
 - Retirados módulos y claims genéricos de voz, equipo, nutrición y kit; se conservaron URLs, H1, canonicals y scripts.
 - Canonical, H1, equilibrio de etiquetas, cierres body/html y firma AdSense verificados antes y después para cada página.
 - Sin cambios de robots, indexabilidad, sitemap, redirects o eliminación.
+
+
+## Revisión de claims en fichas del directorio — 2026-10-24
+
+Se corrigieron 63 fichas de artistas presentes en el directorio que el inventario marcaba por claims de rango vocal, nutrición, equipo o plantilla de bajo valor. El lote incluyó las 24 señales de equipo, 36 de nutrición, 36 de rango, dos placeholders de repertorio y las señales de voz/plantilla coincidentes; las categorías se solapan.
+
+- Se retiraron los módulos genéricos de equipo, nutrición, rango y repertorio, y se sustituyeron por el alcance de la ficha basado únicamente en la clasificación registrada en el directorio.
+- Se conservaron H1, canonical, CTA, navegación, estilos y scripts existentes; se neutralizaron los títulos/descripciones V5 y subtítulos de bio-hacking cuando aparecían.
+- H1 y canonical únicos, equilibrio de divs y cierres body/html verificados en las 63 páginas. Los scripts se compararon byte por byte; los marcadores AdSense existentes se mantuvieron sin cambios (ninguno detectado en este lote).
+- Sin cambios de robots, indexabilidad, sitemap, redirecciones ni eliminaciones.
