@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "description": "Editorial metadata for artist pages. This file is separate from artistas/index.json, which remains the base directory of name, slug and orientative voice type.",
+  "levels": {
+    "1": "Full editorial profile",
+    "2": "Analytical profile",
+    "3": "Directory-only record"
+  },
+  "rules": {
+    "minimumIndexable": "A page should only be considered for individual indexation when it contains materially differentiated, source-aware editorial value.",
+    "sourcePolicy": "Artist-specific factual claims require an identifiable source. Editorial observations must be presented as analysis, not biography or verified fact.",
+    "equipmentPolicy": "Artist-owned equipment is only stated when sourced. Otherwise equipment is labelled as an editorial recommendation.",
+    "rangePolicy": "Exact vocal ranges are omitted when they are estimates or disputed; classifications are contextual and orientative."
+  },
+  "artists": {
+    "ed-sheeran": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Tenor",
+      "voiceClassification": "Harmiq orientative classification; external analyses may place him around the tenor/light-baritone boundary.",
+      "sources": [
+        {
+          "type": "specialist-analysis",
+          "url": "https://vocalrangetester.com/ed-sheeran-vocal-range/",
+          "supports": [
+            "voice classification context",
+            "range-analysis context"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "voice profile",
+        "artist-specific vocal analysis",
+        "three-song study guide",
+        "study approach"
+      ],
+      "notes": "Do not publish an exact official range. Current evidence is sufficient for an analytical profile, not a fully sourced biographical dossier."
+    },
+    "ariana-grande": {
+      "level": 1,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Harmiq database classification; contextualized with Ariana Grande's documented discussion of her naturally high voice and trained coloratura-soprano placement for Wicked.",
+      "sources": [
+        {
+          "type": "primary-interview",
+          "url": "https://www.npr.org/2025/02/04/nx-s1-5279457/wicked-ariana-grande",
+          "supports": [
+            "high-voice context",
+            "Wicked vocal training context"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "voice profile",
+        "artist-specific vocal analysis",
+        "three-song study guide",
+        "study approach",
+        "Harmiq comparison CTA"
+      ],
+      "notes": "Avoid presenting classical fach as a fixed medical or anatomical fact."
+    },
+    "bad-bunny": {
+      "level": 1,
+      "status": "pilot-reviewed",
+      "voiceType": "Barítono",
+      "voiceClassification": "Harmiq database classification, supported contextually by a professional mastering-engineer interview describing his vocal tone as baritone.",
+      "sources": [
+        {
+          "type": "professional-interview",
+          "url": "https://www.ajc.com/arts-entertainment/2026/02/meet-the-atlanta-mastering-engineer-behind-bad-bunnys-biggest-songs/",
+          "supports": [
+            "baritone tone context",
+            "production context"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "voice profile",
+        "artist-specific vocal analysis",
+        "three-song study guide",
+        "study approach",
+        "production context",
+        "Harmiq comparison CTA"
+      ],
+      "notes": "Popular-music voice labels are contextual; do not treat baritone as a rigid classical fach assignment."
+    }
+  }
+}
