@@ -4,8 +4,10 @@
  *
  * Usage: node scripts/audit-affiliate-links.mjs
  *
- * Domain and query-parameter patterns are review candidates. This script does
- * not infer whether a relationship is paid and never edits markup.
+ * Tagged retail links and known affiliate-network domains are review candidates.
+ * Plain Amazon destinations are not treated as affiliate links without a referral
+ * parameter. This script does not infer whether a relationship is paid and never
+ * edits markup.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -55,7 +57,7 @@ const summary = {
 console.log(JSON.stringify({
   htmlFilesScanned: files.length,
   anchorsScanned,
-  note: "Heuristic domain/parameter matches only; inspect affiliate terms and page context.",
+  note: "Tagged retail links and known affiliate-network domains only; inspect affiliate terms and page context.",
   summary,
   examples: {
     sponsored: byStatus("sponsored").slice(0, 30),
