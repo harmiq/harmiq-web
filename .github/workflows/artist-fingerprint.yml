@@ -23,7 +23,9 @@ jobs:
         run: node scripts/check-analyzer-regressions.mjs
 
       - name: Check residual-template auditor syntax
-        run: node --check scripts/audit-residual-directory-templates.mjs
+        run: |
+          node --check scripts/audit-residual-directory-templates.mjs
+          node --check scripts/audit-affiliate-links.mjs
 
       - name: Group residual directory templates
         run: node scripts/audit-residual-directory-templates.mjs > residual-directory-templates.json
