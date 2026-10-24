@@ -363,3 +363,13 @@ Se corrigieron 63 fichas de artistas presentes en el directorio que el inventari
 - Se conservaron H1, canonical, CTA, navegación, estilos y scripts existentes; se neutralizaron los títulos/descripciones V5 y subtítulos de bio-hacking cuando aparecían.
 - H1 y canonical únicos, equilibrio de divs y cierres body/html verificados en las 63 páginas. Los scripts se compararon byte por byte; los marcadores AdSense existentes se mantuvieron sin cambios (ninguno detectado en este lote).
 - Sin cambios de robots, indexabilidad, sitemap, redirecciones ni eliminaciones.
+
+
+## Retirada de etiquetas V5 residuales y equipo no verificado — 2026-10-24
+
+La auditoría detectó 40 fichas del directorio que todavía llevaban el título de plantilla «Perfil Vocal V5». Se corrigieron los títulos y, cuando existía, la descripción genérica sobre técnica y equipo.
+
+- En 16 páginas con bloques «Perfil Biomecánico» que asignaban micrófonos al artista sin fuente visible, se retiró únicamente ese bloque y se dejó claro que la ficha muestra la clasificación del directorio y no verifica el equipo. Se conservaron las guías editoriales de escucha, cuidado y práctica que ya estaban en esas páginas.
+- En la ficha de 10 Years se retiraron el kit vocal afiliado y los enlaces genéricos de «Mejores Interpretaciones», sustituidos por el alcance del directorio.
+- Se mantuvieron H1, canonical, navegación, estilos y scripts. Las 40 quedaron con divs equilibrados y cierres body/html correctos; scripts y marcadores AdSense comparados antes y después, sin cambios.
+- No se alteró robots, indexabilidad, sitemap, redirecciones ni se eliminaron URLs.
