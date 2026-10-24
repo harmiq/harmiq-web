@@ -373,3 +373,8 @@ La auditoría detectó 40 fichas del directorio que todavía llevaban el título
 - En la ficha de 10 Years se retiraron el kit vocal afiliado y los enlaces genéricos de «Mejores Interpretaciones», sustituidos por el alcance del directorio.
 - Se mantuvieron H1, canonical, navegación, estilos y scripts. Las 40 quedaron con divs equilibrados y cierres body/html correctos; scripts y marcadores AdSense comparados antes y después, sin cambios.
 - No se alteró robots, indexabilidad, sitemap, redirecciones ni se eliminaron URLs.
+
+
+### Ajuste residual de Sam Smith — 2026-10-24
+
+La auditoría posterior a la limpieza de 40 títulos detectó una última ficha de directorio con un bloque «Perfil Biomecánico» y micrófonos sin fuente visible, Sam Smith. Se retiró ese bloque y dos notas duplicadas sobre equipo. Se mantuvieron el resto de la guía editorial, H1, canonical, scripts y clasificación del directorio. La estructura quedó equilibrada y no se modificaron marcadores AdSense, robots, indexabilidad ni sitemap.
