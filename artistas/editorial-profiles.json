@@ -121,6 +121,42 @@
         "fuentes visibles"
       ],
       "notes": "Las observaciones de escucha son análisis editorial de Harmiq, no hechos biográficos. No atribuirle equipo, rango exacto ni técnica como dato clínico."
+    },
+    "adele": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Mezzosoprano",
+      "voiceClassification": "Etiqueta del directorio de Harmiq, orientativa; no se presenta como clasificación oficial de Adele.",
+      "sources": [
+        {
+          "type": "official-discography",
+          "url": "https://www.xlrecordings.com/releases/21",
+          "supports": [
+            "inclusión de Rolling in the Deep, Rumour Has It, Turning Tables y Someone Like You en el tracklist de 21"
+          ]
+        },
+        {
+          "type": "official-artist-site",
+          "url": "https://www.adele.com/",
+          "supports": [
+            "discografía y enlaces oficiales"
+          ]
+        },
+        {
+          "type": "editorial-album-page",
+          "url": "https://music.apple.com/us/album/21/1544491232",
+          "supports": [
+            "contexto editorial del álbum usado para orientar el análisis, sin reproducir texto"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en canciones identificadas",
+        "ejercicio práctico",
+        "fuentes visibles"
+      ],
+      "notes": "Las observaciones son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto, salud vocal o biografía sin fuentes específicas."
     }
   }
 }
