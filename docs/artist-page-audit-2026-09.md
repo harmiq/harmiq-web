@@ -378,3 +378,20 @@ La auditoría detectó 40 fichas del directorio que todavía llevaban el título
 ### Ajuste residual de Sam Smith — 2026-10-24
 
 La auditoría posterior a la limpieza de 40 títulos detectó una última ficha de directorio con un bloque «Perfil Biomecánico» y micrófonos sin fuente visible, Sam Smith. Se retiró ese bloque y dos notas duplicadas sobre equipo. Se mantuvieron el resto de la guía editorial, H1, canonical, scripts y clasificación del directorio. La estructura quedó equilibrada y no se modificaron marcadores AdSense, robots, indexabilidad ni sitemap.
+
+
+## Auditoría de corpus y muestra de títulos compuestos — 2026-10-26
+
+La ejecución más reciente del workflow de huellas confirma 11.931 páginas físicas bajo `/artistas/` y 9.187 registros en el directorio:
+
+- 9.170 fichas del directorio, 17 perfiles editoriales y 2.711 páginas `derived-candidate`; otras 33 siguen como `unresolved`.
+- Cero marcadores V5/genéricos auditados, cero páginas sin canonical y cero páginas con `noindex`.
+- Las 2.744 páginas ajenas al directorio siguen fuera del sitemap. No se alteraron robots, indexabilidad, redirecciones ni eliminaciones.
+- Las 2.711 páginas derivadas muestran un punto y coma en el título. Esa señal no identifica por sí sola la relación entre nombres ni un destino canónico.
+- Una revisión de seis ejemplos encontró páginas breves de colaboración, participación o crédito de producción. Por ejemplo, Apple Music acredita “Say Something” a A Great Big World y Christina Aguilera ([ficha del sencillo](https://music.apple.com/us/album/say-something-single/1435641904)); Anjunabeats cataloga lanzamientos de Above & Beyond con Richard Bedford ([catálogo oficial](https://music.anjunabeats.com/artist/57458-above-beyond-feat-richard-bedford?lang=en_GB)); y Qobuz acredita a Jack Joseph Puig como mezclador/remixer en el catálogo de 3 Doors Down ([álbum](https://www.qobuz.com/us-en/album/the-greatest-hits-3-doors-down/0060253722725)).
+- Resultado: no se aplican redirects ni canonicals en lote a títulos compuestos. La decisión requiere identificar qué representa cada relación y documentar su destino con evidencia.
+- La auditoría de huellas normalizadas no encontró páginas idénticas entre sí (11.931 huellas únicas); sí encontró 55 familias de plantilla repetidas entre 536 huellas de plantilla. Esto requiere revisión del valor/rol de la página, no una acción SEO automática.
+
+La ficha de Michael Bublé en el preview actual muestra una fotografía atribuida a Jeanie Mackinder y enlazada a su página de Wikimedia Commons y licencia CC BY 2.0. La comprobación visual de la URL de preview confirma que la imagen servida es Michael Bublé actuando; la captura anterior del usuario no coincide con el preview actual.
+
+**Estado:** revisión de clasificación y huellas completada; la determinación de destino/indexación de las 2.744 URLs sigue pendiente de evidencia por grupos concretos. PR en draft, sin merge ni despliegue de producción.
