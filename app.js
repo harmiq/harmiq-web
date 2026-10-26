@@ -2538,7 +2538,7 @@ function showViralCard() {
           <div style="display:inline-flex;align-items:center;gap:6px;
             background:rgba(255,255,255,.08);padding:3px 10px;border-radius:20px">
             <div style="width:6px;height:6px;border-radius:50%;background:${color}"></div>
-            <span style="font-size:11px;color:rgba(255,255,255,.6)">${conf}% confianza</span>
+            <span style="font-size:11px;color:rgba(255,255,255,.6)">estimación orientativa</span>
           </div>
         </div>
 
@@ -2690,7 +2690,7 @@ async function exportToPDF() {
   
   doc.setFontSize(12);
   doc.text(`Tipo de voz detectado: ${vtName.toUpperCase()}`, 20, 65);
-  doc.text(`Nivel de confianza: ${conf}%`, 20, 72);
+  doc.text("Clasificación orientativa; no es una evaluación vocal profesional.", 20, 72);
 
   // --- Datos Técnicos ---
   doc.setFillColor(243, 244, 246);
