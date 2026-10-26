@@ -197,6 +197,45 @@
         "fotografía identificada con atribución y licencia"
       ],
       "notes": "Las observaciones de escucha son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto o salud sin fuentes específicas."
+    },
+    "taylor-swift": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Mezzosoprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial de Taylor Swift.",
+      "sources": [
+        {
+          "type": "official-album-catalogue",
+          "url": "https://music.apple.com/us/album/the-tortured-poets-department/1736268215",
+          "supports": [
+            "títulos y créditos del tracklist de The Tortured Poets Department"
+          ]
+        },
+        {
+          "type": "official-artist-site",
+          "url": "https://www.taylorswift.com/",
+          "supports": [
+            "discografía y proyectos oficiales"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Taylor_swift.jpg",
+          "supports": [
+            "identidad de Taylor Swift durante The Eras Tour en Los Ángeles en 2023",
+            "autoría Emazasm",
+            "licencia CC BY 4.0"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía de escucha con repertorio identificado",
+        "ejercicio práctico",
+        "fuentes visibles",
+        "fotografía identificada con atribución y licencia"
+      ],
+      "notes": "Las observaciones de escucha son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto o salud sin fuentes específicas."
     }
   }
 }
