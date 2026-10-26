@@ -63,11 +63,12 @@
         },
         {
           "type": "image-source-and-license",
-          "url": "https://commons.wikimedia.org/wiki/File:Ariana_Grande_Eternal_Sunshine_Tour_performing.jpg",
+          "url": "https://commons.wikimedia.org/wiki/File:Ariana_Grande_Eternal_Sunshine_Tour_performing_(cropped).jpg",
           "supports": [
             "Ariana Grande actuando en Brooklyn el 18 de julio de 2026",
             "autor Saturnmondays",
-            "licencia CC BY 4.0"
+            "licencia CC BY 4.0",
+            "recorte de la fotografía original"
           ]
         }
       ],
