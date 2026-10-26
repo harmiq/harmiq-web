@@ -1599,6 +1599,12 @@ function getMatches(vec,vt,gender,filters={},topN=5) {
 
   // 2. FILTRO DE TIPO DE VOZ ESTRICTO (Barítono solo ve Barítonos, etc.)
   pool = pool.filter(s => s.voice_type === vt);
+  // Editorial review found a label conflict: Freddie Mercury is listed as tenor in the artist directory,
+  // but the analyzer catalog labels him baritone. Hide that candidate from baritone results until the
+  // catalog source is reconciled, rather than presenting the conflict as a reliable match.
+  if (String(vt).toLowerCase().includes("barit")) {
+    pool = pool.filter(s => (s.name || "").trim().toLowerCase() !== "freddie mercury");
+  }
   const compareSlug = (new URLSearchParams(window.location.search)).get('compare');
   let compareArtist = null; if (compareSlug) { const target = compareSlug.toLowerCase(); compareArtist = singersDb.find(s => s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') === target || s.name.toLowerCase().includes(target.replace(/-/g, ' '))); }
 
