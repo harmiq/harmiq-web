@@ -358,6 +358,54 @@
         }
       ],
       "notes": "La imagen y atribución se verificaron en Wikimedia Commons. La ficha conserva su alcance de directorio."
+    },
+    "rihanna": {
+      "level": 3,
+      "status": "image-reviewed",
+      "voiceType": "Mezzosoprano",
+      "sources": [
+        {
+          "type": "directory-record",
+          "url": "https://github.com/harmiq/harmiq-web/blob/adsense-editorial-hardening/artistas/index.json",
+          "supports": [
+            "clasificación Mezzosoprano del directorio Harmiq"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Rihanna_2010.jpg",
+          "supports": [
+            "fotografía de Rihanna actuando durante Last Girl on Earth Tour, agosto de 2010",
+            "autoría dephisticate",
+            "licencia CC BY 2.0"
+          ]
+        }
+      ],
+      "notes": "La clasificación se muestra como etiqueta del directorio y no como evaluación vocal individual."
+    },
+    "whitney-houston": {
+      "level": 3,
+      "status": "image-reviewed",
+      "voiceType": "Soprano",
+      "sources": [
+        {
+          "type": "directory-record",
+          "url": "https://github.com/harmiq/harmiq-web/blob/adsense-editorial-hardening/artistas/index.json",
+          "supports": [
+            "clasificación Soprano del directorio Harmiq"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:WhitneyHoustonApril2010crop.jpg",
+          "supports": [
+            "fotografía de Whitney Houston actuando en el O2 Arena de Londres el 28 de abril de 2010",
+            "autoría Egghead06; recorte por matanya",
+            "licencia CC BY 3.0"
+          ]
+        }
+      ],
+      "notes": "La clasificación se muestra como etiqueta del directorio y no como evaluación vocal individual."
     }
   }
 }
