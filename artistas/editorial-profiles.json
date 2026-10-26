@@ -326,86 +326,120 @@
       "notes": "La imagen y su atribución se verificaron en Wikimedia Commons. La ficha conserva su alcance de directorio."
     },
     "bruno-mars": {
-      "level": 3,
-      "status": "image-reviewed",
+      "level": 2,
+      "status": "pilot-reviewed",
       "voiceType": "Tenor",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; no se presenta como clasificación oficial.",
       "sources": [
         {
-          "type": "image-source-and-license",
-          "url": "https://commons.wikimedia.org/wiki/File:Bruno_Mars_portrait.jpg",
+          "type": "official-artist-site",
+          "url": "https://www.brunomars.com/music/24k-magic",
           "supports": [
-            "fotografía de Bruno Mars actuando en Las Vegas en 2010",
-            "original de Chrizta T.; recorte por TheCuriousGnome",
-            "licencia CC BY 2.0"
+            "página oficial del álbum y sus vídeos"
+          ]
+        },
+        {
+          "type": "official-store-tracklist",
+          "url": "https://ukstore.brunomars.com/products/24k-magic-lp",
+          "supports": [
+            "presencia de 24K Magic y That's What I Like en el tracklist"
           ]
         }
       ],
-      "notes": "La imagen y atribución se verificaron en Wikimedia Commons. La ficha conserva su alcance de directorio."
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en tracklists oficiales",
+        "ejercicio breve de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican identidad del repertorio y contexto discográfico. El comentario de escucha es editorial de Harmiq; no atribuir equipo, rango exacto ni evaluación clínica."
     },
     "lady-gaga": {
-      "level": 3,
-      "status": "image-reviewed",
+      "level": 2,
+      "status": "pilot-reviewed",
       "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; no se presenta como clasificación oficial.",
       "sources": [
         {
-          "type": "image-source-and-license",
-          "url": "https://commons.wikimedia.org/wiki/File:Lady_Gaga_2011.jpg",
+          "type": "official-store-tracklist",
+          "url": "https://shopfr.ladygaga.com/collections/musique/products/cd-the-fame",
           "supports": [
-            "fotografía de Lady Gaga durante The Monster Ball Tour en Nashville en abril de 2011",
-            "autoría Philip Nelson",
-            "licencia CC BY-SA 2.0"
+            "tracklist de The Fame, incluidos Poker Face y Paparazzi"
+          ]
+        },
+        {
+          "type": "official-store-tracklist",
+          "url": "https://shopau.ladygaga.com/products/the-fame-cd",
+          "supports": [
+            "tracklist de The Fame"
           ]
         }
       ],
-      "notes": "La imagen y atribución se verificaron en Wikimedia Commons. La ficha conserva su alcance de directorio."
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en tracklists oficiales",
+        "ejercicio breve de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican identidad del repertorio y contexto discográfico. El comentario de escucha es editorial de Harmiq; no atribuir equipo, rango exacto ni evaluación clínica."
     },
     "rihanna": {
-      "level": 3,
-      "status": "image-reviewed",
+      "level": 2,
+      "status": "pilot-reviewed",
       "voiceType": "Mezzosoprano",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; no se presenta como clasificación oficial.",
       "sources": [
         {
-          "type": "directory-record",
-          "url": "https://github.com/harmiq/harmiq-web/blob/adsense-editorial-hardening/artistas/index.json",
+          "type": "official-album-tracklist",
+          "url": "https://www.rihannanow.com/music/good-girl-gone-bad-album/",
           "supports": [
-            "clasificación Mezzosoprano del directorio Harmiq"
+            "tracklist de Good Girl Gone Bad, incluidos Umbrella y Don't Stop the Music"
           ]
         },
         {
-          "type": "image-source-and-license",
-          "url": "https://commons.wikimedia.org/wiki/File:Rihanna.jpg",
+          "type": "official-artist-catalogue",
+          "url": "https://music.apple.com/us/artist/rihanna/63346553",
           "supports": [
-            "fotografía de Rihanna en París en 2011",
-            "autoría oouinouin",
-            "licencia CC BY 2.0"
+            "catálogo y discos de la artista"
           ]
         }
       ],
-      "notes": "La clasificación se muestra como etiqueta del directorio y no como evaluación vocal individual."
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en tracklists oficiales",
+        "ejercicio breve de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican identidad del repertorio y contexto discográfico. El comentario de escucha es editorial de Harmiq; no atribuir equipo, rango exacto ni evaluación clínica."
     },
     "whitney-houston": {
-      "level": 3,
-      "status": "image-reviewed",
+      "level": 2,
+      "status": "pilot-reviewed",
       "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; no se presenta como clasificación oficial.",
       "sources": [
         {
-          "type": "directory-record",
-          "url": "https://github.com/harmiq/harmiq-web/blob/adsense-editorial-hardening/artistas/index.json",
+          "type": "official-album-tracklist",
+          "url": "https://www.whitneyhouston.com/music/whitney-greatest-hits/",
           "supports": [
-            "clasificación Soprano del directorio Harmiq"
+            "tracklist oficial con I Will Always Love You y Greatest Love of All"
           ]
         },
         {
-          "type": "image-source-and-license",
-          "url": "https://commons.wikimedia.org/wiki/File:WhitneyHoustonApril2010crop.jpg",
+          "type": "official-album-tracklist",
+          "url": "https://www.whitneyhouston.com/en-ca/music/whitney-houston/",
           "supports": [
-            "fotografía de Whitney Houston actuando en el O2 Arena de Londres el 28 de abril de 2010",
-            "autoría Egghead06; recorte por matanya",
-            "licencia CC BY 3.0"
+            "tracklist y contexto del álbum Whitney Houston"
           ]
         }
       ],
-      "notes": "La clasificación se muestra como etiqueta del directorio y no como evaluación vocal individual."
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en tracklists oficiales",
+        "ejercicio breve de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican identidad del repertorio y contexto discográfico. El comentario de escucha es editorial de Harmiq; no atribuir equipo, rango exacto ni evaluación clínica."
     },
     "alicia-keys": {
       "level": 2,
