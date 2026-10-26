@@ -27,13 +27,23 @@
             "voice classification context",
             "range-analysis context"
           ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Ed_Sheeran_Madrid.jpg",
+          "supports": [
+            "Ed Sheeran actuando en Madrid el 31 de mayo de 2025",
+            "autor Elwin594",
+            "dedicatoria CC0 1.0"
+          ]
         }
       ],
       "editorialFeatures": [
         "voice profile",
         "artist-specific vocal analysis",
         "three-song study guide",
-        "study approach"
+        "study approach",
+        "fotografía identificada con fuente y licencia"
       ],
       "notes": "Do not publish an exact official range. Current evidence is sufficient for an analytical profile, not a fully sourced biographical dossier."
     },
@@ -50,6 +60,15 @@
             "high-voice context",
             "Wicked vocal training context"
           ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Ariana_Grande_Eternal_Sunshine_Tour_performing.jpg",
+          "supports": [
+            "Ariana Grande actuando en Brooklyn el 18 de julio de 2026",
+            "autor Saturnmondays",
+            "licencia CC BY 4.0"
+          ]
         }
       ],
       "editorialFeatures": [
@@ -57,7 +76,8 @@
         "artist-specific vocal analysis",
         "three-song study guide",
         "study approach",
-        "Harmiq comparison CTA"
+        "Harmiq comparison CTA",
+        "fotografía identificada con fuente y licencia"
       ],
       "notes": "Avoid presenting classical fach as a fixed medical or anatomical fact."
     },
@@ -74,6 +94,15 @@
             "baritone tone context",
             "production context"
           ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Bad_Bunny_Performs.jpg",
+          "supports": [
+            "Bad Bunny actuando en Puerto Rico el 5 de septiembre de 2025",
+            "autor Comecoquito",
+            "dedicatoria CC0 1.0"
+          ]
         }
       ],
       "editorialFeatures": [
@@ -82,7 +111,8 @@
         "three-song study guide",
         "study approach",
         "production context",
-        "Harmiq comparison CTA"
+        "Harmiq comparison CTA",
+        "fotografía identificada con fuente y licencia"
       ],
       "notes": "Popular-music voice labels are contextual; do not treat baritone as a rigid classical fach assignment."
     },
