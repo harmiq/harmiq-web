@@ -2003,18 +2003,18 @@ const PIANO_FREQS = {
 function getVoiceTypeDescription(vt, conf, lang) {
   const desc = {
     es: {
-      "baritone":      "Tu voz de barítono es la más versátil del espectro vocal masculino. Cálida, oscura y expresiva, es el tipo de voz más común entre cantantes profesionales. Freddie Mercury, Elvis Presley y Frank Sinatra eran barítonos.",
+      "baritone":      "El sistema ha estimado una categoría amplia de barítono. La etiqueta es orientativa: no determina por sí sola tu extensión vocal ni implica que tu voz se parezca a la de un cantante concreto.",
       "bass":          "La voz de bajo es la más grave y poderosa de todas. Aporta una profundidad única que pocas voces pueden alcanzar. Johnny Cash y Barry White son ejemplos icónicos de este registro incomparable.",
-      "tenor":         "El tenor es el tipo de voz masculina más agudo y brillante. Su capacidad para alcanzar el Do de pecho lo convierte en el protagonista de óperas y baladas épicas. Pavarotti y Freddie Mercury (en sus agudos) eran tenores.",
+      "tenor":         "El sistema ha estimado una categoría amplia de tenor. La etiqueta es orientativa y no determina por sí sola tu extensión vocal, técnica o similitud con un cantante concreto.",
       "soprano":       "La soprano posee el registro más agudo de las voces femeninas. Clara, luminosa y poderosa en los agudos, es la voz protagonista de la ópera y los grandes musicales. Celine Dion y Ariana Grande son sopranos.",
       "mezzo-soprano": "La mezzo-soprano combina la potencia de las graves con la brillantez de los agudos. Es la voz femenina más común, con un timbre cálido e intensamente expresivo. Adele y Amy Winehouse son mezzos.",
       "contralto":     "La contralto es la voz femenina más grave y una verdadera rareza vocal. Oscura, poderosa y con una profundidad hipnótica, es un regalo musical extraordinario. Nina Simone y Tracy Chapman son contraltos.",
       "countertenor":  "El contratenor es la voz masculina más aguda, que utiliza la voz de cabeza o falsetto para alcanzar registros de soprano o mezzo. Una rareza extraordinaria con un sonido único e inconfundible.",
     },
     en: {
-      "baritone":      "Your baritone voice is the most versatile in the male vocal spectrum. Warm, dark and expressive, it's the most common voice type among professional singers.",
+      "baritone":      "The system estimated a broad baritone category. This is an orientation, not a full assessment of your range or evidence that your voice resembles a particular singer.",
       "bass":          "The bass is the deepest and most powerful of all voices. It brings a unique depth that few voices can reach.",
-      "tenor":         "The tenor is the highest and brightest male voice type. Its ability to hit the chest high C makes it the protagonist of operas and epic ballads.",
+      "tenor":         "The system estimated a broad tenor category. This is an orientation, not a full assessment of your range, technique, or similarity to a particular singer.",
       "soprano":       "The soprano has the highest register of female voices. Clear, luminous and powerful in the high notes.",
       "mezzo-soprano": "The mezzo-soprano combines the power of lower notes with the brilliance of the upper range.",
       "contralto":     "The contralto is the lowest female voice and a true vocal rarity.",
