@@ -406,6 +406,21 @@
         }
       ],
       "notes": "La clasificación se muestra como etiqueta del directorio y no como evaluación vocal individual."
+    },
+    "alicia-keys": {
+      "level": 3,
+      "status": "directory-label-reviewed",
+      "voiceType": "Soprano",
+      "sources": [
+        {
+          "type": "directory-record",
+          "url": "https://github.com/harmiq/harmiq-web/blob/adsense-editorial-hardening/artistas/index.json",
+          "supports": [
+            "clasificación Soprano del directorio Harmiq"
+          ]
+        }
+      ],
+      "notes": "La clasificación se muestra como etiqueta del directorio y no como evaluación vocal individual."
     }
   }
 }
