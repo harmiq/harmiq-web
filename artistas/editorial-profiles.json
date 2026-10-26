@@ -10,7 +10,8 @@
     "minimumIndexable": "A page should only be considered for individual indexation when it contains materially differentiated, source-aware editorial value.",
     "sourcePolicy": "Artist-specific factual claims require an identifiable source. Editorial observations must be presented as analysis, not biography or verified fact.",
     "equipmentPolicy": "Artist-owned equipment is only stated when sourced. Otherwise equipment is labelled as an editorial recommendation.",
-    "rangePolicy": "Exact vocal ranges are omitted when they are estimates or disputed; classifications are contextual and orientative."
+    "rangePolicy": "Exact vocal ranges are omitted when they are estimates or disputed; classifications are contextual and orientative.",
+    "imagePolicy": "Use an image only after verifying that it actually depicts the named artist and recording the author, source, license and required attribution. Alt text must describe the actual image; linked album art is not an artist portrait."
   },
   "artists": {
     "ed-sheeran": {
@@ -157,6 +158,45 @@
         "fuentes visibles"
       ],
       "notes": "Las observaciones son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto, salud vocal o biografía sin fuentes específicas."
+    },
+    "shakira": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Mezzosoprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial de Shakira.",
+      "sources": [
+        {
+          "type": "record-label-tracklist",
+          "url": "https://sonymusic.com.mx/shakira-revela-tracklist-de-las-mujeres-ya-no-lloran/",
+          "supports": [
+            "títulos y colaboraciones del álbum Las Mujeres Ya No Lloran"
+          ]
+        },
+        {
+          "type": "official-artist-site",
+          "url": "https://www.shakira.com/music/",
+          "supports": [
+            "discografía oficial"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Shakira.JPG",
+          "supports": [
+            "identidad de Shakira en una actuación en Singapur en 2011",
+            "autoría Serenity",
+            "licencia CC BY 3.0"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía de escucha con repertorio identificado",
+        "ejercicio práctico",
+        "fuentes visibles",
+        "fotografía identificada con atribución y licencia"
+      ],
+      "notes": "Las observaciones de escucha son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto o salud sin fuentes específicas."
     }
   }
 }
