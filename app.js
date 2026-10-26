@@ -1913,8 +1913,17 @@ async function analyzeAudio() {
       clearTimeout(timeout);
     }
 
-    if (!resp || !resp.ok) {
-      // Backend con error HTTP, timeout o fallo de red → fallback local
+    let data = null;
+    if (resp?.ok) {
+      try {
+        data = await resp.json();
+      } catch (parseError) {
+        console.warn("Respuesta /analyze inválida; se intentará análisis local.", parseError?.name || "parse-error");
+      }
+    }
+
+    if (!resp || !resp.ok || !data || data.status === "error") {
+      // Backend con error HTTP, timeout, JSON inválido o error de aplicación → fallback local
       showStatus("⚡ Backend no disponible. Analizando localmente...");
       const feat = await extractFeatures(audioBlob);
       feat._local = true;
@@ -1929,10 +1938,6 @@ async function analyzeAudio() {
       showStatus("");
       return;
     }
-    const data = await resp.json();
-    
-    if (data.status === "error") throw new Error(data.message);
-
     const vec  = data.vector;
     const feat = data.features;
     
