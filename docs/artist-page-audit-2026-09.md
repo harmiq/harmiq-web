@@ -395,3 +395,8 @@ La ejecución más reciente del workflow de huellas confirma 11.931 páginas fí
 La ficha de Michael Bublé en el preview actual muestra una fotografía atribuida a Jeanie Mackinder y enlazada a su página de Wikimedia Commons y licencia CC BY 2.0. La comprobación visual de la URL de preview confirma que la imagen servida es Michael Bublé actuando; la captura anterior del usuario no coincide con el preview actual.
 
 **Estado:** revisión de clasificación y huellas completada; la determinación de destino/indexación de las 2.744 URLs sigue pendiente de evidencia por grupos concretos. PR en draft, sin merge ni despliegue de producción.
+
+
+### Corrección de etiqueta en la Home — Adele — 2026-10-26
+
+La tarjeta destacada de Adele decía “Contralto”, mientras que artistas/index.json y su ficha editorial la registran como “Mezzosoprano”. Se alineó la tarjeta con la clasificación orientativa del directorio. Solo cambió ese rótulo; el canonical, el loader de AdSense y el resto de la página permanecen intactos. La vista previa actualizada muestra “MEZZOSOPRANO Adele”. Commit b3f5c92680903b00522a08c8b0afc7becb54b7e0; auditoría [40374271764](https://github.com/harmiq/harmiq-web/actions/runs/40374271764) y preview [40374271540](https://github.com/harmiq/harmiq-web/actions/runs/40374271540), correctos.
