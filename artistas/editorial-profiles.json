@@ -466,6 +466,100 @@
         "fotografía identificada con atribución y licencia"
       ],
       "notes": "Las observaciones musicales son análisis editorial de Harmiq; no inferir salud vocal, rango exacto, equipo ni técnica individual."
+    },
+    "celine-dion": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial.",
+      "sources": [
+        {
+          "type": "official-discography",
+          "url": "https://www.celinedion.com/discography/my-love-essential-collection/",
+          "supports": [
+            "inclusión de My Heart Will Go On en el tracklist de My Love: Essential Collection"
+          ]
+        },
+        {
+          "type": "official-discography",
+          "url": "https://www.celinedion.com/discography/falling-into-you/",
+          "supports": [
+            "inclusión de All By Myself en el tracklist de Falling Into You"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "etiqueta del directorio contextualizada",
+        "guía comparativa de escucha sobre dos canciones",
+        "ejercicio de práctica seguro",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican la identificación de las canciones. Las observaciones de escucha son editoriales; no atribuir equipo, rango exacto ni técnica clínica."
+    },
+    "elvis-presley": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Barítono",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; la página no la convierte en una clasificación oficial ni infiere un rango medido.",
+      "sources": [
+        {
+          "type": "official-track-page",
+          "url": "https://www.elvisthemusic.com/track/cant-help-falling-in-love/",
+          "supports": [
+            "identificación y contexto de la grabación"
+          ]
+        },
+        {
+          "type": "official-track-page",
+          "url": "https://www.elvisthemusic.com/music/suspicious-minds/",
+          "supports": [
+            "contexto de grabación y arreglo de Suspicious Minds"
+          ]
+        },
+        {
+          "type": "official-track-page",
+          "url": "https://www.elvisthemusic.com/music/jailhouse-rock/",
+          "supports": [
+            "identificación y contexto de Jailhouse Rock"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "comparación editorial de fraseo y arreglo",
+        "ejercicio práctico",
+        "fuentes oficiales visibles"
+      ],
+      "notes": "Las páginas oficiales respaldan identidad y contexto discográfico. Las observaciones son análisis de escucha, no hechos biográficos ni una evaluación vocal."
+    },
+    "mariah-carey": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial ni se deriva de afirmaciones promocionales sobre rango.",
+      "sources": [
+        {
+          "type": "album-catalogue",
+          "url": "https://music.apple.com/us/album/music-box/1706160663",
+          "supports": [
+            "tracklist de Music Box: Hero y Dreamlover"
+          ]
+        },
+        {
+          "type": "official-artist-site",
+          "url": "https://mariahcarey.com/about-us/",
+          "supports": [
+            "biografía oficial; no se utiliza para inferir clasificación vocal"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "comparación de escucha de Hero y Dreamlover",
+        "ejercicio de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "La lista de canciones se contrasta con el álbum. No presentar el rango promocional citado en el sitio oficial como medición independiente ni como etiqueta técnica."
     }
   }
 }
