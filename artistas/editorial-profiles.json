@@ -236,6 +236,46 @@
         "fotografía identificada con atribución y licencia"
       ],
       "notes": "Las observaciones de escucha son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto o salud sin fuentes específicas."
+    },
+    "freddie-mercury": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Tenor",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq. Un estudio acústico midió habla en rango típico de barítono y un rango de canto F♯2–G5, sin asignar una clasificación clásica definitiva.",
+      "sources": [
+        {
+          "type": "peer-reviewed-acoustic-study",
+          "url": "https://doi.org/10.3109/14015439.2016.1156737",
+          "supports": [
+            "mediana de frecuencia fundamental del habla en seis entrevistas",
+            "intervalo medido en muestras cantadas F♯2–G5; no es una clasificación clásica definitiva"
+          ]
+        },
+        {
+          "type": "official-biography",
+          "url": "https://freddiemercury.com/bio/",
+          "supports": [
+            "contexto biográfico oficial; no se usa para establecer clasificación vocal"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Queen_-_Freddie_Mercury.jpg",
+          "supports": [
+            "identidad/contexto de la fotografía en New Haven en 1977",
+            "autor Carl Lender",
+            "licencia CC BY 2.0"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "investigación acústica explicada con límites",
+        "guía original de escucha",
+        "fuentes visibles",
+        "fotografía identificada con atribución y licencia"
+      ],
+      "notes": "No deducir clasificación clásica del tono hablado ni del rango medido aislado. La recomendación del analizador no significa que la voz del usuario sea igual a la del artista."
     }
   }
 }
