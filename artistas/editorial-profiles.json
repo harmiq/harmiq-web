@@ -30,11 +30,11 @@
         },
         {
           "type": "image-source-and-license",
-          "url": "https://commons.wikimedia.org/wiki/File:Ed_Sheeran_Madrid.jpg",
+          "url": "https://commons.wikimedia.org/wiki/File:Ed_Sheeran_-_2017_Press.jpg",
           "supports": [
-            "Ed Sheeran actuando en Madrid el 31 de mayo de 2025",
-            "autor Elwin594",
-            "dedicatoria CC0 1.0"
+            "retrato de prensa de Ed Sheeran publicado en 2017",
+            "autor Greg Williams",
+            "licencia CC BY 3.0"
           ]
         }
       ],
@@ -97,10 +97,10 @@
         },
         {
           "type": "image-source-and-license",
-          "url": "https://commons.wikimedia.org/wiki/File:Bad_Bunny_Performs.jpg",
+          "url": "https://commons.wikimedia.org/wiki/File:Bad_Bunny_Performs_(cropped).jpg",
           "supports": [
-            "Bad Bunny actuando en Puerto Rico el 5 de septiembre de 2025",
-            "autor Comecoquito",
+            "recorte de foto de Bad Bunny cantando Baile Inolvidable en Puerto Rico el 5 de septiembre de 2025",
+            "autoría original Comecoquito",
             "dedicatoria CC0 1.0"
           ]
         }
