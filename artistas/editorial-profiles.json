@@ -84,6 +84,43 @@
         "Harmiq comparison CTA"
       ],
       "notes": "Popular-music voice labels are contextual; do not treat baritone as a rigid classical fach assignment."
+    },
+    "michael-buble": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Barítono",
+      "voiceClassification": "Clasificación orientativa de Harmiq, no una asignación oficial. Se contextualiza con la explicación del artista sobre los distintos enfoques estilísticos que usa al cantar material contemporáneo y estándares.",
+      "sources": [
+        {
+          "type": "artist-interview",
+          "url": "https://www.pbs.org/newshour/show/singer-michael-buble-on-his-musical-choices-inspirations",
+          "supports": [
+            "distinción de enfoque estilístico entre material contemporáneo y estándares"
+          ]
+        },
+        {
+          "type": "official-biography",
+          "url": "https://www.michaelbuble.com/",
+          "supports": [
+            "contexto de repertorio: estándares, pop, swing, jazz y R&B"
+          ]
+        },
+        {
+          "type": "official-discography",
+          "url": "https://www.michaelbuble.com/album/crazy-love",
+          "supports": [
+            "tracklist de Cry Me a River y Haven't Met You Yet"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "entrevista del artista",
+        "guía comparativa de escucha basada en repertorio identificado",
+        "ejercicio práctico de interpretación",
+        "fuentes visibles"
+      ],
+      "notes": "Las observaciones de escucha son análisis editorial de Harmiq, no hechos biográficos. No atribuirle equipo, rango exacto ni técnica como dato clínico."
     }
   }
 }
