@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://harmiq.app/</loc></url>
+  <url><loc>https://harmiq.app/artistas/</loc></url>
+  <url><loc>https://harmiq.app/artistas/ed-sheeran/</loc></url>
+  <url><loc>https://harmiq.app/artistas/ariana-grande/</loc></url>
+  <url><loc>https://harmiq.app/artistas/bad-bunny/</loc></url>
+  <url><loc>https://harmiq.app/artistas/michael-buble/</loc></url>
+  <url><loc>https://harmiq.app/artistas/shakira/</loc></url>
+  <url><loc>https://harmiq.app/artistas/taylor-swift/</loc></url>
+  <url><loc>https://harmiq.app/artistas/adele/</loc></url>
+  <url><loc>https://harmiq.app/artistas/alicia-keys/</loc></url>
+  <url><loc>https://harmiq.app/artistas/freddie-mercury/</loc></url>
+  <url><loc>https://harmiq.app/tipos-de-voz/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/soprano/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/mezzosoprano/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/tenor/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/baritono/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/bajo/</loc></url>
+  <url><loc>https://harmiq.app/tipo-de-voz/contralto/</loc></url>
+  <url><loc>https://harmiq.app/home-studio/</loc></url>
   <url><loc>https://harmiq.app/recursos/</loc></url>
   <url><loc>https://harmiq.app/recursos/lalal-ai/</loc></url>
   <url><loc>https://harmiq.app/recursos/udemy-canto/</loc></url>
@@ -18,4 +36,11 @@
   <url><loc>https://harmiq.app/recursos/daw/waveform-free/</loc></url>
   <url><loc>https://harmiq.app/recursos/daw/lmms/</loc></url>
   <url><loc>https://harmiq.app/recursos/daw/garageband/</loc></url>
+  <url><loc>https://harmiq.app/artistas/celine-dion/</loc></url>
+  <url><loc>https://harmiq.app/artistas/elvis-presley/</loc></url>
+  <url><loc>https://harmiq.app/artistas/mariah-carey/</loc></url>
+  <url><loc>https://harmiq.app/artistas/bruno-mars/</loc></url>
+  <url><loc>https://harmiq.app/artistas/lady-gaga/</loc></url>
+  <url><loc>https://harmiq.app/artistas/rihanna/</loc></url>
+  <url><loc>https://harmiq.app/artistas/whitney-houston/</loc></url>
 </urlset>

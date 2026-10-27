@@ -1047,12 +1047,10 @@ function stopSpectrum() {
 async function toggleRecording() {
   const btn  = document.getElementById("record-btn");
   const txt  = document.getElementById("btn-record-text");
-  let gender = document.getElementById("user-gender")?.value;
-  if (!gender) {
-    gender = "auto";
-    const sel = document.getElementById("user-gender");
-    if (sel) sel.value = "auto";
-    _setGender("auto", document.getElementById("_gbtn_auto"));
+  const gender = document.getElementById("user-gender")?.value;
+  if (!gender && !isRec) {
+    showStatus("Selecciona Hombre o Mujer antes de grabar.", "err");
+    return;
   }
 
   if (!isRec) {
@@ -1156,7 +1154,11 @@ async function extractFeatures(blob) {
       }
     }
   }
-  if (pitches.length<5) pitches.push(150);
+  // No inventar una F0 cuando el audio no contiene suficientes tramas sonoras fiables.
+  // Un valor sintético de 150 Hz sesga la clasificación hacia barítono/mezzo.
+  if (pitches.length < 5) {
+    throw new Error("No se ha detectado suficiente voz clara. Graba entre 5 y 10 segundos, evita el ruido y prueba de nuevo.");
+  }
   pitches.sort((a,b)=>a-b);
   const n=pitches.length;
   const pm=pitches.reduce((a,v)=>a+v,0)/n;
@@ -1597,6 +1599,12 @@ function getMatches(vec,vt,gender,filters={},topN=5) {
 
   // 2. FILTRO DE TIPO DE VOZ ESTRICTO (Barítono solo ve Barítonos, etc.)
   pool = pool.filter(s => s.voice_type === vt);
+  // Editorial review found a label conflict: Freddie Mercury is listed as tenor in the artist directory,
+  // but the analyzer catalog labels him baritone. Hide that candidate from baritone results until the
+  // catalog source is reconciled, rather than presenting the conflict as a reliable match.
+  if (String(vt).toLowerCase().includes("barit")) {
+    pool = pool.filter(s => (s.name || "").trim().toLowerCase() !== "freddie mercury");
+  }
   const compareSlug = (new URLSearchParams(window.location.search)).get('compare');
   let compareArtist = null; if (compareSlug) { const target = compareSlug.toLowerCase(); compareArtist = singersDb.find(s => s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') === target || s.name.toLowerCase().includes(target.replace(/-/g, ' '))); }
 
@@ -1792,10 +1800,8 @@ async function analyzeAudio() {
   const dropZone   = document.getElementById("_drop_zone");
 
   if (!gender) {
-    gender = "male"; // Default intuitivo para evitar bloqueo
-    const sel = document.getElementById("user-gender");
-    if (sel) sel.value = "male";
-    console.log("Gender not selected, defaulting to male for analysis.");
+    showStatus("Selecciona Hombre o Mujer antes de analizar el audio.", "err");
+    return;
   }
   if (!audioBlob) { showStatus(tr("_err_short"), "err"); return; }
   if (!singersDb || !singersDb.length){ showStatus(tr("_err_db"), "err"); return; }
@@ -1825,9 +1831,10 @@ async function analyzeAudio() {
   try {
     updateP(5, "Despertando motor neuronal...");
     
-    // 🔔 WAKE-UP LOOP: Hasta 20 segundos para despertar el Space
+    // 🔔 WAKE-UP LOOP: presupuesto aproximado de 20 segundos.
+    // Evita dejar al usuario esperando casi un minuto antes del análisis local.
     let isAwake = false;
-    const maxRetries = 10;
+    const maxRetries = 6;
     for (let i=0; i<maxRetries; i++) {
         const retryNum = i + 1;
         const progress = Math.min(85, 5 + (i * 8));
@@ -1835,7 +1842,7 @@ async function analyzeAudio() {
         
         try {
             const controller = new AbortController();
-            const tId = setTimeout(() => controller.abort(), 3500);
+            const tId = setTimeout(() => controller.abort(), 2500);
             const h = await fetch(`${HF_API_URL}/health`, { 
                 method: 'GET', 
                 mode: 'cors',
@@ -1846,7 +1853,7 @@ async function analyzeAudio() {
         } catch(e) { 
             console.log("Reintento conexión...", retryNum); 
         }
-        await new Promise(r => setTimeout(r, 1800));
+        if (i < maxRetries - 1) await new Promise(r => setTimeout(r, 1000));
     }
 
     if (!isAwake) {
@@ -1890,7 +1897,7 @@ async function analyzeAudio() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 60000); // 60s timeout
 
-    let resp;
+    let resp = null;
     try {
       resp = await fetch(`${HF_API_URL}/analyze`, {
         method: 'POST',
@@ -1898,12 +1905,25 @@ async function analyzeAudio() {
         mode: 'cors',
         signal: controller.signal
       });
+    } catch (networkError) {
+      // La caída de red o el timeout también deben activar el análisis local.
+      // No registrar el audio ni datos sensibles en telemetría.
+      console.warn("Backend /analyze no disponible; se intentará análisis local.", networkError?.name || "network-error");
     } finally {
       clearTimeout(timeout);
     }
 
-    if (!resp.ok) {
-      // Backend con error HTTP → fallback local
+    let data = null;
+    if (resp?.ok) {
+      try {
+        data = await resp.json();
+      } catch (parseError) {
+        console.warn("Respuesta /analyze inválida; se intentará análisis local.", parseError?.name || "parse-error");
+      }
+    }
+
+    if (!resp || !resp.ok || !data || data.status === "error") {
+      // Backend con error HTTP, timeout, JSON inválido o error de aplicación → fallback local
       showStatus("⚡ Backend no disponible. Analizando localmente...");
       const feat = await extractFeatures(audioBlob);
       feat._local = true;
@@ -1918,10 +1938,6 @@ async function analyzeAudio() {
       showStatus("");
       return;
     }
-    const data = await resp.json();
-    
-    if (data.status === "error") throw new Error(data.message);
-
     const vec  = data.vector;
     const feat = data.features;
     
@@ -1987,18 +2003,18 @@ const PIANO_FREQS = {
 function getVoiceTypeDescription(vt, conf, lang) {
   const desc = {
     es: {
-      "baritone":      "Tu voz de barítono es la más versátil del espectro vocal masculino. Cálida, oscura y expresiva, es el tipo de voz más común entre cantantes profesionales. Freddie Mercury, Elvis Presley y Frank Sinatra eran barítonos.",
+      "baritone":      "El sistema ha estimado una categoría amplia de barítono. La etiqueta es orientativa: no determina por sí sola tu extensión vocal ni implica que tu voz se parezca a la de un cantante concreto.",
       "bass":          "La voz de bajo es la más grave y poderosa de todas. Aporta una profundidad única que pocas voces pueden alcanzar. Johnny Cash y Barry White son ejemplos icónicos de este registro incomparable.",
-      "tenor":         "El tenor es el tipo de voz masculina más agudo y brillante. Su capacidad para alcanzar el Do de pecho lo convierte en el protagonista de óperas y baladas épicas. Pavarotti y Freddie Mercury (en sus agudos) eran tenores.",
+      "tenor":         "El sistema ha estimado una categoría amplia de tenor. La etiqueta es orientativa y no determina por sí sola tu extensión vocal, técnica o similitud con un cantante concreto.",
       "soprano":       "La soprano posee el registro más agudo de las voces femeninas. Clara, luminosa y poderosa en los agudos, es la voz protagonista de la ópera y los grandes musicales. Celine Dion y Ariana Grande son sopranos.",
       "mezzo-soprano": "La mezzo-soprano combina la potencia de las graves con la brillantez de los agudos. Es la voz femenina más común, con un timbre cálido e intensamente expresivo. Adele y Amy Winehouse son mezzos.",
       "contralto":     "La contralto es la voz femenina más grave y una verdadera rareza vocal. Oscura, poderosa y con una profundidad hipnótica, es un regalo musical extraordinario. Nina Simone y Tracy Chapman son contraltos.",
       "countertenor":  "El contratenor es la voz masculina más aguda, que utiliza la voz de cabeza o falsetto para alcanzar registros de soprano o mezzo. Una rareza extraordinaria con un sonido único e inconfundible.",
     },
     en: {
-      "baritone":      "Your baritone voice is the most versatile in the male vocal spectrum. Warm, dark and expressive, it's the most common voice type among professional singers.",
+      "baritone":      "The system estimated a broad baritone category. This is an orientation, not a full assessment of your range or evidence that your voice resembles a particular singer.",
       "bass":          "The bass is the deepest and most powerful of all voices. It brings a unique depth that few voices can reach.",
-      "tenor":         "The tenor is the highest and brightest male voice type. Its ability to hit the chest high C makes it the protagonist of operas and epic ballads.",
+      "tenor":         "The system estimated a broad tenor category. This is an orientation, not a full assessment of your range, technique, or similarity to a particular singer.",
       "soprano":       "The soprano has the highest register of female voices. Clear, luminous and powerful in the high notes.",
       "mezzo-soprano": "The mezzo-soprano combines the power of lower notes with the brilliance of the upper range.",
       "contralto":     "The contralto is the lowest female voice and a true vocal rarity.",
@@ -2522,7 +2538,7 @@ function showViralCard() {
           <div style="display:inline-flex;align-items:center;gap:6px;
             background:rgba(255,255,255,.08);padding:3px 10px;border-radius:20px">
             <div style="width:6px;height:6px;border-radius:50%;background:${color}"></div>
-            <span style="font-size:11px;color:rgba(255,255,255,.6)">${conf}% confianza</span>
+            <span style="font-size:11px;color:rgba(255,255,255,.6)">estimación orientativa</span>
           </div>
         </div>
 
@@ -2674,7 +2690,7 @@ async function exportToPDF() {
   
   doc.setFontSize(12);
   doc.text(`Tipo de voz detectado: ${vtName.toUpperCase()}`, 20, 65);
-  doc.text(`Nivel de confianza: ${conf}%`, 20, 72);
+  doc.text("Clasificación orientativa; no es una evaluación vocal profesional.", 20, 72);
 
   // --- Datos Técnicos ---
   doc.setFillColor(243, 244, 246);
@@ -2754,7 +2770,7 @@ const VOZ_DATA = {
   baritono: {
     emoji:"🎭", color:"#7C4DFF", range:"Sol2 – Sol4", hz:"98 – 392 Hz",
     ytId: "E_h-T5ZKZDU", ytId2: "rmopMoKJo34",
-    artists:["Frank Sinatra","Elvis Presley","Michael Bublé","David Bowie","Freddie Mercury","Alejandro Sanz","Joaquín Sabina","Serrat"],
+    artists:["Frank Sinatra","Elvis Presley","Michael Bublé","David Bowie","Alejandro Sanz","Joaquín Sabina","Serrat"],
     artistImgs:{
       "Frank Sinatra":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Frank_Sinatra_-_publicity.jpg/220px-Frank_Sinatra_-_publicity.jpg",
       "Elvis Presley":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Elvis_Presley_promoting_Jailhouse_Rock.jpg/220px-Elvis_Presley_promoting_Jailhouse_Rock.jpg",
@@ -2792,8 +2808,8 @@ const VOZ_DATA = {
       "Passaggio exercise: work the B2-D3 gently without breaking",
       "5-minute warm-up: yawns + neck rotation + humming",
     ],
-    desc_es:"El barítono es el tipo de voz masculina más común y versátil del mundo. Su zona de confort abarca desde el Sol2 al Sol4, con un timbre cálido, oscuro y proyectado que lo hace ideal para el pop, el rock, el jazz y la música clásica. Se estima que el 60-70% de los cantantes masculinos son barítonos, aunque muchos no lo saben porque no han hecho ningún análisis vocal. Entre los barítonos más famosos de la historia se encuentran Frank Sinatra, Elvis Presley, David Bowie, Freddie Mercury (sí, era barítono con extensión de tenor), Alejandro Sanz y Michael Bublé. La riqueza armónica del barítono permite tanto el drama de la ópera como la intimidad del jazz o la potencia del rock. Si eres barítono, tu zona de mayor poder está entre el La2 y el Mi4. Con técnica y entrenamiento vocal, puedes extender tu registro hacia el Sol4 y más arriba usando mix voice. El secreto del barítono moderno no es llegar al agudo a la fuerza, sino construir una voz completa desde los graves.",
-    desc_en:"The baritone is the most common and versatile male voice type in the world. Its comfort zone spans from G2 to G4, with a warm, dark, projected timbre ideal for pop, rock, jazz and classical music. An estimated 60-70% of male singers are baritones, though many don't know it because they've never done a vocal analysis.  Famous baritones include Frank Sinatra, Elvis Presley, David Bowie, Freddie Mercury (yes, he was a baritone with tenor extension), Alejandro Sanz and Michael Bublé. The harmonic richness of the baritone allows both operatic drama and jazz intimacy.  If you're a baritone, your power zone is between A2 and E4. With vocal technique and training, you can extend your range to G4 and beyond using mix voice.",
+    desc_es:"El barítono es el tipo de voz masculina más común y versátil del mundo. Su zona de confort abarca desde el Sol2 al Sol4, con un timbre cálido, oscuro y proyectado que lo hace ideal para el pop, el rock, el jazz y la música clásica. Se estima que el 60-70% de los cantantes masculinos son barítonos, aunque muchos no lo saben porque no han hecho ningún análisis vocal. Entre los barítonos más famosos de la historia se encuentran Frank Sinatra, Elvis Presley, David Bowie, Alejandro Sanz y Michael Bublé. La riqueza armónica del barítono permite tanto el drama de la ópera como la intimidad del jazz o la potencia del rock. Si eres barítono, tu zona de mayor poder está entre el La2 y el Mi4. Con técnica y entrenamiento vocal, puedes extender tu registro hacia el Sol4 y más arriba usando mix voice. El secreto del barítono moderno no es llegar al agudo a la fuerza, sino construir una voz completa desde los graves.",
+    desc_en:"The baritone is the most common and versatile male voice type in the world. Its comfort zone spans from G2 to G4, with a warm, dark, projected timbre ideal for pop, rock, jazz and classical music. An estimated 60-70% of male singers are baritones, though many don't know it because they've never done a vocal analysis.  Famous baritones include Frank Sinatra, Elvis Presley, David Bowie, Alejandro Sanz and Michael Bublé. The harmonic richness of the baritone allows both operatic drama and jazz intimacy.  If you're a baritone, your power zone is between A2 and E4. With vocal technique and training, you can extend your range to G4 and beyond using mix voice.",
   },
 
   tenor: {

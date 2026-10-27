@@ -1,0 +1,599 @@
+{
+  "schemaVersion": 1,
+  "description": "Editorial metadata for artist pages. This file is separate from artistas/index.json, which remains the base directory of name, slug and orientative voice type.",
+  "levels": {
+    "1": "Full editorial profile",
+    "2": "Analytical profile",
+    "3": "Directory-only record"
+  },
+  "rules": {
+    "minimumIndexable": "A page should only be considered for individual indexation when it contains materially differentiated, source-aware editorial value.",
+    "sourcePolicy": "Artist-specific factual claims require an identifiable source. Editorial observations must be presented as analysis, not biography or verified fact.",
+    "equipmentPolicy": "Artist-owned equipment is only stated when sourced. Otherwise equipment is labelled as an editorial recommendation.",
+    "rangePolicy": "Exact vocal ranges are omitted when they are estimates or disputed; classifications are contextual and orientative.",
+    "imagePolicy": "Use an image only after verifying that it actually depicts the named artist and recording the author, source, license and required attribution. Alt text must describe the actual image; linked album art is not an artist portrait."
+  },
+  "artists": {
+    "ed-sheeran": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Tenor",
+      "voiceClassification": "Harmiq orientative classification; external analyses may place him around the tenor/light-baritone boundary.",
+      "sources": [
+        {
+          "type": "specialist-analysis",
+          "url": "https://vocalrangetester.com/ed-sheeran-vocal-range/",
+          "supports": [
+            "voice classification context",
+            "range-analysis context"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Ed_Sheeran_-_2017_Press.jpg",
+          "supports": [
+            "retrato de prensa de Ed Sheeran publicado en 2017",
+            "autor Greg Williams",
+            "licencia CC BY 3.0"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "voice profile",
+        "artist-specific vocal analysis",
+        "three-song study guide",
+        "study approach",
+        "fotografía identificada con fuente y licencia"
+      ],
+      "notes": "Do not publish an exact official range. Current evidence is sufficient for an analytical profile, not a fully sourced biographical dossier."
+    },
+    "ariana-grande": {
+      "level": 1,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Harmiq database classification; contextualized with Ariana Grande's documented discussion of her naturally high voice and trained coloratura-soprano placement for Wicked.",
+      "sources": [
+        {
+          "type": "primary-interview",
+          "url": "https://www.npr.org/2025/02/04/nx-s1-5279457/wicked-ariana-grande",
+          "supports": [
+            "high-voice context",
+            "Wicked vocal training context"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Ariana_Grande_Eternal_Sunshine_Tour_performing_(cropped).jpg",
+          "supports": [
+            "Ariana Grande actuando en Brooklyn el 18 de julio de 2026",
+            "autor Saturnmondays",
+            "licencia CC BY 4.0",
+            "recorte de la fotografía original"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "voice profile",
+        "artist-specific vocal analysis",
+        "three-song study guide",
+        "study approach",
+        "Harmiq comparison CTA",
+        "fotografía identificada con fuente y licencia"
+      ],
+      "notes": "Avoid presenting classical fach as a fixed medical or anatomical fact."
+    },
+    "bad-bunny": {
+      "level": 1,
+      "status": "pilot-reviewed",
+      "voiceType": "Barítono",
+      "voiceClassification": "Harmiq database classification, supported contextually by a professional mastering-engineer interview describing his vocal tone as baritone.",
+      "sources": [
+        {
+          "type": "professional-interview",
+          "url": "https://www.ajc.com/arts-entertainment/2026/02/meet-the-atlanta-mastering-engineer-behind-bad-bunnys-biggest-songs/",
+          "supports": [
+            "baritone tone context",
+            "production context"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Bad_Bunny_Performs_(cropped).jpg",
+          "supports": [
+            "recorte de foto de Bad Bunny cantando Baile Inolvidable en Puerto Rico el 5 de septiembre de 2025",
+            "autoría original Comecoquito",
+            "dedicatoria CC0 1.0"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "voice profile",
+        "artist-specific vocal analysis",
+        "three-song study guide",
+        "study approach",
+        "production context",
+        "Harmiq comparison CTA",
+        "fotografía identificada con fuente y licencia"
+      ],
+      "notes": "Popular-music voice labels are contextual; do not treat baritone as a rigid classical fach assignment."
+    },
+    "michael-buble": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Barítono",
+      "voiceClassification": "Clasificación orientativa de Harmiq, no una asignación oficial. Se contextualiza con la explicación del artista sobre los distintos enfoques estilísticos que usa al cantar material contemporáneo y estándares.",
+      "sources": [
+        {
+          "type": "artist-interview",
+          "url": "https://www.pbs.org/newshour/show/singer-michael-buble-on-his-musical-choices-inspirations",
+          "supports": [
+            "distinción de enfoque estilístico entre material contemporáneo y estándares"
+          ]
+        },
+        {
+          "type": "official-biography",
+          "url": "https://www.michaelbuble.com/",
+          "supports": [
+            "contexto de repertorio: estándares, pop, swing, jazz y R&B"
+          ]
+        },
+        {
+          "type": "official-discography",
+          "url": "https://www.michaelbuble.com/album/crazy-love",
+          "supports": [
+            "tracklist de Cry Me a River y Haven't Met You Yet"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "entrevista del artista",
+        "guía comparativa de escucha basada en repertorio identificado",
+        "ejercicio práctico de interpretación",
+        "fuentes visibles"
+      ],
+      "notes": "Las observaciones de escucha son análisis editorial de Harmiq, no hechos biográficos. No atribuirle equipo, rango exacto ni técnica como dato clínico."
+    },
+    "adele": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Mezzosoprano",
+      "voiceClassification": "Etiqueta del directorio de Harmiq, orientativa; no se presenta como clasificación oficial de Adele.",
+      "sources": [
+        {
+          "type": "official-discography",
+          "url": "https://www.xlrecordings.com/releases/21",
+          "supports": [
+            "inclusión de Rolling in the Deep, Rumour Has It, Turning Tables y Someone Like You en el tracklist de 21"
+          ]
+        },
+        {
+          "type": "official-artist-site",
+          "url": "https://www.adele.com/",
+          "supports": [
+            "discografía y enlaces oficiales"
+          ]
+        },
+        {
+          "type": "editorial-album-page",
+          "url": "https://music.apple.com/us/album/21/1544491232",
+          "supports": [
+            "contexto editorial del álbum usado para orientar el análisis, sin reproducir texto"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en canciones identificadas",
+        "ejercicio práctico",
+        "fuentes visibles"
+      ],
+      "notes": "Las observaciones son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto, salud vocal o biografía sin fuentes específicas."
+    },
+    "shakira": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Mezzosoprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial de Shakira.",
+      "sources": [
+        {
+          "type": "record-label-tracklist",
+          "url": "https://sonymusic.com.mx/shakira-revela-tracklist-de-las-mujeres-ya-no-lloran/",
+          "supports": [
+            "títulos y colaboraciones del álbum Las Mujeres Ya No Lloran"
+          ]
+        },
+        {
+          "type": "official-artist-site",
+          "url": "https://www.shakira.com/music/",
+          "supports": [
+            "discografía oficial"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Shakira.JPG",
+          "supports": [
+            "identidad de Shakira en una actuación en Singapur en 2011",
+            "autoría Serenity",
+            "licencia CC BY 3.0"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía de escucha con repertorio identificado",
+        "ejercicio práctico",
+        "fuentes visibles",
+        "fotografía identificada con atribución y licencia"
+      ],
+      "notes": "Las observaciones de escucha son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto o salud sin fuentes específicas."
+    },
+    "taylor-swift": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Mezzosoprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial de Taylor Swift.",
+      "sources": [
+        {
+          "type": "official-album-catalogue",
+          "url": "https://music.apple.com/us/album/the-tortured-poets-department/1736268215",
+          "supports": [
+            "títulos y créditos del tracklist de The Tortured Poets Department"
+          ]
+        },
+        {
+          "type": "official-artist-site",
+          "url": "https://www.taylorswift.com/",
+          "supports": [
+            "discografía y proyectos oficiales"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Taylor_swift.jpg",
+          "supports": [
+            "identidad de Taylor Swift durante The Eras Tour en Los Ángeles en 2023",
+            "autoría Emazasm",
+            "licencia CC BY 4.0"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía de escucha con repertorio identificado",
+        "ejercicio práctico",
+        "fuentes visibles",
+        "fotografía identificada con atribución y licencia"
+      ],
+      "notes": "Las observaciones de escucha son análisis editorial original de Harmiq. Evitar afirmaciones de técnica, equipo, rango exacto o salud sin fuentes específicas."
+    },
+    "freddie-mercury": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Tenor",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq. Un estudio acústico midió habla en rango típico de barítono y un rango de canto F♯2–G5, sin asignar una clasificación clásica definitiva.",
+      "sources": [
+        {
+          "type": "peer-reviewed-acoustic-study",
+          "url": "https://doi.org/10.3109/14015439.2016.1156737",
+          "supports": [
+            "mediana de frecuencia fundamental del habla en seis entrevistas",
+            "intervalo medido en muestras cantadas F♯2–G5; no es una clasificación clásica definitiva"
+          ]
+        },
+        {
+          "type": "official-biography",
+          "url": "https://freddiemercury.com/bio/",
+          "supports": [
+            "contexto biográfico oficial; no se usa para establecer clasificación vocal"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Queen_-_Freddie_Mercury.jpg",
+          "supports": [
+            "identidad/contexto de la fotografía en New Haven en 1977",
+            "autor Carl Lender",
+            "licencia CC BY 2.0"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "investigación acústica explicada con límites",
+        "guía original de escucha",
+        "fuentes visibles",
+        "fotografía identificada con atribución y licencia"
+      ],
+      "notes": "No deducir clasificación clásica del tono hablado ni del rango medido aislado. La recomendación del analizador no significa que la voz del usuario sea igual a la del artista."
+    },
+    "beyonce": {
+      "level": 3,
+      "status": "image-reviewed",
+      "voiceType": "Soprano",
+      "sources": [
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Beyonce.jpg",
+          "supports": [
+            "fotografía de Beyoncé durante The Beyoncé Experience en Múnich, 7 de mayo de 2007",
+            "autoría Jen Keys",
+            "dominio público declarado por la autora"
+          ]
+        }
+      ],
+      "notes": "La imagen y su atribución se verificaron en Wikimedia Commons. La ficha conserva su alcance de directorio."
+    },
+    "bruno-mars": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Tenor",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; no se presenta como clasificación oficial.",
+      "sources": [
+        {
+          "type": "official-artist-site",
+          "url": "https://www.brunomars.com/music/24k-magic",
+          "supports": [
+            "página oficial del álbum y sus vídeos"
+          ]
+        },
+        {
+          "type": "official-store-tracklist",
+          "url": "https://ukstore.brunomars.com/products/24k-magic-lp",
+          "supports": [
+            "presencia de 24K Magic y That's What I Like en el tracklist"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en tracklists oficiales",
+        "ejercicio breve de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican identidad del repertorio y contexto discográfico. El comentario de escucha es editorial de Harmiq; no atribuir equipo, rango exacto ni evaluación clínica."
+    },
+    "lady-gaga": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; no se presenta como clasificación oficial.",
+      "sources": [
+        {
+          "type": "official-store-tracklist",
+          "url": "https://shopfr.ladygaga.com/collections/musique/products/cd-the-fame",
+          "supports": [
+            "tracklist de The Fame, incluidos Poker Face y Paparazzi"
+          ]
+        },
+        {
+          "type": "official-store-tracklist",
+          "url": "https://shopau.ladygaga.com/products/the-fame-cd",
+          "supports": [
+            "tracklist de The Fame"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en tracklists oficiales",
+        "ejercicio breve de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican identidad del repertorio y contexto discográfico. El comentario de escucha es editorial de Harmiq; no atribuir equipo, rango exacto ni evaluación clínica."
+    },
+    "rihanna": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Mezzosoprano",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; no se presenta como clasificación oficial.",
+      "sources": [
+        {
+          "type": "official-album-tracklist",
+          "url": "https://www.rihannanow.com/music/good-girl-gone-bad-album/",
+          "supports": [
+            "tracklist de Good Girl Gone Bad, incluidos Umbrella y Don't Stop the Music"
+          ]
+        },
+        {
+          "type": "official-artist-catalogue",
+          "url": "https://music.apple.com/us/artist/rihanna/63346553",
+          "supports": [
+            "catálogo y discos de la artista"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en tracklists oficiales",
+        "ejercicio breve de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican identidad del repertorio y contexto discográfico. El comentario de escucha es editorial de Harmiq; no atribuir equipo, rango exacto ni evaluación clínica."
+    },
+    "whitney-houston": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; no se presenta como clasificación oficial.",
+      "sources": [
+        {
+          "type": "official-album-tracklist",
+          "url": "https://www.whitneyhouston.com/music/whitney-greatest-hits/",
+          "supports": [
+            "tracklist oficial con I Will Always Love You y Greatest Love of All"
+          ]
+        },
+        {
+          "type": "official-album-tracklist",
+          "url": "https://www.whitneyhouston.com/en-ca/music/whitney-houston/",
+          "supports": [
+            "tracklist y contexto del álbum Whitney Houston"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "guía comparativa de escucha basada en tracklists oficiales",
+        "ejercicio breve de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican identidad del repertorio y contexto discográfico. El comentario de escucha es editorial de Harmiq; no atribuir equipo, rango exacto ni evaluación clínica."
+    },
+    "alicia-keys": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial ni evaluación vocal individual.",
+      "sources": [
+        {
+          "type": "directory-record",
+          "url": "https://github.com/harmiq/harmiq-web/blob/adsense-editorial-hardening/artistas/index.json",
+          "supports": [
+            "clasificación Soprano del directorio Harmiq"
+          ]
+        },
+        {
+          "type": "official-artist-discography",
+          "url": "https://www.aliciakeys.com/music",
+          "supports": [
+            "discografía oficial y canciones del repertorio"
+          ]
+        },
+        {
+          "type": "official-album-tracklist",
+          "url": "https://shop.aliciakeys.com/collections/songs-in-a-minor-25th-anniversary",
+          "supports": [
+            "tracklist de la edición conmemorativa de Songs in A Minor"
+          ]
+        },
+        {
+          "type": "artist-interview-library-of-congress",
+          "url": "https://www.loc.gov/static/programs/national-recording-preservation-board/documents/Interview_Alicia-Keys.pdf",
+          "supports": [
+            "reflexión de Keys sobre el piano y el arpegio de Fallin’"
+          ]
+        },
+        {
+          "type": "npr-interview",
+          "url": "https://www.wbur.org/npr/165822474/alicia-keys-how-a-girl-on-fire-keeps-from-burning-out",
+          "supports": [
+            "declaraciones de Keys sobre cantar Girl on Fire en actuaciones largas"
+          ]
+        },
+        {
+          "type": "image-source-and-license",
+          "url": "https://commons.wikimedia.org/wiki/File:Alicia_Keys.jpg",
+          "supports": [
+            "fotografía de Alicia Keys actuando en Frankfurt en 2002",
+            "autoría Jen Keys",
+            "dominio público declarado por la autora"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "análisis editorial de escucha",
+        "guía de práctica original",
+        "fuentes visibles",
+        "fotografía identificada con atribución y licencia"
+      ],
+      "notes": "Las observaciones musicales son análisis editorial de Harmiq; no inferir salud vocal, rango exacto, equipo ni técnica individual."
+    },
+    "celine-dion": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial.",
+      "sources": [
+        {
+          "type": "official-discography",
+          "url": "https://www.celinedion.com/discography/my-love-essential-collection/",
+          "supports": [
+            "inclusión de My Heart Will Go On en el tracklist de My Love: Essential Collection"
+          ]
+        },
+        {
+          "type": "official-discography",
+          "url": "https://www.celinedion.com/discography/falling-into-you/",
+          "supports": [
+            "inclusión de All By Myself en el tracklist de Falling Into You"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "etiqueta del directorio contextualizada",
+        "guía comparativa de escucha sobre dos canciones",
+        "ejercicio de práctica seguro",
+        "fuentes visibles"
+      ],
+      "notes": "Las fuentes verifican la identificación de las canciones. Las observaciones de escucha son editoriales; no atribuir equipo, rango exacto ni técnica clínica."
+    },
+    "elvis-presley": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Barítono",
+      "voiceClassification": "Etiqueta orientativa del directorio Harmiq; la página no la convierte en una clasificación oficial ni infiere un rango medido.",
+      "sources": [
+        {
+          "type": "official-track-page",
+          "url": "https://www.elvisthemusic.com/track/cant-help-falling-in-love/",
+          "supports": [
+            "identificación y contexto de la grabación"
+          ]
+        },
+        {
+          "type": "official-track-page",
+          "url": "https://www.elvisthemusic.com/music/suspicious-minds/",
+          "supports": [
+            "contexto de grabación y arreglo de Suspicious Minds"
+          ]
+        },
+        {
+          "type": "official-track-page",
+          "url": "https://www.elvisthemusic.com/music/jailhouse-rock/",
+          "supports": [
+            "identificación y contexto de Jailhouse Rock"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "comparación editorial de fraseo y arreglo",
+        "ejercicio práctico",
+        "fuentes oficiales visibles"
+      ],
+      "notes": "Las páginas oficiales respaldan identidad y contexto discográfico. Las observaciones son análisis de escucha, no hechos biográficos ni una evaluación vocal."
+    },
+    "mariah-carey": {
+      "level": 2,
+      "status": "pilot-reviewed",
+      "voiceType": "Soprano",
+      "voiceClassification": "Etiqueta orientativa del directorio de Harmiq; no se presenta como clasificación oficial ni se deriva de afirmaciones promocionales sobre rango.",
+      "sources": [
+        {
+          "type": "album-catalogue",
+          "url": "https://music.apple.com/us/album/music-box/1706160663",
+          "supports": [
+            "tracklist de Music Box: Hero y Dreamlover"
+          ]
+        },
+        {
+          "type": "official-artist-site",
+          "url": "https://mariahcarey.com/about-us/",
+          "supports": [
+            "biografía oficial; no se utiliza para inferir clasificación vocal"
+          ]
+        }
+      ],
+      "editorialFeatures": [
+        "clasificación del directorio contextualizada",
+        "comparación de escucha de Hero y Dreamlover",
+        "ejercicio de práctica",
+        "fuentes visibles"
+      ],
+      "notes": "La lista de canciones se contrasta con el álbum. No presentar el rango promocional citado en el sitio oficial como medición independiente ni como etiqueta técnica."
+    }
+  }
+}
